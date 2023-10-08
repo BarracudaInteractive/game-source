@@ -165,6 +165,9 @@ public class awakeManager : MonoBehaviour
     public void loadComunityMap(){
         SceneManager.LoadScene("ComunityMap");
     }
-
+    
+    public void loadTesting(){
+        SceneManager.LoadScene("Testing");
+    }
 
 }

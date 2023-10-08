@@ -29,14 +29,32 @@ public class inputManager : MonoBehaviour {
         //print(gameObject.name + "offset distance " + distanceOffset + "steer force = " + sterrForce + "acc " + acceleration);
     }
 
-    private void FixedUpdate () {
+    private void FixedUpdate()
+    {
 
-        if (gameObject.tag == "AI") AIDrive ();
-        else if (gameObject.tag == "Player"){
+        if (gameObject.tag == "AI") AIDrive();
+        else if (gameObject.tag == "Player")
+        {
             calculateDistanceOfWaypoints();
-            keyboard ();
-        } 
+            keyboard();
+        }
 
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit, 10000);
+            if (hit.transform)
+            {
+                
+                if (hit.collider.tag == "ground")
+                {
+                    Debug.Log(hit.transform.position);
+                    Vector3 coord = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
+                    Debug.Log("Hit tocado x:" + coord.x + " y:" + coord.y + " z:" + coord.z);
+                }
+            }
+        }
     }
 
     private void keyboard () {
@@ -45,7 +63,6 @@ public class inputManager : MonoBehaviour {
         handbrake = (Input.GetAxis ("Jump") != 0) ? true : false;
         if (Input.GetKey (KeyCode.LeftShift)) boosting = true;
         else boosting = false;
-
     }
 
     private void AIDrive () {
