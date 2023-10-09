@@ -52,6 +52,7 @@ public class inputManager : MonoBehaviour {
                     Debug.Log(hit.transform.position);
                     Vector3 coord = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
                     Debug.Log("Hit tocado x:" + coord.x + " y:" + coord.y + " z:" + coord.z);
+                    Debug.Log(hit.point);
                 }
             }
         }
