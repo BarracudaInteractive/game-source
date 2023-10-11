@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour {
 
     private int startPositionXvalue = -50-62;
     private bool arrarDisplayed = false,countdownFlag = false;
+    
+    
+    
     private void Awake () {
 
         Instantiate (list.vehicles[PlayerPrefs.GetInt ("pointer")], startPosition.transform.position, startPosition.transform.rotation);
@@ -145,6 +148,7 @@ public class GameManager : MonoBehaviour {
         while (true) {
             yield return new WaitForSeconds (.7f);
             sortArray ();
+            displayArray()
         }
     }
 

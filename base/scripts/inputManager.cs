@@ -9,6 +9,8 @@ public class inputManager : MonoBehaviour {
     [HideInInspector] public bool handbrake;
     [HideInInspector] public bool boosting;
 
+    
+    
     // AI components
 
     private trackWaypoints waypoints;
@@ -39,23 +41,7 @@ public class inputManager : MonoBehaviour {
             keyboard();
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit, 10000);
-            if (hit.transform)
-            {
-                
-                if (hit.collider.tag == "ground")
-                {
-                    Debug.Log(hit.transform.position);
-                    Vector3 coord = new Vector3(hit.transform.position.x, hit.transform.position.y, hit.transform.position.z);
-                    Debug.Log("Hit tocado x:" + coord.x + " y:" + coord.y + " z:" + coord.z);
-                    Debug.Log(hit.point);
-                }
-            }
-        }
+        
     }
 
     private void keyboard () {
