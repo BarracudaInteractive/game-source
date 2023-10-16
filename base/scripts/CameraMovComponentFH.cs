@@ -47,25 +47,25 @@ public class CameraMovComponentFH : MonoBehaviour
     private void Move() 
     { 
         //A to move left
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.H))
         {
             transform.Translate(-transform.right * movSpeed);
         }
 
         //D to move right
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.K))
         {
             transform.Translate(transform.right * movSpeed);
         }
 
         //W to move forward
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.U))
         {
             transform.Translate(transform.forward * movSpeed);
         }
 
         //S to move backwards
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.J))
         {
             transform.Translate(-transform.forward * movSpeed);
         }
@@ -75,13 +75,13 @@ public class CameraMovComponentFH : MonoBehaviour
     private void Rotate()
     {
         //Use Q to rotate counte-clock wise
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Y))
         {
             transform.Rotate(new Vector3(0, -rotSpeed, 0));
         }
 
         //Use E to rotate clock wise
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.I))
         {
             transform.Rotate(new Vector3(0, rotSpeed, 0));
         }

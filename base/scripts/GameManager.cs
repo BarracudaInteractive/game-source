@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour {
         while (true) {
             yield return new WaitForSeconds (.7f);
             sortArray ();
-            displayArray()
+            displayArray();
         }
     }
 
