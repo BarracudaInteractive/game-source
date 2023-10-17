@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Login : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Login : MonoBehaviour
     {
         loginButton.onClick.AddListener(login);
         goToRegisterButton.onClick.AddListener(moveToRegister);
+
+        passwordInput.contentType = (InputField.ContentType)TMP_InputField.ContentType.Password;
 
         if (File.Exists(Application.dataPath + "/credentials.txt"))
         {
