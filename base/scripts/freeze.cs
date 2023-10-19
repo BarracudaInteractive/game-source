@@ -10,6 +10,10 @@ public class freeze : MonoBehaviour
     public Transform parent;    
     public int timeout = 0;
     public int rtime = 60;
+    public int o = 0;
+    private trackWaypoints Platonics;
+    private List<Transform> nodes = new List<Transform> ();
+    
     void PauseGame()
     {
         Time.timeScale = 0;
@@ -28,6 +32,9 @@ public class freeze : MonoBehaviour
         parent = GameObject.FindGameObjectWithTag("path").GetComponent<Transform>();
         freezeGame.onClick.AddListener(() => ResumeGame());
         PauseGame();
+        //nodes = GameObject.FindGameObjectWithTag("path").GetComponent<trackWaypoints>();
+        //currentWaypoint = gameObject.transform;
+        //nodes = waypoints.nodes;
     }
 
     void Update()
@@ -43,13 +50,12 @@ public class freeze : MonoBehaviour
             {
                 if (hit.collider.tag == "ground" && timeout > 0)
                 {
-                    //Debug.Log("Spawned wp in: " + hit.point);
                     GameObject Platonic = Instantiate(Platonic_0, hit.point, Quaternion.identity, parent);
-                    Debug.Log("Spawned wp: " + hit.point);
+                    Platonic.name = "Platonic_" + o.ToString();
+                    o += 1;
                     timeout = -rtime;
                 }
             }
         }
-        Debug.Log(timeout);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class inputManager : MonoBehaviour {
 
@@ -8,7 +9,8 @@ public class inputManager : MonoBehaviour {
     [HideInInspector] public float horizontal;
     [HideInInspector] public bool handbrake;
     [HideInInspector] public bool boosting;
-
+    //private bool first = false;
+    //public Button boton;
     
     
     // AI components
@@ -21,27 +23,27 @@ public class inputManager : MonoBehaviour {
     [Header("AI acceleration value")]
     [Range(0,1)]public float acceleration = 0.5f;
     public int currentNode;
-
+    
 
     private void Start() {
+        //boton = GameObject.FindGameObjectWithTag("FreezeButton").GetComponent<Button>();
+        //boton.onClick.AddListener(() => routing());
         waypoints = GameObject.FindGameObjectWithTag("path").GetComponent<trackWaypoints>();
         currentWaypoint = gameObject.transform;
         nodes = waypoints.nodes;
-        
-        //print(gameObject.name + "offset distance " + distanceOffset + "steer force = " + sterrForce + "acc " + acceleration);
     }
 
     private void FixedUpdate()
     {
-
-        if (gameObject.tag == "AI") AIDrive();
-        else if (gameObject.tag == "Player")
-        {
-            calculateDistanceOfWaypoints();
-            keyboard();
-        }
-
-        
+        //if (Time.timeScale != 0 && first)
+        //{
+            if (gameObject.tag == "AI") AIDrive();
+            else if (gameObject.tag == "Player")
+            {
+                calculateDistanceOfWaypoints();
+                keyboard();
+            }
+        //}
     }
 
     private void keyboard () {

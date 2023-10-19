@@ -147,8 +147,8 @@ public class GameManager : MonoBehaviour {
     private IEnumerator timedLoop () {
         while (true) {
             yield return new WaitForSeconds (.7f);
-            sortArray ();
-            displayArray();
+            //sortArray ();
+            //displayArray();
         }
     }
 
