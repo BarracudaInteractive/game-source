@@ -11,63 +11,55 @@ public class CameraMovComponentFH : MonoBehaviour
 
     [SerializeField] private Vector3 rotInit; //Set camera initial rotation
 
+    [SerializeField] private GameObject camera;
+
     //Method executed when created
     void Start()
     {
-        movSpeed *= 0.001f; //Transformation for easy view numbers
-        rotSpeed *= 0.01f; //Same as above
+        movSpeed *= 1.0f; //Transformation for easy view numbers
+        rotSpeed *= 1.0f; //Same as above
+
+        transform.position = new Vector3 (transform.position.x, height, transform.position.z);
 
         transform.rotation = Quaternion.identity; //Reset camera rotation
-        transform.Rotate(rotInit); //Set camera rotation to specified
+        camera.transform.rotation = Quaternion.identity;
+        camera.transform.Rotate(new Vector3(rotInit.x, 0, rotInit.z)); //Set camera rotation to specified
+        transform.Rotate(new Vector3(0, rotInit.y, 0));
     }
 
     //Method executed evey frame
     void Update()
     {
-        this.GoToHeight(); //Firstly, check height
         this.Move(); //Secondly, move the camera
         this.Rotate(); //Finally, rotate the camera
-    }
-
-    //Check if camera height is ok
-    private void GoToHeight()
-    {
-        //If camera is height above collider, it drops
-        if (Physics.Raycast(transform.position, Vector3.down, height))
-        {
-            transform.Translate(new Vector3(0, 0.001f, 0));
-        } //If camera is height below collider, it goes up
-        else if (!Physics.Raycast(transform.position, Vector3.down, height+0.002f))
-        {
-            transform.Translate(new Vector3(0, -0.001f, 0));
-        }
+        Debug.Log(transform.forward);
     }
 
     //Method to move the camera
     private void Move() 
     { 
         //A to move left
-        if (Input.GetKey(KeyCode.H))
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(-transform.right * movSpeed);
+            transform.position+= -transform.right * movSpeed;
         }
 
         //D to move right
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(transform.right * movSpeed);
+            transform.position += transform.right * movSpeed;
         }
 
         //W to move forward
-        if (Input.GetKey(KeyCode.U))
+        if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(transform.forward * movSpeed);
+            transform.position += transform.forward * movSpeed;
         }
 
         //S to move backwards
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(-transform.forward * movSpeed);
+            transform.position += -transform.forward * movSpeed;
         }
     }
 
@@ -75,13 +67,13 @@ public class CameraMovComponentFH : MonoBehaviour
     private void Rotate()
     {
         //Use Q to rotate counte-clock wise
-        if (Input.GetKey(KeyCode.Y))
+        if (Input.GetKey(KeyCode.Q))
         {
             transform.Rotate(new Vector3(0, -rotSpeed, 0));
         }
 
         //Use E to rotate clock wise
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKey(KeyCode.E))
         {
             transform.Rotate(new Vector3(0, rotSpeed, 0));
         }
