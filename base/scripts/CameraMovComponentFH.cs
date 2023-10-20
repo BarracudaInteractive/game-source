@@ -32,7 +32,7 @@ public class CameraMovComponentFH : MonoBehaviour
     {
         this.Move(); //Secondly, move the camera
         this.Rotate(); //Finally, rotate the camera
-        Debug.Log(transform.forward);
+        //Debug.Log(transform.forward);
     }
 
     //Method to move the camera
