@@ -37,54 +37,56 @@ public class GameManager : MonoBehaviour {
     
     private void Awake () {
 
-        Instantiate (list.vehicles[PlayerPrefs.GetInt ("pointer")], startPosition.transform.position, startPosition.transform.rotation);
-        RR = GameObject.FindGameObjectWithTag ("Player").GetComponent<controller> ();
+        //Instantiate (list.vehicles[PlayerPrefs.GetInt ("pointer")], startPosition.transform.position, startPosition.transform.rotation);
+        //RR = GameObject.FindGameObjectWithTag ("Player").GetComponent<controller> ();
 
         presentGameObjectVehicles = GameObject.FindGameObjectsWithTag ("AI");
 
-        presentVehicles = new List<vehicle> ();
-        foreach (GameObject R in presentGameObjectVehicles)
-            presentVehicles.Add (new vehicle (R.GetComponent<inputManager> ().currentNode, R.GetComponent<controller> ().carName,R.GetComponent<controller> ().hasFinished));
+        //presentVehicles = new List<vehicle> ();
+        //foreach (GameObject R in presentGameObjectVehicles)
+        //    presentVehicles.Add (new vehicle (R.GetComponent<inputManager> ().currentNode, R.GetComponent<controller> ().carName,R.GetComponent<controller> ().hasFinished));
 
-        presentVehicles.Add (new vehicle (RR.gameObject.GetComponent<inputManager> ().currentNode, RR.carName , RR.hasFinished));
+        //presentVehicles.Add (new vehicle (RR.gameObject.GetComponent<inputManager> ().currentNode, RR.carName , RR.hasFinished));
 
-        temporaryArray = new GameObject[presentVehicles.Count];
+        //temporaryArray = new GameObject[presentVehicles.Count];
 
-        temporaryList = new List<GameObject> ();
-        foreach (GameObject R in presentGameObjectVehicles)
-            temporaryList.Add (R);
-        temporaryList.Add (RR.gameObject);
+        //temporaryList = new List<GameObject> ();
+        //foreach (GameObject R in presentGameObjectVehicles)
+        //    temporaryList.Add (R);
+        //temporaryList.Add (RR.gameObject);
 
-        fullArray = temporaryList.ToArray ();
+        //fullArray = temporaryList.ToArray ();
         //displayArray ();
-        StartCoroutine (timedLoop ());
+        //StartCoroutine (timedLoop ());
     }
 
     private void FixedUpdate () {
-        if(RR.hasFinished)displayArray();
-        kph.text = RR.KPH.ToString ("0");
-        updateNeedle ();
-        nitrusUI ();
-        coundDownTimer();
+        //if(RR.hasFinished)displayArray();
+        //kph.text = RR.KPH.ToString ("0");
+        //updateNeedle ();
+        //nitrusUI ();
+        //coundDownTimer();
     }
-
+    
+    /*
     public void updateNeedle () {
         desiredPosition = startPosiziton - endPosition;
         float temp = RR.engineRPM / 10000;
         neeedle.transform.eulerAngles = new Vector3 (0, 0, (startPosiziton - temp * desiredPosition));
-
     }
-
+    */
     public void changeGear () {
         gearNum.text = (!RR.reverse) ? (RR.gearNum + 1).ToString () : "R";
-
     }
 
-    public void nitrusUI () {
-        nitrusSlider.value = RR.nitrusValue / 45;
-    }
-
-    private void sortArray () {
+    //public void nitrusUI () {
+    //    nitrusSlider.value = RR.nitrusValue / 45;
+    //}
+    
+    
+    
+    /*
+     private void sortArray () {
 
         for (int i = 0; i < fullArray.Length; i++) {
             presentVehicles[i].hasFinished = fullArray[i].GetComponent<controller>().hasFinished;
@@ -100,10 +102,10 @@ public class GameManager : MonoBehaviour {
                     presentVehicles[i] = presentVehicles[j];
                     presentVehicles[j] = QQ;
                 }
-            }                
+            }
         }
 
-        
+
         if(arrarDisplayed)
         for (int i = 0; i < temporaryArray.Length; i++) {
             temporaryArray[i].transform.Find ("vehicle node").gameObject.GetComponent<Text> ().text = (presentVehicles[i].hasFinished)?"finished":"";
@@ -118,7 +120,8 @@ public class GameManager : MonoBehaviour {
 
 
     }
-
+    
+    
     private void displayArray () {
         if(arrarDisplayed)return;
         uiList.SetActive(true);
@@ -161,7 +164,6 @@ public class GameManager : MonoBehaviour {
         if(timeLeft > 1 )timeLeftText.text = timeLeft.ToString("0");
         else if(timeLeft >= -1 && timeLeft <= 1 )timeLeftText.text = "GO!";
         else timeLeftText.text ="";
-
     }
     
     private void freezePlayers(){
@@ -181,7 +183,7 @@ public class GameManager : MonoBehaviour {
             countdownFlag = false;
         
     }
-
+    */
     public void loadAwakeScene(){
         SceneManager.LoadScene("awakeScene");
     }

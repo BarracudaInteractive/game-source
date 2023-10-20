@@ -19,7 +19,7 @@ public class inputManager : MonoBehaviour {
     private Transform currentWaypoint;
     private List<Transform> nodes = new List<Transform> ();
     private int distanceOffset = 5;
-    private float sterrForce = 1;
+    [Range(0,1)]public float steerForce = 0.2f;
     [Header("AI acceleration value")]
     [Range(0,1)]public float acceleration = 0.5f;
     public int currentNode;
@@ -88,7 +88,7 @@ public class inputManager : MonoBehaviour {
         Vector3 relative = transform.InverseTransformPoint (currentWaypoint.transform.position);
         relative /= relative.magnitude;
 
-        horizontal = (relative.x / relative.magnitude) * sterrForce;
+        horizontal = (relative.x / relative.magnitude) * steerForce;
 
     }
 

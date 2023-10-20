@@ -48,7 +48,6 @@ using Random = UnityEngine.Random;
         //private CarController m_CarController; // Reference to car we are controlling
         public controller m_CarController;
         public inputManager InputManager;
-        private AIcontroller aicontroler;
         
         private void StartSound()
         {
