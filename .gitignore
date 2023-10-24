@@ -24,7 +24,7 @@
 
 # Visual Studio cache directory
 .vs/
-/.vs/
+
 
 # Gradle cache directory
 .gradle/
@@ -51,7 +51,6 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
-*.meta
 *.cs.meta
 
 # Unity3D generated file on crash reports
