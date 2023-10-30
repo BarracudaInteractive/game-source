@@ -1,3 +1,5 @@
+// ITS GONNA BE REDONE, SO DONT PAY ATTENTION TO THIS CODE
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,3 +41,4 @@ public class RewindStateComponent : MonoBehaviour
         }
     }
 }
+*/

@@ -3,263 +3,322 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class Controller : MonoBehaviour
 {
-    internal enum driveType{ frontWheelDrive, rearWheelDrive, allWheelDrive }
-    [SerializeField]private driveType drive;
+    private enum DriveType 
+    { 
+        Front,
+        Rear,
+        AllWheel
+    }
     
-    private GameManager manager;
-    private InputManager IM;
-    private CarEffects CarEffects;
-    [HideInInspector]public bool test; 
-
     [Header("Variables")]
-    public float handBrakeFrictionMultiplier = 2f;
-    public float maxRPM , minRPM;
+    [SerializeField] private DriveType _Drive;
     public float[] gears;
     public float[] gearChangeSpeed;
+    public float _fMinRPM;
+    public float _fMaxRPM;
     public AnimationCurve enginePower;
-
-    [HideInInspector]public int gearNum = 1;
-    [HideInInspector]public bool playPauseSmoke = false, hasFinished;
-    [HideInInspector]public float KPH;
-    [HideInInspector]public float engineRPM;
-    [HideInInspector]public bool reverse = false;
-    [HideInInspector]public float gas = 0.0f;
-    [HideInInspector]private float demo = 100.0f; //demo mode to see the gas drop
-    [HideInInspector]public float dmg = 0.0f, accDmg = 0.0f;
-
-    private GameObject wheelMeshes,wheelColliders;
-    private WheelCollider[] wheels = new WheelCollider[4];
-    private GameObject[] wheelMesh = new GameObject[4];
-    private GameObject centerOfMass;
-    private Rigidbody rigidbody;
-
-    //car Shop Values
-    public int carPrice ;
-    public string carName;
-    private float smoothTime = 0.09f;
     
-	private WheelFrictionCurve  forwardFriction,sidewaysFriction;
-    private float radius = 6, brakPower = 0, DownForceValue = 10f,wheelsRPM ,driftFactor, lastValue ,horizontal , vertical, totalPower, lastKPH = 0;
-    private bool flag = false;
-    private float speedBaseDmg = 15.0f;
+    [Header("Workshop values")]
+    public int _iCarPrice;
+    public string _sCarName;
     
-    private void Awake() 
-    {
-        if(SceneManager.GetActiveScene().name == "awakeScene") return;
-        getObjects();
-        StartCoroutine(timedLoop());
-        StartCoroutine(oilSet());
-    }
+    private GameManager _GameManager;
+    private InputManager _InputManager;
+    //private CarEffects CarEffects;
+    private int _iGearNum = 1;
+    private float _fKPH;
+    private float _fEngineRPM;
+    private float _fGas = 0.0f;
+    private float _fDemo = 100.0f; //demo mode to see the gas drop
+    private float _fDmg = 0.0f;
+    private float _fAccDmg = 0.0f;
+    private bool _isReverse = false;
+    private bool _isAcc = false;
+    private GameObject _gWheelMeshes;
+    private GameObject _gWheelColliders;
+    private WheelCollider[] _Wheels = new WheelCollider[4];
+    private GameObject[] _WheelMesh = new GameObject[4];
+    private GameObject _gCenterOfMass;
+    private Rigidbody _Rigidbody;
+    
+    private float _fSmoothTime = 0.1f;
 
-    private void Update() 
+    private WheelFrictionCurve _ForwardFriction;
+    private WheelFrictionCurve _SidewaysFriction;
+    private float _fRadius = 6.0f;
+    private float _fBrakPower = 0.0f;
+    private float _fDownForceValue = 10.0f;
+    private float _fWheelsRPM;
+    private float _fDriftFactor;
+    private float _fLastEngineRPM;
+    private float _fHorizontal;
+    private float _fVertical;
+    private float _fTotalPower;
+    private float _fLastKPH = 0.0f;
+    private float _fSpeedBaseDmg = 15.0f;
+    private bool _isBelowRPM = false;
+    
+    public bool IsAcc => _isAcc;
+    
+    public float GetMaxRPM => _fMaxRPM;
+    
+    public float GetDmg => _fDmg;
+    
+    public float SetDmg { set => _fDmg = value; }
+    
+    public float GetGas => _fGas;
+    
+    public bool IsReverse => _isReverse;
+    
+    public float GetEngineRPM => _fEngineRPM;
+    
+    public float GetKPH => _fKPH;
+    
+    public int GetGear => _iGearNum;
+    
+    public string GetCarName => _sCarName;
+    
+    public int GetCarPrice => _iCarPrice;
+    
+    private void _CalculateEnginePower()
     {
-        if (SceneManager.GetActiveScene().name == "awakeScene") return;
-        horizontal = IM.horizontal;
-        vertical = IM.vertical;
-        lastValue = engineRPM;
-        addDownForce();
-        animateWheels();
-        steerVehicle();
-        calculateEnginePower();
-    }
-
-    private void calculateEnginePower(){
-        wheelRPM();
+        _CalculateWheelRPMnChangeGear();
         
-        if (vertical != 0 ){ rigidbody.drag = 0.005f; }
-        if (vertical == 0){ rigidbody.drag = 0.1f; }
-        totalPower = 3.6f * enginePower.Evaluate(engineRPM) * (vertical);
+        if (_fVertical != 0 ) _Rigidbody.drag = 0.005f; 
+        if (_fVertical == 0) _Rigidbody.drag = 0.1f; 
+        
+        _fTotalPower = 3.6f * enginePower.Evaluate(_fEngineRPM) * (_fVertical);
         float velocity  = 0.0f;
         
-        if (engineRPM >= maxRPM || flag)
+        if (_fEngineRPM >= _fMaxRPM || _isBelowRPM)
         {
-            engineRPM = Mathf.SmoothDamp(engineRPM, maxRPM - 500, ref velocity, 0.05f);
-            flag = (engineRPM >= maxRPM - 450);
-            test = (lastValue > engineRPM);
+            _fEngineRPM = Mathf.SmoothDamp(_fEngineRPM, _fMaxRPM - 500, ref velocity, 0.05f);
+            _isBelowRPM = (_fEngineRPM >= _fMaxRPM - 450);
+            _isAcc = (_fLastEngineRPM > _fEngineRPM);
         }
         else 
         { 
-            engineRPM = Mathf.SmoothDamp(engineRPM,1000 + (Mathf.Abs(wheelsRPM) * 3.6f * (gears[gearNum])), ref velocity , smoothTime);
-            test = false;
+            _fEngineRPM = Mathf.SmoothDamp(_fEngineRPM,1000 + (Mathf.Abs(_fWheelsRPM) * 3.6f * (gears[_iGearNum])), ref velocity , _fSmoothTime);
+            _isAcc = false;
         }
-        if (engineRPM >= maxRPM + 1000) engineRPM = maxRPM + 1000;
-        moveVehicle();
-        shifter();
+        if (_fEngineRPM >= _fMaxRPM + 1000) _fEngineRPM = _fMaxRPM + 1000;
+        
+        _MoveVehicle();
+        _Shifter();
     }
 
-    private void wheelRPM(){
+    private void _CalculateWheelRPMnChangeGear()
+    {
         float sum = 0;
         int R = 0;
+        
         for (int i = 0; i < 4; i++)
         {
-            sum += wheels[i].rpm;
+            sum += _Wheels[i].rpm;
             R++;
         }
-        wheelsRPM = (R != 0) ? sum / R : 0;
+        
+        _fWheelsRPM = (R != 0) ? sum / R : 0;
  
-        if(wheelsRPM < 0 && !reverse ){
-            reverse = true;
-            manager.changeGear();
+        if (_fWheelsRPM < 0 && !_isReverse )
+        {
+            _isReverse = true;
+            //_GameManager.changeGear();
         }
-        else if(wheelsRPM > 0 && reverse){
-            reverse = false;
-            manager.changeGear();
+        else if (_fWheelsRPM > 0 && _isReverse)
+        {
+            _isReverse = false;
+            //_GameManager.changeGear();
         }
     }
 
-    private bool checkGears(){
-        if(KPH >= gearChangeSpeed[gearNum] ) return true;
-        else return false;
-    }
+    private bool _CheckGears() { return _fKPH >= gearChangeSpeed[_iGearNum]; }
 
-    private void shifter(){
-
-        if(!isGrounded())return;
-            //automatic
-        if(engineRPM > maxRPM && gearNum < gears.Length-1 && !reverse && checkGears() ){
-            gearNum ++;
-            manager.changeGear();
+    private void _Shifter()
+    {
+        if(!_IsGrounded())return;
+        
+        //automatic
+        if(_fEngineRPM > _fMaxRPM && _iGearNum < gears.Length - 1 && !_isReverse && _CheckGears() )
+        {
+            _iGearNum++;
+            //_GameManager.changeGear();
             return;
         }
-        if(engineRPM < minRPM && gearNum > 0){
-            gearNum --;
-            manager.changeGear();
+        
+        if(_fEngineRPM < _fMinRPM && _iGearNum > 0)
+        {
+            _iGearNum--;
+            //_GameManager.changeGear();
         }
-
     }
  
-    public bool isGrounded()
+    private bool _IsGrounded()
     {
-        //try { if (wheels[0].isGrounded && wheels[1].isGrounded && wheels[2].isGrounded && wheels[3].isGrounded) return true; }
-        //catch (Exception e) { return false; }
-        if (wheels[0].isGrounded && wheels[1].isGrounded && wheels[2].isGrounded && wheels[3].isGrounded) return true;
+        if (_Wheels[0].isGrounded && _Wheels[1].isGrounded && _Wheels[2].isGrounded && _Wheels[3].isGrounded) return true;
         else return false;
     }
 
-    private void moveVehicle()
+    private void _MoveVehicle()
     {
-        brakeVehicle();
+        _BrakeVehicle();
 
-        if (drive == driveType.allWheelDrive){
-            for (int i = 0; i < wheels.Length; i++){
-                wheels[i].motorTorque = totalPower / 4;
-                wheels[i].brakeTorque = brakPower;
-            }
-        }else if(drive == driveType.rearWheelDrive){
-            wheels[2].motorTorque = totalPower / 2;
-            wheels[3].motorTorque = totalPower / 2;
-
-            for (int i = 0; i < wheels.Length; i++)
+        if (_Drive == DriveType.AllWheel)
+        {
+            for (int i = 0; i < _Wheels.Length; i++)
             {
-                wheels[i].brakeTorque = brakPower;
+                _Wheels[i].motorTorque = _fTotalPower / 4;
+                _Wheels[i].brakeTorque = _fBrakPower;
             }
         }
-        else{
-            wheels[0].motorTorque = totalPower / 2;
-            wheels[1].motorTorque = totalPower / 2;
+        else if(_Drive == DriveType.Rear)
+        {
+            _Wheels[2].motorTorque = _fTotalPower / 2;
+            _Wheels[3].motorTorque = _fTotalPower / 2;
 
-            for (int i = 0; i < wheels.Length; i++)
-            {
-                wheels[i].brakeTorque = brakPower;
-            }
+            for (int i = 0; i < _Wheels.Length; i++)
+                _Wheels[i].brakeTorque = _fBrakPower;
         }
-        KPH = rigidbody.velocity.magnitude * 3.6f;
+        else
+        {
+            _Wheels[0].motorTorque = _fTotalPower / 2;
+            _Wheels[1].motorTorque = _fTotalPower / 2;
+
+            for (int i = 0; i < _Wheels.Length; i++)
+                _Wheels[i].brakeTorque = _fBrakPower;
+        }
+        _fKPH = _Rigidbody.velocity.magnitude * 3.6f;
     }
 
-    private void brakeVehicle()
+    private void _BrakeVehicle()
     {
-        if (vertical < 0){
-            brakPower =(KPH >= 10)? 500 : 0;
-        }
-        else if (vertical == 0 &&(KPH <= 10 || KPH >= -10)){
-            brakPower = 10;
-        }
-        else{
-            brakPower = 0;
-        }
+        if (_fVertical < 0) 
+            _fBrakPower =(_fKPH >= 10)? 500 : 0;
+        else if (_fVertical == 0 && (_fKPH <= 10 || _fKPH >= -10))
+            _fBrakPower = 10;
+        else
+            _fBrakPower = 0;
     }
   
-    private void steerVehicle()
+    private void _SteerVehicle()
     {
         //Ackerman steering formula
-        if (horizontal > 0 ) {
-            wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * horizontal;
-            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * horizontal;
-        } else if (horizontal < 0 ) {                                                          
-            wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * horizontal;
-            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * horizontal;
-        } else {
-            wheels[0].steerAngle =0;
-            wheels[1].steerAngle =0;
+        if (_fHorizontal > 0 ) 
+        {
+            _Wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (_fRadius + (1.5f / 2))) * _fHorizontal;
+            _Wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (_fRadius - (1.5f / 2))) * _fHorizontal;
+        } 
+        else if (_fHorizontal < 0 ) 
+        {                                                          
+            _Wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (_fRadius - (1.5f / 2))) * _fHorizontal;
+            _Wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (_fRadius + (1.5f / 2))) * _fHorizontal;
+        } 
+        else 
+        {
+            _Wheels[0].steerAngle =0;
+            _Wheels[1].steerAngle =0;
         }
     }
 
-    private void animateWheels ()
+    private void _AnimateWheels ()
 	{
 		Vector3 wheelPosition = Vector3.zero;
 		Quaternion wheelRotation = Quaternion.identity;
 
-		for (int i = 0; i < 4; i++) {
-			wheels [i].GetWorldPose (out wheelPosition, out wheelRotation);
-			wheelMesh [i].transform.position = wheelPosition;
-			wheelMesh [i].transform.rotation = wheelRotation;
+		for (int i = 0; i < 4; i++) 
+        {
+			_Wheels [i].GetWorldPose (out wheelPosition, out wheelRotation);
+			_WheelMesh [i].transform.position = wheelPosition;
+			_WheelMesh [i].transform.rotation = wheelRotation;
 		}
 	}
    
-    private void getObjects(){
-        IM = GetComponent<InputManager>();
-        manager = GameObject.FindGameObjectWithTag("gameManager").GetComponent<GameManager>();
-        CarEffects = GetComponent<CarEffects>();
-        rigidbody = GetComponent<Rigidbody>();
-        wheelColliders = gameObject.transform.Find("wheelColliders").gameObject;
-        wheelMeshes = gameObject.transform.Find("wheelMeshes").gameObject;
-        wheels[0] = wheelColliders.transform.Find("0").gameObject.GetComponent<WheelCollider>();
-        wheels[1] = wheelColliders.transform.Find("1").gameObject.GetComponent<WheelCollider>();
-        wheels[2] = wheelColliders.transform.Find("2").gameObject.GetComponent<WheelCollider>();
-        wheels[3] = wheelColliders.transform.Find("3").gameObject.GetComponent<WheelCollider>();
-        wheelMesh[0] = wheelMeshes.transform.Find("0").gameObject;
-        wheelMesh[1] = wheelMeshes.transform.Find("1").gameObject;
-        wheelMesh[2] = wheelMeshes.transform.Find("2").gameObject;
-        wheelMesh[3] = wheelMeshes.transform.Find("3").gameObject;
-        centerOfMass = gameObject.transform.Find("mass").gameObject;
-        rigidbody.centerOfMass = centerOfMass.transform.localPosition;   
+    private void _GetObjects()
+    {
+        //CarEffects = GetComponent<CarEffects>();
+        _InputManager = GetComponent<InputManager>();
+        _GameManager = GameObject.FindGameObjectWithTag("gameManager").GetComponent<GameManager>();
+        _Rigidbody = GetComponent<Rigidbody>();
+        _gWheelColliders = gameObject.transform.Find("wheelColliders").gameObject;
+        _gWheelMeshes = gameObject.transform.Find("wheelMeshes").gameObject;
+        
+        _Wheels[0] = _gWheelColliders.transform.Find("0").gameObject.GetComponent<WheelCollider>();
+        _Wheels[1] = _gWheelColliders.transform.Find("1").gameObject.GetComponent<WheelCollider>();
+        _Wheels[2] = _gWheelColliders.transform.Find("2").gameObject.GetComponent<WheelCollider>();
+        _Wheels[3] = _gWheelColliders.transform.Find("3").gameObject.GetComponent<WheelCollider>();
+        
+        _WheelMesh[0] = _gWheelMeshes.transform.Find("0").gameObject;
+        _WheelMesh[1] = _gWheelMeshes.transform.Find("1").gameObject;
+        _WheelMesh[2] = _gWheelMeshes.transform.Find("2").gameObject;
+        _WheelMesh[3] = _gWheelMeshes.transform.Find("3").gameObject;
+        
+        _gCenterOfMass = gameObject.transform.Find("mass").gameObject;
+        _Rigidbody.centerOfMass = _gCenterOfMass.transform.localPosition;   
     }
 
-    private void addDownForce(){ rigidbody.AddForce(-transform.up * (DownForceValue * rigidbody.velocity.magnitude)); }
+    private void _AddDownForce() { _Rigidbody.AddForce(-transform.up * (_fDownForceValue * _Rigidbody.velocity.magnitude)); }
 
-    private void dmgLoop()
+    private void _DmgLoop ()
     {
-        if (KPH > speedBaseDmg) accDmg += .033f * (KPH/speedBaseDmg);
-        else accDmg += .033f;
+        if (_fKPH > _fSpeedBaseDmg) _fAccDmg += .033f * (_fKPH/_fSpeedBaseDmg);
+        else _fAccDmg += .033f;
+    }
+    
+    private void Awake() 
+    {
+        if(SceneManager.GetActiveScene().name == "Prefs") return;
+        _GetObjects();
+        StartCoroutine(_SteerRadiusUpdate());
+        StartCoroutine(_OilUpdate());
     }
     
     private void FixedUpdate()
     {
-        if(SceneManager.GetActiveScene().name == "awakeScene") return;
-        if (!isGrounded()) dmgLoop();
-        else { dmg += accDmg; accDmg = 0.0f; }
+        if(SceneManager.GetActiveScene().name == "Prefs") return;
+        if (!_IsGrounded()) _DmgLoop();
+        else { _fDmg += _fAccDmg; _fAccDmg = 0.0f; }
     }
 
-    private IEnumerator timedLoop(){
-		while(true){
+    private void Update() 
+    {
+        if (SceneManager.GetActiveScene().name == "Prefs") return;
+        _fHorizontal = _InputManager.GetHorizontal;
+        _fVertical = _InputManager.GetVertical;
+        _fLastEngineRPM = _fEngineRPM;
+        _AddDownForce();
+        _AnimateWheels();
+        _SteerVehicle();
+        _CalculateEnginePower();
+    }
+    
+    private IEnumerator _SteerRadiusUpdate()
+    {
+		while(true)
+        {
 			yield return new WaitForSeconds(.7f);
-            radius = 6 + KPH / 20;
+            _fRadius = 6 + _fKPH / 20;
 		}
 	}
 
-    private IEnumerator oilSet(){
-        while(true){
+    private IEnumerator _OilUpdate()
+    {
+        while(true)
+        {
             yield return new WaitForSeconds(1.0f);
-            if (isGrounded()) //flying does not consume oil
+            if (_IsGrounded()) //flying does not consume oil
             {
-                if (lastKPH > KPH) gas += (float)0.015*demo; //decelerate
-                else if (KPH / gearChangeSpeed[gearNum] > 0.8f) gas += (float)0.02*demo; //accelerate
-                else if (KPH / gearChangeSpeed[gearNum] <= 0.8f || KPH > 20.0f) gas += (float)0.015*demo; //accelerate slightly
+                //decelerate
+                if (_fLastKPH > _fKPH) _fGas += (float)0.015*_fDemo; 
+                //accelerate
+                else if (_fKPH / gearChangeSpeed[_iGearNum] > 0.8f) _fGas += (float)0.02*_fDemo; 
+                //accelerate slightly
+                else if (_fKPH / gearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas += (float)0.015*_fDemo; 
             }
-            lastKPH = KPH;
+            _fLastKPH = _fKPH;
         }
     }
 }

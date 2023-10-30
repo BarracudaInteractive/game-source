@@ -5,170 +5,169 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 public class SectionManager : MonoBehaviour
 {
-    private short high = 12;
-    private TrackWaypoints waypoints;
-    private Transform currentWaypoint;
-    private List<Transform> nodes = new List<Transform> ();
-    private List<float> steps = new List<float> { 8.62f, 8.53f, -10.0f, 36.87f, 70.28f, 4.90f, 53.67f, 138.80f, -4.76f, 30.0f};
-    
-    private int timeout = 0;
-    private int rtime = 30;
-    private GameObject _gameObject;
-    
     [Header("Section Canvas")]
-    public GameObject sectionSetCanvas;
+    public GameObject SectionSetCanvas;
     
-    [Header("Pacenotes buttons")] //straight, shallow curve, tight curve, very tight curve, hairpin
-    public GameObject st; 
-    public GameObject sc;
-    public GameObject tc;
-    public GameObject vc;
-    public GameObject hp;
+    [Header("Pacenotes buttons")]
+    public GameObject gStraight; 
+    public GameObject gShallowCurve;
+    public GameObject gTightCurve;
+    public GameObject gVeryTightCurve;
+    public GameObject gHairpin;
+    
+    [Header("Temper slider")]
+    public GameObject gTemperSlider;
+    
+    [Header("Submit button")] 
+    public GameObject gSubmitButton;
 
-    [HideInInspector] public Button b0;
-    [HideInInspector] public Button b1;
-    [HideInInspector] public Button b2;
-    [HideInInspector] public Button b3;
-    [HideInInspector] public Button b4;
-    private short p = 0;
-    
-    [Header("Temper slider")] // 0.2 - 1.0
-    public GameObject ts;
-    
-    [HideInInspector] public Slider s0;
-    private float t = 0.2f;
-    
-    [Header("Submit button")] //straight, shallow curve, tight curve, very tight curve, hairpin
-    public GameObject sb;
-
-    [HideInInspector] public Button b5;
-    
-    [HideInInspector] public short id = 0;
-    [HideInInspector] public int idx = 0;
-    [HideInInspector] public bool rev = false;
-    [HideInInspector] public Vector3 pos;
-    [HideInInspector] public Vector3 rot;
-    
     [Header("Text field")] //straight, shallow curve, tight curve, very tight curve, hairpin
-    public TMP_Text txt;
+    public TMP_Text tText;
     
+    private short _iHigh = 12;
+    private Transform _tCurrentWaypoint;
+    private List<Transform> _NodesList = new List<Transform> ();
+    private List<float> _StepsTuple = new List<float> { 8.62f, 8.53f, -10.0f, 36.87f, 70.28f, 4.90f, 53.67f, 138.80f, -4.76f, 30.0f};
     
-    public void setPValue(short val) { p = val; }
+    private int _iTimeout = 0;
+    private int _iRenderTimer = 30;
+    private GameObject _gHit;
     
-    public void setTValue(float val) { t = val; }
+    private Button _Button0;
+    private Button _Button1;
+    private Button _Button2;
+    private Button _Button3;
+    private Button _Button4;
+    private short _iPacenoteSelected = 0;
+    
+    private Slider _TemperSlider;
+    private float _fTemperValue = 0.2f;
+    
+    private Button _Button5;
+    
+    private short _iSectionId = 0;
+    private int _iIdx = 0;
+    private bool _isRev = false;
+    private Vector3 _v3Pos;
+    private Vector3 _v3Rot;
+    
+    private void _SetPacenoteValue(short val) { _iPacenoteSelected = val; }
+    
+    private void _SetTemperValue(float val) { _fTemperValue = val; }
 
-    public void swapValues() { for (int i = 0; i < steps.Count; i++) steps[i] = -steps[i]; }
+    private void _SwapSideStepsValues() { for (int i = 0; i < _StepsTuple.Count; i++) _StepsTuple[i] = -_StepsTuple[i]; }
     
-    public void moveNodes()
+    private void _MoveNodes()
     {
         Vector3 mov;
-        if (rev) swapValues();
-        switch (p)
+        if (_isRev) _SwapSideStepsValues();
+        switch (_iPacenoteSelected)
         {
             case 0:
                 for (int i = 0; i < 3; i++)
                 {
-                    mov = new Vector3(pos.x, high, pos.z);
-                    nodes[idx + i].position = mov;
-                    nodes[idx + i].Rotate(0.0f, rot.y, pos.z + 0.0f, Space.Self);
-                    nodes[idx + i].Translate(0.0f, 0.0f, (33.3f * (i + 1)), Space.Self);
+                    mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
+                    _NodesList[_iIdx + i].position = mov;
+                    _NodesList[_iIdx + i].Rotate(0.0f, _v3Rot.y, _v3Pos.z + 0.0f, Space.Self);
+                    _NodesList[_iIdx + i].Translate(0.0f, 0.0f, (33.3f * (i + 1)), Space.Self);
                 }
                 break;
             case 1:
                 for (int i = 0; i < 3; i++)
                 {
-                    mov = new Vector3(pos.x, high, pos.z);
-                    nodes[idx + i].position = mov;
-                    nodes[idx + i].Rotate(0.0f, steps[0] + rot.y, 0.0f, Space.Self); //pos.z + 0.0f
-                    nodes[idx + i].Translate(0.0f, 0.0f, (33.3f * (i + 1)), Space.Self);
+                    mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
+                    _NodesList[_iIdx + i].position = mov;
+                    _NodesList[_iIdx + i].Rotate(0.0f, _StepsTuple[0] + _v3Rot.y, 0.0f, Space.Self); //pos.z + 0.0f
+                    _NodesList[_iIdx + i].Translate(0.0f, 0.0f, (33.3f * (i + 1)), Space.Self);
                 }
                 break;
             case 2:
-                mov = new Vector3(pos.x, high, pos.z);
-                nodes[idx].position = mov;
-                nodes[idx].Rotate(0.0f, steps[1] + rot.y, 0.0f, Space.Self);
-                nodes[idx].Translate(steps[2], 0.0f, (60.66f), Space.Self);
-                nodes[idx + 1].position = nodes[idx].position;
-                nodes[idx + 1].Rotate(0.0f, steps[3] + rot.y, 0.0f, Space.Self);
-                nodes[idx + 1].Translate(0.0f, 0.0f, (50.0f), Space.Self);
-                nodes[idx + 2].position = nodes[idx + 1].position;
-                nodes[idx + 2].Rotate(0.0f, steps[4] + rot.y, 0.0f, Space.Self);
-                nodes[idx + 2].Translate(0.0f, 0.0f, (50.0f), Space.Self);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
+                _NodesList[_iIdx].position = mov;
+                _NodesList[_iIdx].Rotate(0.0f, _StepsTuple[1] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx].Translate(_StepsTuple[2], 0.0f, (60.66f), Space.Self);
+                _NodesList[_iIdx + 1].position = _NodesList[_iIdx].position;
+                _NodesList[_iIdx + 1].Rotate(0.0f, _StepsTuple[3] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx + 1].Translate(0.0f, 0.0f, (50.0f), Space.Self);
+                _NodesList[_iIdx + 2].position = _NodesList[_iIdx + 1].position;
+                _NodesList[_iIdx + 2].Rotate(0.0f, _StepsTuple[4] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx + 2].Translate(0.0f, 0.0f, (50.0f), Space.Self);
                 break;
             case 3:
-                mov = new Vector3(pos.x, high, pos.z);
-                nodes[idx].position = mov;
-                nodes[idx].Rotate(0.0f, steps[5] + rot.y, 0.0f, Space.Self);
-                nodes[idx].Translate(steps[2], 0.0f, (70.26f), Space.Self);
-                nodes[idx + 1].position = nodes[idx].position;
-                nodes[idx + 1].Rotate(0.0f, steps[6] + rot.y, 0.0f, Space.Self);
-                nodes[idx + 1].Translate(0.0f, 0.0f, (59.0f), Space.Self);
-                nodes[idx + 2].position = nodes[idx + 1].position;
-                nodes[idx + 2].Rotate(0.0f, steps[7] + rot.y, 0.0f, Space.Self);
-                nodes[idx + 2].Translate(0.0f, 0.0f, (33.09f), Space.Self);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
+                _NodesList[_iIdx].position = mov;
+                _NodesList[_iIdx].Rotate(0.0f, _StepsTuple[5] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx].Translate(_StepsTuple[2], 0.0f, (70.26f), Space.Self);
+                _NodesList[_iIdx + 1].position = _NodesList[_iIdx].position;
+                _NodesList[_iIdx + 1].Rotate(0.0f, _StepsTuple[6] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx + 1].Translate(0.0f, 0.0f, (59.0f), Space.Self);
+                _NodesList[_iIdx + 2].position = _NodesList[_iIdx + 1].position;
+                _NodesList[_iIdx + 2].Rotate(0.0f, _StepsTuple[7] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx + 2].Translate(0.0f, 0.0f, (33.09f), Space.Self);
                 break;
             case 4:
-                mov = new Vector3(pos.x, high, pos.z);
-                nodes[idx].position = mov;
-                nodes[idx].Rotate(0.0f, steps[8] + rot.y, 0.0f, Space.Self);
-                nodes[idx].Translate(steps[2], 0.0f, (60.21f), Space.Self);
-                nodes[idx + 1].position = mov;
-                nodes[idx + 1].Rotate(0.0f, rot.y, 0.0f, Space.Self);
-                nodes[idx + 1].Translate(steps[9], 0.0f, (75.50f), Space.Self);
-                nodes[idx + 2].position = mov;
-                nodes[idx + 2].Rotate(0.0f, -steps[8] + rot.y, 0.0f, Space.Self);
-                nodes[idx + 2].Translate(steps[9] * 2 - steps[2], 0.0f, (60.21f), Space.Self);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
+                _NodesList[_iIdx].position = mov;
+                _NodesList[_iIdx].Rotate(0.0f, _StepsTuple[8] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx].Translate(_StepsTuple[2], 0.0f, (60.21f), Space.Self);
+                _NodesList[_iIdx + 1].position = mov;
+                _NodesList[_iIdx + 1].Rotate(0.0f, _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx + 1].Translate(_StepsTuple[9], 0.0f, (75.50f), Space.Self);
+                _NodesList[_iIdx + 2].position = mov;
+                _NodesList[_iIdx + 2].Rotate(0.0f, -_StepsTuple[8] + _v3Rot.y, 0.0f, Space.Self);
+                _NodesList[_iIdx + 2].Translate(_StepsTuple[9] * 2 - _StepsTuple[2], 0.0f, (60.21f), Space.Self);
                 break;
         }
-        if (rev) swapValues();
+        if (_isRev) _SwapSideStepsValues();
     }
     
-    public void submit() { startSectionSet(false); moveNodes(); _gameObject.GetComponent<Attrib>().SetSf(t); }
+    private void _Submit() { _StartSectionSet(false); _MoveNodes(); _gHit.GetComponent<Attrib>().SetSf = _fTemperValue; }
     
-    public void initButtons()
+    private void _InitButtons()
     {
-        b0 = st.GetComponent<Button>();
-        b0.onClick.AddListener(() => setPValue(0));
-        b1 = sc.GetComponent<Button>();
-        b1.onClick.AddListener(() => setPValue(1));
-        b2 = tc.GetComponent<Button>();
-        b2.onClick.AddListener(() => setPValue(2));
-        b3 = vc.GetComponent<Button>();
-        b3.onClick.AddListener(() => setPValue(3));
-        b4 = hp.GetComponent<Button>();
-        b4.onClick.AddListener(() => setPValue(4));
+        _Button0 = gStraight.GetComponent<Button>();
+        _Button0.onClick.AddListener(() => _SetPacenoteValue(0));
+        _Button1 = gShallowCurve.GetComponent<Button>();
+        _Button1.onClick.AddListener(() => _SetPacenoteValue(1));
+        _Button2 = gTightCurve.GetComponent<Button>();
+        _Button2.onClick.AddListener(() => _SetPacenoteValue(2));
+        _Button3 = gVeryTightCurve.GetComponent<Button>();
+        _Button3.onClick.AddListener(() => _SetPacenoteValue(3));
+        _Button4 = gHairpin.GetComponent<Button>();
+        _Button4.onClick.AddListener(() => _SetPacenoteValue(4));
     }
 
-    public void initSlider()
+    private void _InitSlider()
     {
-        s0 = ts.GetComponent<Slider>();
-        s0.onValueChanged.AddListener(delegate { setTValue(s0.value); });
+        _TemperSlider = gTemperSlider.GetComponent<Slider>();
+        _TemperSlider.onValueChanged.AddListener(delegate { _SetTemperValue(_TemperSlider.value); });
     }
     
-    public void startSectionSet(bool b){ sectionSetCanvas.SetActive(b);  }
+    private void _StartSectionSet(bool b){ SectionSetCanvas.SetActive(b);  }
     
-    public void textSet() { txt.text = "Section: " + id; }
+    private void _SetText() { tText.text = $"Section: {_iSectionId.ToString()}"; }
     
     private void Awake()
     {
-        initButtons();
-        initSlider();
-        b5 = sb.GetComponent<Button>();
-        b5.onClick.AddListener(() => submit());
+        _InitButtons();
+        _InitSlider();
+        _Button5 = gSubmitButton.GetComponent<Button>();
+        _Button5.onClick.AddListener(() => _Submit());
     }
 
     private void Start()
     {
-        nodes = GameObject.FindGameObjectWithTag("path").GetComponent<TrackWaypoints>().nodes;
+        _NodesList = GameObject.FindGameObjectWithTag("path").GetComponent<TrackWaypoints>().NodesList;
     }
 
-    void Update()
+    private void Update()
     {
-        timeout += 1;
-        timeout %= rtime;
+        _iTimeout += 1;
+        _iTimeout %= _iRenderTimer;
         if (Input.GetMouseButton(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -176,17 +175,17 @@ public class SectionManager : MonoBehaviour
             Physics.Raycast(ray, out hit, 10000);
             if (hit.transform)
             {
-                if (hit.collider.tag == "section" && timeout > 0)
+                if (hit.collider.tag == "section" && _iTimeout > 0)
                 {
-                    timeout = -rtime;
-                    id = hit.collider.GetComponent<Attrib>().GetId();
-                    rev = hit.collider.GetComponent<Attrib>().IsReverse();
-                    idx = id * 3;
-                    startSectionSet(true);
-                    textSet();
-                    pos = hit.collider.transform.position;
-                    rot = hit.collider.transform.rotation.eulerAngles;
-                    _gameObject = hit.collider.gameObject;
+                    _iTimeout = -_iRenderTimer;
+                    _iSectionId = hit.collider.GetComponent<Attrib>().GetId;
+                    _isRev = hit.collider.GetComponent<Attrib>().IsReverse;
+                    _iIdx = _iSectionId * 3;
+                    _StartSectionSet(true);
+                    _SetText();
+                    _v3Pos = hit.collider.transform.position;
+                    _v3Rot = hit.collider.transform.rotation.eulerAngles;
+                    _gHit = hit.collider.gameObject;
                 }
             }
         }

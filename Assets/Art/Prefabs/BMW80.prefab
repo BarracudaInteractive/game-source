@@ -1945,12 +1945,10 @@ GameObject:
   - component: {fileID: 2962088815592287999}
   - component: {fileID: 2962088815592287997}
   - component: {fileID: 7837695500219272407}
-  - component: {fileID: 3990281597347014629}
-  - component: {fileID: 1779992248954430971}
   - component: {fileID: 8952095242928637465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BMW80
-  m_TagString: Player
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1977,7 +1975,7 @@ Transform:
   - {fileID: 6430789853825841581}
   - {fileID: 5881065544463246371}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2962088815592287998
 Rigidbody:
@@ -2018,15 +2016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47db1fee2da73ec45b6bdac4e39c5781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RR: {fileID: 0}
-  vertical: 0
-  horizontal: 0
-  zet: 0
-  handbrake: 0
-  boosting: 0
-  acceleration: 0.5
-  steerForce: 0.2
-  currentNode: 0
 --- !u!114 &2962088815592287997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2039,11 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434cf01a841ee2344b8788c24624771d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drive: 2
-  test: 0
-  handBrakeFrictionMultiplier: 2
-  maxRPM: 8500
-  minRPM: 5000
+  _Drive: 0
   gears:
   - 5
   - 2.8
@@ -2058,6 +2043,8 @@ MonoBehaviour:
   - 150
   - 200
   - 250
+  _fMinRPM: 2000
+  _fMaxRPM: 5000
   enginePower:
     serializedVersion: 2
     m_Curve:
@@ -2091,18 +2078,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  gearNum: 1
-  playPauseSmoke: 0
-  hasFinished: 0
-  KPH: 0
-  engineRPM: 0
-  reverse: 0
-  gas: 0
-  demo: 1
-  dmg: 0
-  accDmg: 0
-  carPrice: 500000
-  carName: BMW 1980
+  _iCarPrice: 19000
+  _sCarName: BMW M5
 --- !u!114 &7837695500219272407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2120,76 +2097,6 @@ MonoBehaviour:
   lowDecelClip: {fileID: 8300000, guid: 38fa732741fddda448c8b95c92e63cad, type: 3}
   highAccelClip: {fileID: 8300000, guid: bc431b4426d765244b2491f9994d9ada, type: 3}
   highDecelClip: {fileID: 8300000, guid: 665d94d5f5681164f893069b15712e28, type: 3}
-  pitchMultiplier: 0.8
-  lowPitchMin: 1
-  lowPitchMax: 7
-  highPitchMultiplier: 0.25
-  maxRolloffDistance: 500
-  dopplerLevel: 1
-  useDoppler: 1
-  m_CarController: {fileID: 2962088815592287997}
-  InputManager: {fileID: 2962088815592287999}
---- !u!114 &3990281597347014629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962088815592287996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e709178596d8c489a6c168283836fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brakeLights: {fileID: 2100000, guid: 25815fe60142a2d479ec4123671fcb07, type: 2}
-  skidClip: {fileID: 8952095242928637465}
-  tireMarks: []
-  smoke:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &1779992248954430971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962088815592287996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b99087c53df3f24d838859ff887d957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerRef: {fileID: 2962088815592287997}
-  engineUpgrade: 1
-  I_engineUpgrade: 0
-  P_engineUpgrade: 0000000000000000000000000000000000000000
-  spoilerUpgrade: 1
-  I_spoilerUpgrade: 0
-  L_spoilerUpgrade:
-  - {fileID: 9062183516772139582}
-  - {fileID: 4015329403088604351}
-  - {fileID: 7454608288177881401}
-  P_spoilerUpgrade: 0000000000000000b3b55607
-  nitrusUpgrade: 1
-  I_nitrusUpgrade: 0
-  P_nitrusUpgrade: 00000000f3e00100f3e00100
-  car: {fileID: 4975652847170142413}
-  colorUpgrade: 1
-  I_colorUpgrade: 0
-  L_colorUpgrade:
-  - {fileID: 2100000, guid: eaf10aac96b5b534d951fc1d3d2fa08e, type: 2}
-  - {fileID: 2100000, guid: fc127e09bf6a2a242b1accb8594f701d, type: 2}
-  - {fileID: 2100000, guid: 95a400d1a5fb7ac4fbf20adb8c2b04a5, type: 2}
-  P_colorUpgrade: 000000000000000000000000
-  wheelUpgrade: 0
-  I_wheelUpgrade: 0
-  L_wheelUpgrade: []
-  P_wheelUpgrade: 
-  handlingUpgrade: 0
-  I_handlingUpgrade: 0
-  P_handlingUpgrade: 000000007b000000f3e00100f3e00100
 --- !u!82 &8952095242928637465
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1983,13 +1983,11 @@ GameObject:
   - component: {fileID: 2610125035370890677}
   - component: {fileID: 2610125035370890676}
   - component: {fileID: 2610125035370890678}
-  - component: {fileID: 2610125035370890635}
-  - component: {fileID: 2610125035370890632}
   - component: {fileID: 2610125035370890633}
   - component: {fileID: 3136624902066826794}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cayman
-  m_TagString: Player
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2015,7 +2013,7 @@ Transform:
   - {fileID: 696121052971446413}
   - {fileID: 1467767}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2610125035370890677
 Rigidbody:
@@ -2056,15 +2054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47db1fee2da73ec45b6bdac4e39c5781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RR: {fileID: 0}
-  vertical: 0
-  horizontal: 0
-  zet: 0
-  handbrake: 0
-  boosting: 0
-  acceleration: 0
-  steerForce: 0.2
-  currentNode: 0
 --- !u!114 &2610125035370890678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,11 +2066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434cf01a841ee2344b8788c24624771d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drive: 2
-  test: 0
-  handBrakeFrictionMultiplier: 1.7
-  maxRPM: 8000
-  minRPM: 5000
+  _Drive: 1
   gears:
   - 4
   - 2.8
@@ -2096,6 +2081,8 @@ MonoBehaviour:
   - 170
   - 200
   - 250
+  _fMinRPM: 5000
+  _fMaxRPM: 8000
   enginePower:
     serializedVersion: 2
     m_Curve:
@@ -2129,83 +2116,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  gearNum: 1
-  playPauseSmoke: 0
-  hasFinished: 0
-  KPH: 0
-  engineRPM: 0
-  reverse: 0
-  gas: 0
-  demo: 1
-  dmg: 0
-  accDmg: 0
-  carPrice: 49000
-  carName: Porsche Cayman
---- !u!114 &2610125035370890635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2610125035370890679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b99087c53df3f24d838859ff887d957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerRef: {fileID: 2610125035370890678}
-  engineUpgrade: 1
-  I_engineUpgrade: 0
-  P_engineUpgrade: 0000000000000000000000000000000000000000
-  spoilerUpgrade: 1
-  I_spoilerUpgrade: 0
-  L_spoilerUpgrade:
-  - {fileID: 2214770922976628719}
-  - {fileID: 2535801864926786802}
-  P_spoilerUpgrade: 0000000000000000
-  nitrusUpgrade: 1
-  I_nitrusUpgrade: 0
-  P_nitrusUpgrade: 000000000000000000000000
-  car: {fileID: 1153391187489484950}
-  colorUpgrade: 1
-  I_colorUpgrade: 0
-  L_colorUpgrade:
-  - {fileID: 2100000, guid: 1946724b1183fcc42a3f27a84832238a, type: 2}
-  - {fileID: 2100000, guid: 2739029ababed9e4d886cfa91ad61d35, type: 2}
-  - {fileID: 2100000, guid: 7a7f63f7f0b931647a3ba0e7470f19d8, type: 2}
-  - {fileID: 2100000, guid: 37a6df9255bfb5b40a51a12c90357c21, type: 2}
-  P_colorUpgrade: 00000000000000000000000000000000
-  wheelUpgrade: 0
-  I_wheelUpgrade: 0
-  L_wheelUpgrade: []
-  P_wheelUpgrade: 
-  handlingUpgrade: 0
-  I_handlingUpgrade: 0
-  P_handlingUpgrade: 000000007b000000f3e00100f3e00100
---- !u!114 &2610125035370890632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2610125035370890679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e709178596d8c489a6c168283836fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brakeLights: {fileID: 2100000, guid: 25815fe60142a2d479ec4123671fcb07, type: 2}
-  skidClip: {fileID: 3136624902066826794}
-  tireMarks:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  smoke:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _iCarPrice: 59000
+  _sCarName: CAYMAN
 --- !u!114 &2610125035370890633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2223,15 +2135,6 @@ MonoBehaviour:
   lowDecelClip: {fileID: 8300000, guid: 38fa732741fddda448c8b95c92e63cad, type: 3}
   highAccelClip: {fileID: 8300000, guid: bc431b4426d765244b2491f9994d9ada, type: 3}
   highDecelClip: {fileID: 8300000, guid: f48ff3bb38b479d41935b57a23e9a578, type: 3}
-  pitchMultiplier: 0.6
-  lowPitchMin: 1
-  lowPitchMax: 7
-  highPitchMultiplier: 0.25
-  maxRolloffDistance: 500
-  dopplerLevel: 1.51
-  useDoppler: 1
-  m_CarController: {fileID: 2610125035370890678}
-  InputManager: {fileID: 2610125035370890676}
 --- !u!82 &3136624902066826794
 AudioSource:
   m_ObjectHideFlags: 0

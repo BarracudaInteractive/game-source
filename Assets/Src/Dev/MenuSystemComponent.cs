@@ -6,48 +6,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ITS GONNA BE REDONE, SO DONT PAY ATTENTION TO THIS CODE
 public class MenuSystemComponent : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private Text sesionText;
-    [SerializeField] private Text menuErrorLog;
-    [SerializeField] private GameObject logIn;
-    [SerializeField] private InputField logInInputUsername;
-    [SerializeField] private InputField logInInputPassword;
-    [SerializeField] private Text logInErrorLog;
-    [SerializeField] private GameObject signUp;
-    [SerializeField] private InputField signUpInputUsername;
-    [SerializeField] private InputField signUpInputPassword;
-    [SerializeField] private Text signUpErrorLog;
-
+    public GameObject mainMenu;
+    public Text sesionText;
+    public Text menuErrorLog;
+    public GameObject logIn;
+    public InputField logInInputUsername;
+    public InputField logInInputPassword;
+    public Text logInErrorLog;
+    public GameObject signUp;
+    public InputField signUpInputUsername;
+    public InputField signUpInputPassword;
+    public Text signUpErrorLog;
+    public User user;
+    public List<User> userList;
+    
     private string filePath;
 
-    private User user;
-    private List<User> userList;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        filePath = "Assets/game-source-code/scripts/Menu/UserDB.txt";
-        menuErrorLog.text = "";
-        logInErrorLog.text = "";
-        signUpErrorLog.text = "";
-        userList = new List<User>();
-        ReadFile();
-        mainMenu.SetActive(true);
-        logIn.SetActive(false);
-        signUp.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (user == null)
-            sesionText.text = "Log In";
-        else
-            sesionText.text = user.GetUsername();
-    }
-    
     private void ReadFile()
     {
         try
@@ -74,7 +51,7 @@ public class MenuSystemComponent : MonoBehaviour
         User userN = new User();
         if (user != null)
         {
-            SceneManager.LoadScene("AwakeScene");
+            SceneManager.LoadScene("Prefs");
         }
         else
         {
@@ -183,4 +160,29 @@ public class MenuSystemComponent : MonoBehaviour
         }
         catch (Exception e) { }
     }
+    
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+        
+        filePath = "Assets/Src/Dev/UserDB.txt";
+        menuErrorLog.text = "";
+        logInErrorLog.text = "";
+        signUpErrorLog.text = "";
+        userList = new List<User>();
+        ReadFile();
+        mainMenu.SetActive(true);
+        logIn.SetActive(false);
+        signUp.SetActive(false);
+    }
+    
+    void Update()
+    {
+        if (user == null)
+            sesionText.text = "Log In";
+        else
+            sesionText.text = user.GetUsername();
+    }
+    
+
 }

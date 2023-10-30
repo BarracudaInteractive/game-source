@@ -1,50 +1,50 @@
 ﻿using UnityEngine;
 using System;
-
-[Serializable]
-public enum DriveType
-{
-	RearWheelDrive,
-	FrontWheelDrive,
-	AllWheelDrive
-}
+using UnityEngine.Serialization;
 
 public class WheelDrive : MonoBehaviour
 {
+	private enum DriveType
+	{
+		Front,
+		Rear,
+		AllWheel
+	}
+	
     [Tooltip("Maximum steering angle of the wheels")]
-	public float maxAngle = 30f;
+	public float fMaxSteeringAngle = 45.0f;
 	[Tooltip("Maximum torque applied to the driving wheels")]
-	public float maxTorque = 300f;
+	public float fMaxTorque = 300.0f;
 	[Tooltip("Maximum brake torque applied to the driving wheels")]
-	public float brakeTorque = 30000f;
+	public float fBrakeTorque = 30000.0f;
 	[Tooltip("If you need the visual wheels to be attached automatically, drag the wheel shape here.")]
-	public GameObject wheelShape;
+	public GameObject gWheelShape;
 
 	[Tooltip("The vehicle's speed when the physics engine can use different amount of sub-steps (in m/s).")]
-	public float criticalSpeed = 5f;
+	public float fCriticalSpeed = 5f;
 	[Tooltip("Simulation sub-steps when the speed is above critical.")]
-	public int stepsBelow = 5;
+	public int iStepsBelow = 5;
 	[Tooltip("Simulation sub-steps when the speed is below critical.")]
-	public int stepsAbove = 1;
-
+	public int iStepsAbove = 1;
+	
 	[Tooltip("The vehicle's drive type: rear-wheels drive, front-wheels drive or all-wheels drive.")]
-	public DriveType driveType;
-
-    private WheelCollider[] m_Wheels;
-
+	[SerializeField] private DriveType Drive;
+	
+    private WheelCollider[] _Wheels;
+    
     // Find all the WheelColliders down in the hierarchy.
 	void Start()
 	{
-		m_Wheels = GetComponentsInChildren<WheelCollider>();
+		_Wheels = GetComponentsInChildren<WheelCollider>();
 
-		for (int i = 0; i < m_Wheels.Length; ++i) 
+		for (int i = 0; i < _Wheels.Length; ++i) 
 		{
-			var wheel = m_Wheels [i];
+			var wheel = _Wheels [i];
 
 			// Create wheel shapes only when needed.
-			if (wheelShape != null)
+			if (gWheelShape != null)
 			{
-				var ws = Instantiate (wheelShape);
+				var ws = Instantiate (gWheelShape);
 				ws.transform.parent = wheel.transform;
 			}
 		}
@@ -55,36 +55,30 @@ public class WheelDrive : MonoBehaviour
 	// This helps us to figure our which wheels are front ones and which are rear.
 	void Update()
 	{
-		m_Wheels[0].ConfigureVehicleSubsteps(criticalSpeed, stepsBelow, stepsAbove);
+		_Wheels[0].ConfigureVehicleSubsteps(fCriticalSpeed, iStepsBelow, iStepsAbove);
 
-		float angle = maxAngle * Input.GetAxis("Horizontal");
-		float torque = maxTorque * Input.GetAxis("Vertical");
+		float angle = fMaxSteeringAngle * Input.GetAxis("Horizontal");
+		float torque = fMaxTorque * Input.GetAxis("Vertical");
 
-		float handBrake = Input.GetKey(KeyCode.X) ? brakeTorque : 0;
+		float handBrake = Input.GetKey(KeyCode.X) ? fBrakeTorque : 0;
 
-		foreach (WheelCollider wheel in m_Wheels)
+		foreach (WheelCollider wheel in _Wheels)
 		{
 			// A simple car where front wheels steer while rear ones drive.
 			if (wheel.transform.localPosition.z > 0)
 				wheel.steerAngle = angle;
 
 			if (wheel.transform.localPosition.z < 0)
-			{
 				wheel.brakeTorque = handBrake;
-			}
-
-			if (wheel.transform.localPosition.z < 0 && driveType != DriveType.FrontWheelDrive)
-			{
+			
+			if (wheel.transform.localPosition.z < 0 && Drive != DriveType.Front)
 				wheel.motorTorque = torque;
-			}
-
-			if (wheel.transform.localPosition.z >= 0 && driveType != DriveType.RearWheelDrive)
-			{
+			
+			if (wheel.transform.localPosition.z >= 0 && Drive != DriveType.Rear)
 				wheel.motorTorque = torque;
-			}
 
 			// Update visual wheels if any.
-			if (wheelShape) 
+			if (gWheelShape) 
 			{
 				Quaternion q;
 				Vector3 p;

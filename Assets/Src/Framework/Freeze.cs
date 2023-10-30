@@ -4,32 +4,40 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Freeze : MonoBehaviour
 {
-    private Button freezeGame;
-    private int rtime = 60;
-    [Header("Text field")] //straight, shallow curve, tight curve, very tight curve, hairpin
-    public TMP_Text txt;
-    public float time = 0.0f;
-    private bool startTimer = false;
-    public void textSet() { txt.text = Mathf.FloorToInt(time / 60).ToString() + ":" + Mathf.FloorToInt(time % 60).ToString(); }
-    void PauseGame() { Time.timeScale = 0; }
-
-    void ResumeGame() { Time.timeScale = 1; startTimer = true; }
+    [Header("Text field")]
+    public TMP_Text tText;
     
+    private float _fTime = 0.0f;
+    private bool _hasStarted = false;
+    private Button _FreezeButton;
 
+    private void _SetText()
+    {
+        string zeroU = "";
+        string zeroD = zeroU;
+        if (Mathf.FloorToInt(_fTime % 60) < 10) zeroU = "0"; 
+        if (Mathf.FloorToInt(_fTime / 60) < 10) zeroD = "0";
+        tText.text = $"{zeroD}{Mathf.FloorToInt(_fTime / 60).ToString()}:{zeroU}{Mathf.FloorToInt(_fTime % 60).ToString()}";
+    }
+    
+    private void PauseGame() { Time.timeScale = 0; }
+
+    private void ResumeGame() { Time.timeScale = 1; _hasStarted = true; }
+    
     private void Awake()
     {
         PauseGame();
-        Application.targetFrameRate = rtime;
-        freezeGame = this.GetComponent<Button>();        
-        freezeGame.onClick.AddListener(() => ResumeGame());
+        _FreezeButton = GetComponent<Button>();        
+        _FreezeButton.onClick.AddListener(() => ResumeGame());
     }
 
     private void Update()
     {
-        if (startTimer) { time += Time.deltaTime; textSet(); }
+        if (_hasStarted) { _fTime += Time.deltaTime; _SetText(); }
     }
 }

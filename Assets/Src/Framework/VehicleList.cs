@@ -5,5 +5,5 @@ using UnityEditor;
 
 public class VehicleList : MonoBehaviour
 {
-    public GameObject[] vehicles;
+    public GameObject[] Vehicles;
 }

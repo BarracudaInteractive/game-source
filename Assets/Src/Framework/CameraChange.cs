@@ -7,31 +7,32 @@ using UnityEngine.UI;
 
 public class CameraChange : MonoBehaviour
 {
-    public GameObject car_view;
-    public GameObject free_view;
+    [Header("Cameras")]
+    public GameObject _gCarView;
+    public GameObject _gFreeView;
     
-    private Button change;
-    private bool main = true;
+    private Button _buttonChange;
+    private bool _isFreeView = true;
     
-    void ChangeCamera()
+    private void _ChangeCamera()
     {
-        if (main)
+        if (_isFreeView)
         {
-            free_view.SetActive(false);
-            car_view.SetActive(true);
-            main = false;
+            _gFreeView.SetActive(false);
+            _gCarView.SetActive(true);
+            _isFreeView = false;
         }
-        else if (!main)
+        else if (!_isFreeView)
         {
-            car_view.SetActive(false);
-            free_view.SetActive(true);
-            main = true;
+            _gCarView.SetActive(false);
+            _gFreeView.SetActive(true);
+            _isFreeView = true;
         }
     }
     
-    private void Start()
+    private void Awake()
     {
-        change = this.GetComponent<Button>();
-        change.onClick.AddListener(() => ChangeCamera());
+        _buttonChange = this.GetComponent<Button>();
+        _buttonChange.onClick.AddListener(() => _ChangeCamera());
     }
 }

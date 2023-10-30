@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// ITS GONNA BE REDONE, SO DONT PAY ATTENTION TO THIS CODE
+/*
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CarUpgrades : MonoBehaviour
@@ -319,3 +321,4 @@ public class CarUpgrades : MonoBehaviour
     }
 
 }
+*/

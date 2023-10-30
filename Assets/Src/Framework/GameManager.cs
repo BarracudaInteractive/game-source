@@ -3,59 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
-    [HideInInspector]public Controller RR;
-    public Text gearNum;
-    
     [Header("Gasoline bar")] // 0.2 - 1.0
-    public GameObject gb;
-    private Slider s0;
+    public GameObject _gGasolineBar;
     
     [Header("Damage bar")] // 0.2 - 1.0
-    public GameObject db;
-    private Slider s1;
+    public GameObject _gDamageBar;
     
-    private float gbValue = 0.0f;
-    private float dbValue = 0.0f;
+    private Controller _Controller;
     
-    public void changeGear() { gearNum.text = (!RR.reverse) ? (RR.gearNum + 1).ToString() : "R"; }
-
-    public void loadPrefs(){ SceneManager.LoadScene("Prefs"); }
+    private float _fGasoline = 0.0f;
+    private float _fDamage = 0.0f;
     
-    private void loadTesting(){ SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
+    private Slider _GasSlider;
+    private Slider _DmgSlider;
     
-    public void oilUpdate() { s0.value = gbValue; }
+    private void _LoadTesting() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     
-    public void dmgUpdate() { s1.value = dbValue; }
+    public void OilUpdate() { _GasSlider.value = _fGasoline; }
+    
+    public void DmgUpdate() { _DmgSlider.value = _fDamage; }
     
     private void Awake() 
     {
-        RR = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
-        s0 = gb.GetComponent<Slider>();
-        s1 = db.GetComponent<Slider>();
+        Application.targetFrameRate = 60;
+        _Controller = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
+        _GasSlider = _gGasolineBar.GetComponent<Slider>();
+        _DmgSlider = _gDamageBar.GetComponent<Slider>();
     }
 
     private void Start()
     {
         if(SceneManager.GetActiveScene().name == "awakeScene") return; 
-        StartCoroutine(oilGet());
+        StartCoroutine(GetOil());
     }
 
     private void FixedUpdate()
     {
-        dbValue = RR.dmg;
-        dmgUpdate();
-        if (dbValue >= 100.0f || gbValue >= 100.0f) loadTesting();
+        _fDamage = _Controller.GetDmg;
+        DmgUpdate();
+        if (_fDamage >= 100.0f || _fGasoline >= 100.0f) _LoadTesting();
     }
 
-    private IEnumerator oilGet(){
+    private IEnumerator GetOil(){
         while(true){
             yield return new WaitForSeconds(1.0f);
-            gbValue = RR.gas;
-            oilUpdate();
+            _fGasoline = _Controller.GetGas;
+            OilUpdate();
         }
     }
 }

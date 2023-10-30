@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// ITS GONNA BE REDONE, SO DONT PAY ATTENTION TO THIS CODE
+/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -49,14 +51,14 @@ public class CarModifier : MonoBehaviour
         updateValues();
         //PlayerPrefs.SetInt("currency", 99999999);
         //controllerRef = GetComponent<controller>();
-        /*
+        
         PlayerPrefs.SetInt((controllerRef.carName + "engineUpgrade").ToString(), 0);
         PlayerPrefs.SetInt((controllerRef.carName + "colorUpgrade").ToString(), 0);
         PlayerPrefs.SetInt((controllerRef.carName + "handlingUpgrade").ToString(), 0);
         PlayerPrefs.SetInt((controllerRef.carName + "nitrusUpgrade").ToString(), 0);
         PlayerPrefs.SetInt((controllerRef.carName + "wheelUpgrade").ToString(), 0);
         PlayerPrefs.SetInt((controllerRef.carName + "spoilerUpgrade").ToString(), 0);
-        */
+        
 
 
     }
@@ -140,3 +142,4 @@ public class CarModifier : MonoBehaviour
 
     }
 }
+*/

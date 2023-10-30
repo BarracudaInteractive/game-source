@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// ITS GONNA BE REDONE, SO DONT PAY ATTENTION TO THIS CODE
+/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +10,7 @@ public class CarEffects : MonoBehaviour
     public AudioSource skidClip;
     public TrailRenderer[] tireMarks;
     public ParticleSystem[] smoke;
-    //public GameObject lights;
+    
     private Controller controller;
     private InputManager IM;
     private bool smokeFlag  = false , lightsFlag = false , tireMarksFlag;
@@ -102,3 +104,4 @@ public class CarEffects : MonoBehaviour
         tireMarksFlag = false;
     }
 }
+*/

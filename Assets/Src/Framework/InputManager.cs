@@ -2,92 +2,86 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
+    private Controller _Controller;
+    private TrackWaypoints _Waypoints;
+    private Transform _tCurrentWaypoint;
+    private List<Transform> _NodesList = new List<Transform>();
+    
+    private float _fAcceleration = 0.2f;
+    private int _iDistanceOffset = 3;
+    private float _fSteerForce = 0.2f;
+    private int _iCurrentNode;
+    private float _fVertical;
+    private float _fHorizontal;
+    private float _fZet;
 
-    [HideInInspector] public Controller RR;
-
-    [HideInInspector] public float vertical;
-    [HideInInspector] public float horizontal;
-    [HideInInspector] public float zet;
-    [HideInInspector] public bool handbrake;
-    [HideInInspector] public bool boosting;
-
-    private TrackWaypoints waypoints;
-    private Transform currentWaypoint;
-    private List<Transform> nodes = new List<Transform>();
-
-    [Header("AI values")] [Range(0, 1)] public float acceleration = 0.2f;
-    private int distanceOffset = 3;
-    [Range(0, 1)] public float steerForce = 0.2f;
-    public int currentNode;
-
-    private void Awake()
-    {
-        RR = GetComponent<Controller>();
-    }
-
-    private void Start()
-    {
-        //boton = GameObject.FindGameObjectWithTag("FreezeButton").GetComponent<Button>();
-        //boton.onClick.AddListener(() => routing());
-        waypoints = GameObject.FindGameObjectWithTag("path").GetComponent<TrackWaypoints>();
-        currentWaypoint = gameObject.transform;
-        nodes = waypoints.nodes;
-    }
-
-    private void FixedUpdate()
-    {
-        if (gameObject.tag == "AI") AIDrive();
-    }
-
-    private void AIDrive()
-    {
-        calculateDistanceOfWaypoints();
-        AISteer();
-        vertical = acceleration;
-
-    }
-
-    private void calculateDistanceOfWaypoints()
+    public float SetAcceleration { set => _fAcceleration = value; }
+    
+    public float SetSteerForce { set => _fSteerForce = value; }
+    
+    public float GetVertical => _fVertical;
+    
+    public float GetHorizontal => _fHorizontal;
+    
+    private void _CalculateDistanceOfWaypoints()
     {
         Vector3 position = gameObject.transform.position;
         float distance = Mathf.Infinity;
 
-        for (int i = 0; i < nodes.Count; i++)
+        for (int i = 0; i < _NodesList.Count; i++)
         {
-            Vector3 difference = nodes[i].transform.position - position;
+            Vector3 difference = _NodesList[i].transform.position - position;
             float currentDistance = difference.magnitude;
+            
             if (currentDistance < distance)
             {
-                if ((i + distanceOffset) >= nodes.Count)
+                if ((i + _iDistanceOffset) >= _NodesList.Count)
                 {
-                    currentWaypoint = nodes[1];
+                    _tCurrentWaypoint = _NodesList[1];
                     distance = currentDistance;
                 }
                 else
                 {
-                    currentWaypoint = nodes[i + distanceOffset];
+                    _tCurrentWaypoint = _NodesList[i + _iDistanceOffset];
                     distance = currentDistance;
                 }
 
-                currentNode = i;
+                _iCurrentNode = i;
             }
         }
     }
 
-    private void AISteer()
+    private void _Steer()
     {
-        Vector3 relative = transform.InverseTransformPoint(currentWaypoint.transform.position);
+        Vector3 relative = transform.InverseTransformPoint(_tCurrentWaypoint.transform.position);
         relative /= relative.magnitude;
-        horizontal = (relative.x / relative.magnitude) * steerForce;
-        zet = (relative.z / relative.magnitude) * steerForce;
+        _fHorizontal = (relative.x / relative.magnitude) * _fSteerForce;
+        _fZet = (relative.z / relative.magnitude) * _fSteerForce;
+    }
+    
+    private void Awake() { _Controller = GetComponent<Controller>(); }
+
+    private void Start()
+    {
+        _Waypoints = GameObject.FindGameObjectWithTag("path").GetComponent<TrackWaypoints>();
+        _tCurrentWaypoint = gameObject.transform;
+        _NodesList = _Waypoints.NodesList;
+    }
+
+    private void FixedUpdate()
+    {
+        _CalculateDistanceOfWaypoints();
+        _Steer();
+        _fVertical = _fAcceleration;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "obstacle") RR.dmg += RR.KPH * 0.167f;
+        if (collision.gameObject.tag == "obstacle") _Controller.SetDmg = _Controller.GetDmg + _Controller.GetKPH * 0.167f;
     }
 }

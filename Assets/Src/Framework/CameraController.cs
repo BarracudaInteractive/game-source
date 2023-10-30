@@ -2,38 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour 
+{
+    [Header("Camera settings")]
+    [Range (0, 50)] public float fSmothTime = 8;
+    
+    private GameObject _gCar;
+    private Controller _Controller;
+    private GameObject _gCameraLookAt,_gCameraPos;
+    private float _fSpeed = 0;
+    private float _fDefaltFOV = 0;
+    private float _fDesiredFOV = 0;
 
-    private GameObject car;
-    private Controller RR;
-    private GameObject cameralookAt,cameraPos;
-    private float speed = 0;
-    private float defaltFOV = 0, desiredFOV = 0;
-    [Range (0, 50)] public float smothTime = 8;
-
-    private void Start () {
-        car = GameObject.FindGameObjectWithTag ("AI");
-        RR = car.GetComponent<Controller> ();
-        cameralookAt = car.transform.Find ("camera lookAt").gameObject;
-        cameraPos = car.transform.Find ("camera constraint").gameObject;
-
-        try { defaltFOV = Camera.main.fieldOfView; } //Camera.main is a bad method -> Pending
-        catch (Exception e) { }
-        desiredFOV = defaltFOV + 15;
+    private void _Follow () {
+        _fSpeed = _Controller.GetKPH / fSmothTime;
+        gameObject.transform.position = Vector3.Lerp (transform.position, _gCameraPos.transform.position ,  Time.deltaTime * _fSpeed);
+        gameObject.transform.LookAt (_gCameraLookAt.gameObject.transform.position);
+    }
+    
+    private void _BoostFOV () { Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, _fDefaltFOV, Time.deltaTime * 5); }
+    
+    private void Awake () {
+        _gCar = GameObject.FindGameObjectWithTag("AI");
+        _Controller = _gCar.GetComponent<Controller> ();
+        _gCameraLookAt = _gCar.transform.Find("camera lookAt").gameObject;
+        _gCameraPos = _gCar.transform.Find("camera constraint").gameObject;
+        _fDefaltFOV = Camera.main.fieldOfView;
+        _fDesiredFOV = _fDefaltFOV + 15;
     }
 
-    private void FixedUpdate () {
-        follow ();
-        boostFOV ();
-    }
-    private void follow () {
-        speed = RR.KPH / smothTime;
-        gameObject.transform.position = Vector3.Lerp (transform.position, cameraPos.transform.position ,  Time.deltaTime * speed);
-        gameObject.transform.LookAt (cameralookAt.gameObject.transform.position);
-    }
-    private void boostFOV () {
-        try { Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, defaltFOV, Time.deltaTime * 5); }
-        catch (Exception e) { }
-    }
+    private void FixedUpdate () { _Follow (); _BoostFOV (); }
 }

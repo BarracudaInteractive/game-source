@@ -643,7 +643,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: upgradesCanvasButton
+        m_MethodName: _UpgradesCanvasButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -815,13 +815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189f2ab782d97ed45961e9a4c10c6478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linecolor: {r: 0, g: 0, b: 0, a: 0}
-  SphereRadius: 0
-  nodes:
-  - {fileID: 2038230661}
-  - {fileID: 498153675}
-  - {fileID: 41189464}
-  - {fileID: 1760993737}
+  LineColor: {r: 0, g: 0, b: 0, a: 0}
+  fSphereRadius: 0
+  NodesList: []
 --- !u!1 &302105391
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +983,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: rightButton
+        m_MethodName: _RightButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2233,7 +2229,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: DeafaultCanvasStartButton
+        m_MethodName: _DeafaultCanvasStartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2367,7 +2363,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: vehicleSelectCanvasStartButton
+        m_MethodName: _VehicleSelectCanvasStartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2634,7 +2630,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: DeafaultCanvasStartButton
+        m_MethodName: _DeafaultCanvasStartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2923,7 +2919,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: awakeManager, Assembly-CSharp
-        m_MethodName: loadTesting
+        m_MethodName: LoadTesting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3343,7 +3339,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: startGameButton
+        m_MethodName: _StartGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5077,7 +5073,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: DeafaultCanvasStartButton
+        m_MethodName: _DeafaultCanvasStartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5971,7 +5967,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: leftButton
+        m_MethodName: _LeftButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6173,29 +6169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1102f72166f0f4a48b6594cf77b62553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPointer: -520
-  list: {fileID: 326023234}
-  chilldObject: {fileID: 2052879471}
-  exitPanelButton: {fileID: 1483280196}
-  engineUpgrade: {fileID: 1792041172}
-  enginePrice: {fileID: 906486410}
-  engineFlag: 0
-  spoilerUpgrade: {fileID: 405580742}
-  spoilerPrice: {fileID: 1243607163}
-  spoilerFlag: 0
-  nitrusUpgrade: {fileID: 567772876}
-  nitrusPrice: {fileID: 451664612}
-  nitrusFlag: 0
-  colorUpgrade: {fileID: 1766968390}
-  colorPrice: {fileID: 1619077374}
-  colorFlag: 0
-  wheelUpgrade: {fileID: 788251975}
-  wheelPrice: {fileID: 747982577}
-  wheelFlag: 0
-  handlingUpgrade: {fileID: 1459840310}
-  handlingPrice: {fileID: 302105393}
-  handlingFlag: 0
-  generatedArray: []
 --- !u!1 &1760993736
 GameObject:
   m_ObjectHideFlags: 0
@@ -6587,7 +6560,7 @@ GameObject:
   - component: {fileID: 1830961137}
   m_Layer: 0
   m_Name: MANAGER
-  m_TagString: Untagged
+  m_TagString: gameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6604,24 +6577,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f3be6ba1456824fa4af6732651031b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpTime: 2
-  CameraObject: {fileID: 7786233397972518158}
-  finalCameraPosition: {fileID: 464717546}
-  startCameraPosition: {fileID: 385529256}
-  DeafaultCanvas: {fileID: 1215039007}
-  DeafaultCanvasCurrency: {fileID: 62924772}
-  mapSelectorCanvas: {fileID: 1039174400}
-  upgradesCurrency: {fileID: 1020681631}
-  upgradesCanvas: {fileID: 1701910247}
-  vehicleSelectCanvas: {fileID: 1251198654}
-  buyButton: {fileID: 2120330510}
-  startButton: {fileID: 862455496}
-  listOfVehicles: {fileID: 326023234}
-  currency: {fileID: 1153446387}
-  carInfo: {fileID: 1162549298}
-  toRotate: {fileID: 1038715321}
-  rotateSpeed: 10
-  vehiclePointer: 0
+  gCameraObject: {fileID: 7786233397972518158}
+  gFinalCameraPosition: {fileID: 464717546}
+  gStartCameraPosition: {fileID: 385529256}
+  gDeafaultCanvas: {fileID: 1215039007}
+  tDeafaultCanvasCurrency: {fileID: 62924772}
+  gMapSelectorCanvas: {fileID: 1039174400}
+  tUpgradesCurrency: {fileID: 1020681631}
+  gUpgradesCanvas: {fileID: 1701910247}
+  gVehicleSelectCanvas: {fileID: 1251198654}
+  gBuyButton: {fileID: 2120330510}
+  gStartButton: {fileID: 862455496}
+  ListOfVehicles: {fileID: 326023234}
+  tCurrency: {fileID: 1153446387}
+  tCarInfo: {fileID: 1162549298}
+  gToRotate: {fileID: 1038715321}
 --- !u!4 &1830961138
 Transform:
   m_ObjectHideFlags: 0
@@ -7229,7 +7199,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: DeafaultCanvasStartButton
+        m_MethodName: _DeafaultCanvasStartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7540,7 +7510,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830961137}
         m_TargetAssemblyTypeName: 
-        m_MethodName: BuyButton
+        m_MethodName: _BuyButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7725,9 +7695,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1696235231782742171, guid: 546bc0ef75f4acc4ca3b3509c9951c1e, type: 3}
+      propertyPath: Vehicles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696235231782742171, guid: 546bc0ef75f4acc4ca3b3509c9951c1e, type: 3}
       propertyPath: vehicles.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1696235231782742171, guid: 546bc0ef75f4acc4ca3b3509c9951c1e, type: 3}
+      propertyPath: Vehicles.Array.data[0]
+      value: 
+      objectReference: {fileID: 2962088815592287996, guid: 6b0640718ac088b4a82650953ac3d101, type: 3}
+    - target: {fileID: 1696235231782742171, guid: 546bc0ef75f4acc4ca3b3509c9951c1e, type: 3}
+      propertyPath: Vehicles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2610125035370890679, guid: 7a1c876f724c2c74babf5b7174c678a9, type: 3}
     - target: {fileID: 1696235231782742171, guid: 546bc0ef75f4acc4ca3b3509c9951c1e, type: 3}
       propertyPath: vehicles.Array.data[0]
       value: 
@@ -7890,7 +7872,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7786233397972518158}
-  m_LocalRotation: {x: 0.10200869, y: -0.14790274, z: 0.0153388055, w: 0.98360753}
+  m_LocalRotation: {x: 0.10200869, y: -0.14790273, z: 0.015338805, w: 0.98360753}
   m_LocalPosition: {x: 3.24, y: 2.31, z: -10.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

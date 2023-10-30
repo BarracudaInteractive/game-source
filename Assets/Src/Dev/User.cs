@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ITS GONNA BE REDONE, SO DONT PAY ATTENTION TO THIS CODE
 public class User
 {
     private string username;
