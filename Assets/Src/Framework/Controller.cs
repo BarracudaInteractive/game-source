@@ -16,10 +16,10 @@ public class Controller : MonoBehaviour
     
     [Header("Variables")]
     [SerializeField] private DriveType _Drive;
-    public float[] gears;
-    public float[] gearChangeSpeed;
-    public float _fMinRPM;
-    public float _fMaxRPM;
+    public float[] fGears;
+    public float[] fGearChangeSpeed;
+    public float fMinRPM;
+    public float fMaxRPM;
     public AnimationCurve enginePower;
     
     [Header("Workshop values")]
@@ -64,7 +64,7 @@ public class Controller : MonoBehaviour
     
     public bool IsAcc => _isAcc;
     
-    public float GetMaxRPM => _fMaxRPM;
+    public float GetMaxRPM => fMaxRPM;
     
     public float GetDmg => _fDmg;
     
@@ -94,18 +94,18 @@ public class Controller : MonoBehaviour
         _fTotalPower = 3.6f * enginePower.Evaluate(_fEngineRPM) * (_fVertical);
         float velocity  = 0.0f;
         
-        if (_fEngineRPM >= _fMaxRPM || _isBelowRPM)
+        if (_fEngineRPM >= fMaxRPM || _isBelowRPM)
         {
-            _fEngineRPM = Mathf.SmoothDamp(_fEngineRPM, _fMaxRPM - 500, ref velocity, 0.05f);
-            _isBelowRPM = (_fEngineRPM >= _fMaxRPM - 450);
+            _fEngineRPM = Mathf.SmoothDamp(_fEngineRPM, fMaxRPM - 500, ref velocity, 0.05f);
+            _isBelowRPM = (_fEngineRPM >= fMaxRPM - 450);
             _isAcc = (_fLastEngineRPM > _fEngineRPM);
         }
         else 
         { 
-            _fEngineRPM = Mathf.SmoothDamp(_fEngineRPM,1000 + (Mathf.Abs(_fWheelsRPM) * 3.6f * (gears[_iGearNum])), ref velocity , _fSmoothTime);
+            _fEngineRPM = Mathf.SmoothDamp(_fEngineRPM,1000 + (Mathf.Abs(_fWheelsRPM) * 3.6f * (fGears[_iGearNum])), ref velocity , _fSmoothTime);
             _isAcc = false;
         }
-        if (_fEngineRPM >= _fMaxRPM + 1000) _fEngineRPM = _fMaxRPM + 1000;
+        if (_fEngineRPM >= fMaxRPM + 1000) _fEngineRPM = fMaxRPM + 1000;
         
         _MoveVehicle();
         _Shifter();
@@ -136,21 +136,21 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private bool _CheckGears() { return _fKPH >= gearChangeSpeed[_iGearNum]; }
+    private bool _CheckGears() { return _fKPH >= fGearChangeSpeed[_iGearNum]; }
 
     private void _Shifter()
     {
         if(!_IsGrounded())return;
         
         //automatic
-        if(_fEngineRPM > _fMaxRPM && _iGearNum < gears.Length - 1 && !_isReverse && _CheckGears() )
+        if(_fEngineRPM > fMaxRPM && _iGearNum < fGears.Length - 1 && !_isReverse && _CheckGears() )
         {
             _iGearNum++;
             //_GameManager.changeGear();
             return;
         }
         
-        if(_fEngineRPM < _fMinRPM && _iGearNum > 0)
+        if(_fEngineRPM < fMinRPM && _iGearNum > 0)
         {
             _iGearNum--;
             //_GameManager.changeGear();
@@ -314,9 +314,9 @@ public class Controller : MonoBehaviour
                 //decelerate
                 if (_fLastKPH > _fKPH) _fGas += (float)0.015*_fDemo; 
                 //accelerate
-                else if (_fKPH / gearChangeSpeed[_iGearNum] > 0.8f) _fGas += (float)0.02*_fDemo; 
+                else if (_fKPH / fGearChangeSpeed[_iGearNum] > 0.8f) _fGas += (float)0.02*_fDemo; 
                 //accelerate slightly
-                else if (_fKPH / gearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas += (float)0.015*_fDemo; 
+                else if (_fKPH / fGearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas += (float)0.015*_fDemo; 
             }
             _fLastKPH = _fKPH;
         }
