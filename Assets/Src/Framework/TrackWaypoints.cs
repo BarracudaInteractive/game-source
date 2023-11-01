@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class TrackWaypoints : MonoBehaviour
-{
-    [Header("Waypoints attributes")]
+public class TrackWaypoints : MonoBehaviour{
+
     public Color LineColor;
     [Range(0, 1)] public float fSphereRadius;
     public List<Transform> NodesList = new List<Transform>();
-    
-    private void OnDrawGizmosSelected()
+
+    public void OnDrawGizmosSelected()
     {
         Gizmos.color = LineColor;
         Transform[] path = GetComponentsInChildren<Transform>();
 
         NodesList = new List<Transform>();
         
-        for (int i = 1; i < path.Length; i++)
+        for (int i = 1; i < path.Length; i++) 
+        {
             NodesList.Add(path[i]);
-        
+        }
+
         for (int i = 0; i < NodesList.Count; i++) 
         {
             Vector3 currentWaypoint = NodesList[i].position;
@@ -32,4 +33,5 @@ public class TrackWaypoints : MonoBehaviour
             Gizmos.DrawSphere(currentWaypoint, fSphereRadius);
         }
     }
+
 }

@@ -12,7 +12,7 @@ public class WheelDrive : MonoBehaviour
 	}
 	
     [Tooltip("Maximum steering angle of the wheels")]
-	public float fMaxSteeringAngle = 45.0f;
+	public float fMaxSteeringAngle = 70.0f;
 	[Tooltip("Maximum torque applied to the driving wheels")]
 	public float fMaxTorque = 300.0f;
 	[Tooltip("Maximum brake torque applied to the driving wheels")]

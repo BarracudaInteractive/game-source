@@ -17,10 +17,7 @@ public class Attrib : MonoBehaviour
     private float _fSteerForce = 0.0f;
     private float _fChrono = 0.0f;
 
-    private void _SetText()
-    {
-        tText.text = $"Section {iId.ToString()}: {Math.Round(_fChrono, 2).ToString()}";
-    }
+    private void _SetText() { tText.text = $"Section {iId.ToString()}: {Math.Round(_fChrono, 2).ToString()}"; }
 
     public short GetId => iId;
 
@@ -35,7 +32,7 @@ private void Update() { _fChrono += Time.deltaTime; }
         if (coll.gameObject.tag == "AI" && _fSteerForce != 0.0f)
         {
             _SetText();
-            coll.gameObject.GetComponent<InputManager>().SetAcceleration = _fSteerForce;
+            //coll.gameObject.GetComponent<InputManager>().SetAcceleration = _fSteerForce;
             coll.gameObject.GetComponent<InputManager>().SetSteerForce = _fSteerForce;
         }
     }

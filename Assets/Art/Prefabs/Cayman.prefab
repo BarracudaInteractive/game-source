@@ -2067,22 +2067,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Drive: 1
-  gears:
+  fGears:
   - 4
   - 2.8
   - 2
   - 1.4
   - 0.9
   - 0.5
-  gearChangeSpeed:
+  fGearChangeSpeed:
   - 60
   - 100
   - 130
   - 170
   - 200
   - 250
-  _fMinRPM: 5000
-  _fMaxRPM: 8000
+  fMinRPM: 5000
+  fMaxRPM: 8000
   enginePower:
     serializedVersion: 2
     m_Curve:
