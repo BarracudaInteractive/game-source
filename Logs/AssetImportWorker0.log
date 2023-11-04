@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2022.3/staging' branch; Version is '2022.3.2f1 (d74737c6db50) revision 14108471'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'en' Physical Memory: 7986 MB
+OS: 'Windows 11  (10.0.22621) 64bit Professional' Language: 'en' Physical Memory: 32636 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -15,7 +15,7 @@ C:/Users/aleja/Unity/game-source
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50921
+54278
 Successfully changed project path to: C:/Users/aleja/Unity/game-source
 C:/Users/aleja/Unity/game-source
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ C:/Users/aleja/Unity/game-source
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [14672] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 861891908 [EditorId] 861891908 [Version] 1048832 [Id] WindowsEditor(7,T-1100) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [15636] Host "[IP] 192.168.0.180 [Port] 0 [Flags] 2 [Guid] 3352903219 [EditorId] 3352903219 [Version] 1048832 [Id] WindowsEditor(7,CALYPSO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [14672] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 861891908 [EditorId] 861891908 [Version] 1048832 [Id] WindowsEditor(7,T-1100) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [15636] Host "[IP] 192.168.0.180 [Port] 0 [Flags] 2 [Guid] 3352903219 [EditorId] 3352903219 [Version] 1048832 [Id] WindowsEditor(7,CALYPSO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 27.13 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 6.93 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.2f1 (d74737c6db50)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/Resources/UnitySubsystems
@@ -61,59 +61,59 @@ Initialize engine version: 2022.3.2f1 (d74737c6db50)
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: Intel(R) UHD Graphics 620 (ID=0x3ea0)
-    Vendor:   Intel
-    VRAM:     3993 MB
-    Driver:   31.0.101.2111
+    Renderer: NVIDIA GeForce RTX 3080 (ID=0x2206)
+    Vendor:   NVIDIA
+    VRAM:     10067 MB
+    Driver:   31.0.15.4584
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56936
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56572
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.037036 seconds.
-- Loaded All Assemblies, in  1.269 seconds
+Registered in 0.010830 seconds.
+- Loaded All Assemblies, in  0.301 seconds
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 853 ms
+Android Extension - Scanning For ADB Devices 241 ms
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.156 seconds
-Domain Reload Profiling: 3420ms
-	BeginReloadAssembly (257ms)
+- Finished resetting the current domain, in  0.516 seconds
+Domain Reload Profiling: 815ms
+	BeginReloadAssembly (74ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (3ms)
-	RebuildCommonClasses (99ms)
-	RebuildNativeTypeToScriptingClass (26ms)
-	initialDomainReloadingComplete (189ms)
-	LoadAllAssembliesAndSetupDomain (692ms)
-		LoadAssemblies (249ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (27ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (56ms)
+	LoadAllAssembliesAndSetupDomain (134ms)
+		LoadAssemblies (72ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (670ms)
-			TypeCache.Refresh (656ms)
-				TypeCache.ScanAssembly (440ms)
-			ScanForSourceGeneratedMonoScriptInfo (1ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (2157ms)
+		AnalyzeDomain (128ms)
+			TypeCache.Refresh (127ms)
+				TypeCache.ScanAssembly (117ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (516ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1992ms)
+		SetupLoadedEditorAssemblies (463ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (1586ms)
-			SetLoadedEditorAssemblies (12ms)
+			InitializePlatformSupportModulesInManaged (347ms)
+			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (7ms)
-			ProcessInitializeOnLoadAttributes (270ms)
-			ProcessInitializeOnLoadMethodAttributes (117ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (76ms)
+			ProcessInitializeOnLoadMethodAttributes (36ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -121,8 +121,8 @@ Domain Reload Profiling: 3420ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  2.203 seconds
-Refreshing native plugins compatible for Editor in 9.29 ms, found 3 plugins.
+- Loaded All Assemblies, in  0.773 seconds
+Refreshing native plugins compatible for Editor in 4.09 ms, found 3 plugins.
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
@@ -132,50 +132,51 @@ Package Manager log level set to [2]
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.684 seconds
-Domain Reload Profiling: 3877ms
-	BeginReloadAssembly (458ms)
+- Finished resetting the current domain, in  0.589 seconds
+Domain Reload Profiling: 1359ms
+	BeginReloadAssembly (104ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (29ms)
+		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (54ms)
-	RebuildCommonClasses (100ms)
-	RebuildNativeTypeToScriptingClass (33ms)
-	initialDomainReloadingComplete (117ms)
-	LoadAllAssembliesAndSetupDomain (1484ms)
-		LoadAssemblies (824ms)
+		CreateAndSetChildDomain (18ms)
+	RebuildCommonClasses (25ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (37ms)
+	LoadAllAssembliesAndSetupDomain (596ms)
+		LoadAssemblies (217ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (822ms)
-			TypeCache.Refresh (777ms)
-				TypeCache.ScanAssembly (739ms)
-			ScanForSourceGeneratedMonoScriptInfo (34ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (1685ms)
+		AnalyzeDomain (426ms)
+			TypeCache.Refresh (404ms)
+				TypeCache.ScanAssembly (382ms)
+			ScanForSourceGeneratedMonoScriptInfo (18ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (589ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1237ms)
+		SetupLoadedEditorAssemblies (397ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (75ms)
-			SetLoadedEditorAssemblies (11ms)
+			InitializePlatformSupportModulesInManaged (33ms)
+			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (153ms)
-			ProcessInitializeOnLoadAttributes (929ms)
-			ProcessInitializeOnLoadMethodAttributes (45ms)
-			AfterProcessingInitializeOnLoad (23ms)
+			BeforeProcessingInitializeOnLoad (58ms)
+			ProcessInitializeOnLoadAttributes (275ms)
+			ProcessInitializeOnLoadMethodAttributes (19ms)
+			AfterProcessingInitializeOnLoad (8ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (18ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.12 seconds
-Refreshing native plugins compatible for Editor in 9.21 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (7ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 2.61 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3110 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 31 unused Assets / (56.5 KB). Loaded Objects now: 3590.
-Memory consumption went from 130.0 MB to 129.9 MB.
-Total: 9.415900 ms (FindLiveObjects: 0.797200 ms CreateObjectMapping: 0.511300 ms MarkObjects: 7.926200 ms  DeleteObjects: 0.179600 ms)
+Unloading 3167 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 33 unused Assets / (56.6 KB). Loaded Objects now: 3643.
+Memory consumption went from 130.9 MB to 130.9 MB.
+Total: 2.778900 ms (FindLiveObjects: 0.252000 ms CreateObjectMapping: 0.084200 ms MarkObjects: 2.343400 ms  DeleteObjects: 0.098300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
@@ -187,577 +188,1014 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 508051.319483 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Editor/Boxophobic.SkyboxCubemapExtended.Editor.asmdef
-  artifactKey: Guid(29bc400970c5066438cbde7676418b75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Editor/Boxophobic.SkyboxCubemapExtended.Editor.asmdef using Guid(29bc400970c5066438cbde7676418b75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0f3f8b6be7a479c8195ec66014a65c0') in 0.006028 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core
-  artifactKey: Guid(18556335e32be764885bcf0a6824be6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core using Guid(18556335e32be764885bcf0a6824be6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a3a620738d192104ceee77c6d4fc084') in 0.000980 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.000121 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Editor/Version.asset
-  artifactKey: Guid(cb530898cc05d744da0941d6160f7b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Editor/Version.asset using Guid(cb530898cc05d744da0941d6160f7b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'deb53b4f8fce154bdb35ec30ac4803cd') in 0.003216 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 1.079571 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Functions
-  artifactKey: Guid(7f2ce50d7f6bdaa4c9b0717b74137465) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Functions using Guid(7f2ce50d7f6bdaa4c9b0717b74137465) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e2646c2c3d256e8e7a35dd9f775f95c') in 0.000808 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.043323 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Functions/Compute Rotation Y.asset
-  artifactKey: Guid(693b7d13a80c93a4e8b791a9cd5e5ab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Functions/Compute Rotation Y.asset using Guid(693b7d13a80c93a4e8b791a9cd5e5ab2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cba424d5b8ff3f31815b1a10fcfc630f') in 0.002442 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 1.459066 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Shaders
-  artifactKey: Guid(e3f53477d64695f4abc989d59212b280) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Shaders using Guid(e3f53477d64695f4abc989d59212b280) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '447ad73c17b5f06dcebfc6bd55b86bf4') in 0.000851 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.915849 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Shaders/Skybox Cubemap Blend.shader
-  artifactKey: Guid(7705790d9e8e16344ad5d7960c568904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Shaders/Skybox Cubemap Blend.shader using Guid(7705790d9e8e16344ad5d7960c568904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e938625e6ac9ecc83c5190a00d7f7b66') in 0.009194 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.617164 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Shaders/Skybox Cubemap Extended.shader
-  artifactKey: Guid(82881a2d011b0964696411c822cdd00b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Shaders/Skybox Cubemap Extended.shader using Guid(82881a2d011b0964696411c822cdd00b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a8986ec233ada486298ee8d995ad455') in 0.001115 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 47.929249 seconds.
-  path: Assets/TextMesh Pro/Fonts/LiberationSans.ttf
-  artifactKey: Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Fonts/LiberationSans.ttf using Guid(e3265ab4bf004d28a9537516768c1c75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '868ae7279cb8681e901fb13a12c8cb7e') in 0.263885 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 4
-========================================================================
-Received Import Request.
-  Time since last request: 0.769768 seconds.
-  path: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat
-  artifactKey: Guid(e73a58f6e2794ae7b1b7e50b7fb811b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat using Guid(e73a58f6e2794ae7b1b7e50b7fb811b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce52b36f64b53d316b94ec1fe6b86786') in 0.200568 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
+  Time since last request: 41080.047486 seconds.
   path: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
   artifactKey: Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset using Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adeea0bbe5691e5d7c8f336394c5d291') in 0.048098 seconds
+Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset using Guid(2e498d1c8094910479dc3e1b768306a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c616856e0e9591d03852673cba4e72c7') in 0.132364 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 6
 ========================================================================
 Received Import Request.
-  Time since last request: 0.119699 seconds.
-  path: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
-  artifactKey: Guid(8f586378b4e144a9851e7b34d9b748ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset using Guid(8f586378b4e144a9851e7b34d9b748ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e966b39e5eae90cdc1a91d6f92d54e09') in 0.079271 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
-========================================================================
-Received Import Request.
   Time since last request: 0.000027 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - FirTreeVariation.mat
-  artifactKey: Guid(0f74119e82d3b3a4d9b2842dbaa2a6ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - FirTreeVariation.mat using Guid(0f74119e82d3b3a4d9b2842dbaa2a6ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dca27d7d619fee9145ec18565ec5907f') in 0.034960 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.316328 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Rock.mat
-  artifactKey: Guid(37524ae4594222f4f8acd7b76234f79a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Rock.mat using Guid(37524ae4594222f4f8acd7b76234f79a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93f076b77504da273dcec800d8ed4d4a') in 0.019767 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.321033 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - TreeTrunk.mat
-  artifactKey: Guid(2a8f9a878cb7cff45b00339938d945ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - TreeTrunk.mat using Guid(2a8f9a878cb7cff45b00339938d945ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69006b43c3a10b8519096b628525c0ce') in 0.017300 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 0.952289 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/Skybox Cubemap Extended Blend.mat
-  artifactKey: Guid(1cf6f4c6e6e0518419839d3f5448dd99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/Skybox Cubemap Extended Blend.mat using Guid(1cf6f4c6e6e0518419839d3f5448dd99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0a6d7d6b6dc40a501e06019f12aef5c') in 2.650718 seconds
+  path: Assets/Art/Textures/InitButtons (2)/shape001_style03_color02.png
+  artifactKey: Guid(0943b09a8ebda7445a37fd2e859db3f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape001_style03_color02.png using Guid(0943b09a8ebda7445a37fd2e859db3f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d0e64bed00d60c222b3a9a52fbeee4c') in 0.028199 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000498 seconds.
-  path: Assets/Art/Materials/Tire.mat
-  artifactKey: Guid(c2353e48d17f1774482f817d2982ed61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Materials/Tire.mat using Guid(c2353e48d17f1774482f817d2982ed61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7413a165d6b1fe636444e1dc5d93a3b') in 0.761042 seconds
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape008_style02_color03.png
+  artifactKey: Guid(73799eac1adca1c408cff4fe53476e65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape008_style02_color03.png using Guid(73799eac1adca1c408cff4fe53476e65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa6f4dc4d252f8d1c494de7ecfd4abb9') in 0.010547 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 3
 ========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  2.166 seconds
-Refreshing native plugins compatible for Editor in 6.41 ms, found 3 plugins.
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Native extension for WebGL target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.971 seconds
-Domain Reload Profiling: 5130ms
-	BeginReloadAssembly (590ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (22ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (250ms)
-	RebuildCommonClasses (100ms)
-	RebuildNativeTypeToScriptingClass (20ms)
-	initialDomainReloadingComplete (73ms)
-	LoadAllAssembliesAndSetupDomain (1375ms)
-		LoadAssemblies (944ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (622ms)
-			TypeCache.Refresh (614ms)
-				TypeCache.ScanAssembly (553ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (2972ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (914ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (62ms)
-			SetLoadedEditorAssemblies (9ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (148ms)
-			ProcessInitializeOnLoadAttributes (646ms)
-			ProcessInitializeOnLoadMethodAttributes (31ms)
-			AfterProcessingInitializeOnLoad (18ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (14ms)
-Refreshing native plugins compatible for Editor in 7.50 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3083 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 25 unused Assets / (32.2 KB). Loaded Objects now: 3634.
-Memory consumption went from 124.6 MB to 124.5 MB.
-Total: 8.009200 ms (FindLiveObjects: 0.437800 ms CreateObjectMapping: 0.459100 ms MarkObjects: 7.010300 ms  DeleteObjects: 0.100200 ms)
-
-Prepare: number of updated asset objects reloaded= 2
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.493 seconds
-Refreshing native plugins compatible for Editor in 9.44 ms, found 3 plugins.
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Native extension for WebGL target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.528 seconds
-Domain Reload Profiling: 3014ms
-	BeginReloadAssembly (311ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (13ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (68ms)
-	RebuildCommonClasses (82ms)
-	RebuildNativeTypeToScriptingClass (20ms)
-	initialDomainReloadingComplete (75ms)
-	LoadAllAssembliesAndSetupDomain (997ms)
-		LoadAssemblies (583ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (572ms)
-			TypeCache.Refresh (559ms)
-				TypeCache.ScanAssembly (534ms)
-			ScanForSourceGeneratedMonoScriptInfo (5ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (1529ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (613ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (47ms)
-			SetLoadedEditorAssemblies (8ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (119ms)
-			ProcessInitializeOnLoadAttributes (390ms)
-			ProcessInitializeOnLoadMethodAttributes (31ms)
-			AfterProcessingInitializeOnLoad (17ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (14ms)
-Refreshing native plugins compatible for Editor in 6.64 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3147 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 23 unused Assets / (72.2 KB). Loaded Objects now: 3697.
-Memory consumption went from 126.6 MB to 126.5 MB.
-Total: 6.960200 ms (FindLiveObjects: 0.398000 ms CreateObjectMapping: 0.443800 ms MarkObjects: 5.968100 ms  DeleteObjects: 0.148800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape001_style03_color03.png
+  artifactKey: Guid(d2540f15f928fe547a46d22202ad4ac7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape001_style03_color03.png using Guid(d2540f15f928fe547a46d22202ad4ac7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22e94f8a94b958ca012c721d44315188') in 0.008058 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 164.682077 seconds.
-  path: Assets/BOXOPHOBIC/Utils
-  artifactKey: Guid(a85b6dec3188bd14194e16aa24e9fd0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Utils using Guid(a85b6dec3188bd14194e16aa24e9fd0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a55d196552cb64a2232721f0d56d5dae') in 0.002897 seconds
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape022_style01_color10.png
+  artifactKey: Guid(e67f087f7911fb944a633acb40fc0be2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape022_style01_color10.png using Guid(e67f087f7911fb944a633acb40fc0be2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97db006124ce11a016e03dc9c2f778f6') in 0.016387 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 1.113949 seconds.
-  path: Assets/BOXOPHOBIC/Utils/Scripts
-  artifactKey: Guid(9ec3a38b6858ee54685444ad9afdd646) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Utils/Scripts using Guid(9ec3a38b6858ee54685444ad9afdd646) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e2fe21c9b3f8703ceb39b61718bb5c7c') in 0.000844 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape022_style02_color01.png
+  artifactKey: Guid(f08cd378fd4456b4ab8808927e80c403) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape022_style02_color01.png using Guid(f08cd378fd4456b4ab8808927e80c403) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af0b7fed7b80ae6f5058ebb77301f140') in 0.011418 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.078458 seconds.
-  path: Assets/BOXOPHOBIC/Utils/Scripts/Boxophobic.Utils.Scripts.asmdef
-  artifactKey: Guid(825ad574da7360d4e8aea558f272972e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Utils/Scripts/Boxophobic.Utils.Scripts.asmdef using Guid(825ad574da7360d4e8aea558f272972e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77eaf203c7e94fcf85b40fa1acb6dadd') in 0.001349 seconds
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape028_style02_color08.png
+  artifactKey: Guid(58d97bc2aef16804785c59dcb41cfd41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape028_style02_color08.png using Guid(58d97bc2aef16804785c59dcb41cfd41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a3d839214a1cb73208058c40c048725') in 0.021804 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 2.083107 seconds.
-  path: Assets/BOXOPHOBIC/Utils/Scripts/StyledGizmos
-  artifactKey: Guid(9de356a448be7ac49969a9ee3488af2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Utils/Scripts/StyledGizmos using Guid(9de356a448be7ac49969a9ee3488af2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cbd48dbad38c12f672c047a32f2cf38c') in 0.000723 seconds
+  Time since last request: 0.000066 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape028_style02_color02.png
+  artifactKey: Guid(43c7bbc60f82ccf4da1b01f22701e13e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape028_style02_color02.png using Guid(43c7bbc60f82ccf4da1b01f22701e13e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9be295f71cf01d587f0a0c729b3594fd') in 0.011717 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.660 seconds
-Refreshing native plugins compatible for Editor in 14.23 ms, found 3 plugins.
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Native extension for WebGL target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  5.340 seconds
-Domain Reload Profiling: 6997ms
-	BeginReloadAssembly (268ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (11ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (70ms)
-	RebuildCommonClasses (73ms)
-	RebuildNativeTypeToScriptingClass (20ms)
-	initialDomainReloadingComplete (56ms)
-	LoadAllAssembliesAndSetupDomain (1237ms)
-		LoadAssemblies (602ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (750ms)
-			TypeCache.Refresh (732ms)
-				TypeCache.ScanAssembly (690ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (18ms)
-	FinalizeReload (5343ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1819ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (152ms)
-			SetLoadedEditorAssemblies (27ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (279ms)
-			ProcessInitializeOnLoadAttributes (1237ms)
-			ProcessInitializeOnLoadMethodAttributes (87ms)
-			AfterProcessingInitializeOnLoad (36ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (38ms)
-Refreshing native plugins compatible for Editor in 20.99 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3145 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 25 unused Assets / (72.4 KB). Loaded Objects now: 3700.
-Memory consumption went from 126.1 MB to 126.0 MB.
-Total: 18.555600 ms (FindLiveObjects: 2.518600 ms CreateObjectMapping: 1.407300 ms MarkObjects: 14.022100 ms  DeleteObjects: 0.597100 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 382.952198 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended
-  artifactKey: Guid(06fe4632bd09e57468b68c174e122233) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended using Guid(06fe4632bd09e57468b68c174e122233) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '410aca8ae9c7c5b498d1846e0713d472') in 0.004387 seconds
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape001_style03_color01.png
+  artifactKey: Guid(1cf2b3b52fe70924e8bbe10ebdfa3c79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape001_style03_color01.png using Guid(1cf2b3b52fe70924e8bbe10ebdfa3c79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1da30a7bdce262dc0a89d20396f7071a') in 0.017791 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Prepare
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.547 seconds
-Refreshing native plugins compatible for Editor in 13.64 ms, found 3 plugins.
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Native extension for WebGL target not found
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  4.330 seconds
-Domain Reload Profiling: 5870ms
-	BeginReloadAssembly (246ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (9ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (63ms)
-	RebuildCommonClasses (61ms)
-	RebuildNativeTypeToScriptingClass (22ms)
-	initialDomainReloadingComplete (59ms)
-	LoadAllAssembliesAndSetupDomain (1152ms)
-		LoadAssemblies (525ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (729ms)
-			TypeCache.Refresh (709ms)
-				TypeCache.ScanAssembly (667ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (20ms)
-	FinalizeReload (4331ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1899ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (156ms)
-			SetLoadedEditorAssemblies (22ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (319ms)
-			ProcessInitializeOnLoadAttributes (1272ms)
-			ProcessInitializeOnLoadMethodAttributes (95ms)
-			AfterProcessingInitializeOnLoad (34ms)
-			EditorAssembliesLoaded (1ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (36ms)
-Refreshing native plugins compatible for Editor in 15.68 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3145 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 25 unused Assets / (72.1 KB). Loaded Objects now: 3703.
-Memory consumption went from 126.1 MB to 126.0 MB.
-Total: 13.607700 ms (FindLiveObjects: 2.194300 ms CreateObjectMapping: 1.457200 ms MarkObjects: 9.731200 ms  DeleteObjects: 0.221800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 368.065001 seconds.
-  path: Assets/BOXOPHOBIC/User
-  artifactKey: Guid(f0aa5379d96b0e14795df45a380643fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/User using Guid(f0aa5379d96b0e14795df45a380643fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e918be24684bd87a694fa56b99c9090') in 0.003349 seconds
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape028_style02_color09.png
+  artifactKey: Guid(b6127dcd016e73b439d3e41e4b4ac55c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape028_style02_color09.png using Guid(b6127dcd016e73b439d3e41e4b4ac55c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5ffa49ca9758e4d0441e2f7a8c1de3e') in 0.009660 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.818503 seconds.
-  path: Assets/BOXOPHOBIC/User/User.pdf
-  artifactKey: Guid(983558b57a284d84bbc541f947bc5139) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/User/User.pdf using Guid(983558b57a284d84bbc541f947bc5139) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b4fc6334677d2487796541621eb99b8') in 0.020225 seconds
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape041_style02_color02.png
+  artifactKey: Guid(6d8849ffbc1eda94b8c658dfb94faeed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape041_style02_color02.png using Guid(6d8849ffbc1eda94b8c658dfb94faeed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b8f48db4d6f17e9ee2a5014d4ca2b83') in 0.016368 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 19.060286 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo
-  artifactKey: Guid(de9e928d9c90c1d43a73ded89b05d1cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo using Guid(de9e928d9c90c1d43a73ded89b05d1cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f52040da45b9987fad04d4ba962b7ff7') in 0.000984 seconds
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape041_style02_color04.png
+  artifactKey: Guid(d9777e325da160949946157869a9d91d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape041_style02_color04.png using Guid(d9777e325da160949946157869a9d91d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a561e2081f18d5aa054d99f9acf87447') in 0.010721 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 1.587757 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Blend.unity
-  artifactKey: Guid(a66e5f1bb7e0e90469c3bcd8ae5c4b2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Blend.unity using Guid(a66e5f1bb7e0e90469c3bcd8ae5c4b2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3331f0b04072f239061fed8054132131') in 0.000808 seconds
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape034_style03_color03.png
+  artifactKey: Guid(fded2c0d2048f454198381a016b5830b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape034_style03_color03.png using Guid(fded2c0d2048f454198381a016b5830b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25a7d159281abb87a31ccb391b411e82') in 0.013941 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 30.921652 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Day.unity
-  artifactKey: Guid(67adac43bcf286444be612074ab04f75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Day.unity using Guid(67adac43bcf286444be612074ab04f75) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5ad39d26765bc4f86888843ab46dd8d') in 0.001228 seconds
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons/shape050_style01_color01.png
+  artifactKey: Guid(45059950e27548d43a03d99fb10b8b98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape050_style01_color01.png using Guid(45059950e27548d43a03d99fb10b8b98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46002c1164937c0ab55cd9e40afff81e') in 0.010580 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 1.302117 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Night.unity
-  artifactKey: Guid(a5df9867bdacd604dbe1d73079151448) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Night.unity using Guid(a5df9867bdacd604dbe1d73079151448) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd364e671d488b726f93b9008467fd3d') in 0.000941 seconds
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons/shape050_style01_color06.png
+  artifactKey: Guid(5d33ae3d6c0395c428927d22c2a0f28e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape050_style01_color06.png using Guid(5d33ae3d6c0395c428927d22c2a0f28e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28168eeabc118505f459a1f5ddd303f4') in 0.016510 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 30.081944 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Textures
-  artifactKey: Guid(622c850911a24ab4c87b6b1cbb58ba1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Textures using Guid(622c850911a24ab4c87b6b1cbb58ba1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa1ec1627a392e0d3658aa839cee7945') in 0.000822 seconds
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons/shape008_style01_color12.png
+  artifactKey: Guid(bd18b1925990a3540928373255d1f6e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape008_style01_color12.png using Guid(bd18b1925990a3540928373255d1f6e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5faca292b54f5bdc6932c1cdc4acefbc') in 0.008301 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.089238 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Textures/Polyverse Skies - Blue Sky.png
-  artifactKey: Guid(beb1457d375110e468b8d8e1f29fccea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Textures/Polyverse Skies - Blue Sky.png using Guid(beb1457d375110e468b8d8e1f29fccea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '204e4a58a9779a80f6ed13740c650f4b') in 0.608005 seconds
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape008_style02_color06.png
+  artifactKey: Guid(846d6e8a09e09f4469876ff7d5a83a86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape008_style02_color06.png using Guid(846d6e8a09e09f4469876ff7d5a83a86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d7e373387d7c7b6fd06cec480aef4fc') in 0.009593 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 2.863929 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Settings
-  artifactKey: Guid(938d9248e9f0f574cb40a5bbca66dae4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Settings using Guid(938d9248e9f0f574cb40a5bbca66dae4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d9f2e4053fe7eb1fa7ea2522883071b') in 0.004001 seconds
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape034_style03_color06.png
+  artifactKey: Guid(80f2a1312c18b364fb5e006e97b14625) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape034_style03_color06.png using Guid(80f2a1312c18b364fb5e006e97b14625) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '188ad35b2b79eb914da6c6f6466eb212') in 0.011841 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.067489 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Settings/Demo.asset
-  artifactKey: Guid(2c9ebc5b5de64494eb66e1f3eb755731) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Settings/Demo.asset using Guid(2c9ebc5b5de64494eb66e1f3eb755731) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3676a17ea46ba3b8a61f0639d320ed8d') in 0.004023 seconds
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/Textures/InitButtons/shape046_style01_color11.png
+  artifactKey: Guid(b05c2fa106f257f4b997f93d45ea0fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape046_style01_color11.png using Guid(b05c2fa106f257f4b997f93d45ea0fc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db843aee5369c17bceaaed8e1950b3f9') in 0.009242 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 3.087479 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes
-  artifactKey: Guid(25d3f6e5ef9743646a02401c50311822) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes using Guid(25d3f6e5ef9743646a02401c50311822) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8499ceaf7f29deba10cea3b96b4a7e94') in 0.001611 seconds
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape034_style03_color04.png
+  artifactKey: Guid(b458052129b88ec4a882bbb24e3c6cd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape034_style03_color04.png using Guid(b458052129b88ec4a882bbb24e3c6cd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88ee3a7a1167871fa98ca2bc4feb9730') in 0.014565 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.127593 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Fence A.FBX
-  artifactKey: Guid(719d923d0fff4604dad00bd968b563b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Fence A.FBX using Guid(719d923d0fff4604dad00bd968b563b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '236b8449af293285e8221eb43dbe83fe') in 0.148045 seconds
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/Textures/InitButtons/shape046_style01_color12.png
+  artifactKey: Guid(0f38e90e9837fec4f9eb73de5ada6be2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape046_style01_color12.png using Guid(0f38e90e9837fec4f9eb73de5ada6be2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a9e2c1c079d579f36dd860d9d0c56e5') in 0.010191 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Grass B.FBX
-  artifactKey: Guid(0860e6fc68e57ae48b5ae6e854f8f6b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Grass B.FBX using Guid(0860e6fc68e57ae48b5ae6e854f8f6b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7d31b06bfc2fe5ae4b5027229a63469') in 0.051360 seconds
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color10.png
+  artifactKey: Guid(cfee51f972235d5448c5aacb91fe9bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color10.png using Guid(cfee51f972235d5448c5aacb91fe9bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8113db8bc32c9ba967e23a3bf5a35bb') in 0.011631 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000098 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Rock A.FBX
-  artifactKey: Guid(26fb55e8ae34728499f6f45cd0527c73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Rock A.FBX using Guid(26fb55e8ae34728499f6f45cd0527c73) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d639d722fe88ae9c1aad0bdc3b7e043') in 0.039971 seconds
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color11.png
+  artifactKey: Guid(75b128743fcfdfb4f80d186d58c14008) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color11.png using Guid(75b128743fcfdfb4f80d186d58c14008) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cfbf778de8b80ff6dc9281f84a05cf0') in 0.013262 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 9
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape046_style02_color01.png
+  artifactKey: Guid(d6fe7d1784c556442b36e3ed2ad1f1cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape046_style02_color01.png using Guid(d6fe7d1784c556442b36e3ed2ad1f1cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5e66fd08db0b3cdd121aa8f25e86177') in 0.006561 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape041_style02_color01.png
+  artifactKey: Guid(726c4f6c39471db4d841a84f2b9cbaa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape041_style02_color01.png using Guid(726c4f6c39471db4d841a84f2b9cbaa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4277598d118c5c73c5511842ab286722') in 0.007896 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape005_style02_color04.png
+  artifactKey: Guid(065d458d58326e94d8b2368498c6e28f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape005_style02_color04.png using Guid(065d458d58326e94d8b2368498c6e28f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57ce8f1f326545f12ae6f5aa295b69ae') in 0.007140 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape050_style01_color04.png
+  artifactKey: Guid(b02f7ac3df0b6b74db885fc0ca30ed3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape050_style01_color04.png using Guid(b02f7ac3df0b6b74db885fc0ca30ed3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed9f48f30856ad72e2a279ee0c7aca85') in 0.006822 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape055_style02_color06.png
+  artifactKey: Guid(3c387fc7b5a3f1e42bbb33e4e06e612d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape055_style02_color06.png using Guid(3c387fc7b5a3f1e42bbb33e4e06e612d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20f31f86d009954f2f5139f740950b83') in 0.008002 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape008_style02_color02.png
+  artifactKey: Guid(ffa255ba34b7e4346ad14faf20d8f30b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape008_style02_color02.png using Guid(ffa255ba34b7e4346ad14faf20d8f30b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '714033b112e9fff5b91ebacea038ddc7') in 0.008275 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons/shape041_style01_color12.png
+  artifactKey: Guid(efe688d3657fe3a49be1936cb267f15b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape041_style01_color12.png using Guid(efe688d3657fe3a49be1936cb267f15b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf9532e9c59607492690ce128b2011eb') in 0.008950 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/Textures/InitButtons/shape069_style01_color10.png
+  artifactKey: Guid(41882fe2c3636b34b99e7ac807eab31b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape069_style01_color10.png using Guid(41882fe2c3636b34b99e7ac807eab31b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb9d58e03e549af428bb12785d23a8b0') in 0.007211 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color08.png
+  artifactKey: Guid(07dac8a214a154a4bb9d85c5cda43354) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color08.png using Guid(07dac8a214a154a4bb9d85c5cda43354) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '786e8de099e9425304aa168c17342fcc') in 0.008287 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape008_style02_color01.png
+  artifactKey: Guid(bad3cd8a62595be4f9a7fa016d117e5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape008_style02_color01.png using Guid(bad3cd8a62595be4f9a7fa016d117e5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '299fc400963bf5f75c79d0f29655482c') in 0.007299 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape060_style01_color10.png
+  artifactKey: Guid(d4441e198f926d649acc7a33467a8d4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape060_style01_color10.png using Guid(d4441e198f926d649acc7a33467a8d4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86cdd60c6c4265ee99c6f156c91d3b3c') in 0.007143 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape076_style02_color06.png
+  artifactKey: Guid(772624d67635dc247bd9d790faf28f96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape076_style02_color06.png using Guid(772624d67635dc247bd9d790faf28f96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65b6172c21547b6fcd2445c9e5c71df8') in 0.007788 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape053_style02_color07.png
+  artifactKey: Guid(2bc4bd40e3f291c4685a7bac389164a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape053_style02_color07.png using Guid(2bc4bd40e3f291c4685a7bac389164a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e356faaff919a3b792f8feffc4d4d138') in 0.007949 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons/shape022_style01_color06.png
+  artifactKey: Guid(5b1b216833fa7f64caad7ee4d4139ad0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape022_style01_color06.png using Guid(5b1b216833fa7f64caad7ee4d4139ad0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea603c34c3033ecb22b3c7ff476ea0bc') in 0.006959 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape053_style02_color03.png
+  artifactKey: Guid(5107d066fcd3d87419a7410f65fca751) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape053_style02_color03.png using Guid(5107d066fcd3d87419a7410f65fca751) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17387a099d8a94ff62a50c82d9d208b0') in 0.007421 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape083_style01_color09.png
+  artifactKey: Guid(1794a9817b386cf4ba25f16c0dabfb07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape083_style01_color09.png using Guid(1794a9817b386cf4ba25f16c0dabfb07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd40f5a5b13fa293b0b9984f895f21b6') in 0.008675 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Art/Textures/InitButtons/shape022_style01_color12.png
+  artifactKey: Guid(d439aae3a8a89824d9559b0c6b1c5b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape022_style01_color12.png using Guid(d439aae3a8a89824d9559b0c6b1c5b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fde64a6f0bceca273e295a4070213ff') in 0.006229 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape063_style02_color08.png
+  artifactKey: Guid(83226d6ee21d50644a624471176f2eb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape063_style02_color08.png using Guid(83226d6ee21d50644a624471176f2eb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58b08e8e48d3e5d633db93fd8bb14704') in 0.007770 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape053_style02_color05.png
+  artifactKey: Guid(526cbbfe514986d45aee9984156473df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape053_style02_color05.png using Guid(526cbbfe514986d45aee9984156473df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72e3da377a910322f34a05584d3d8984') in 0.007847 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color07.png
+  artifactKey: Guid(2947afad00e9a8b4daff076bb68bc6d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color07.png using Guid(2947afad00e9a8b4daff076bb68bc6d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcb7139d71d6da02de17e7e1cf80f116') in 0.009909 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape092_style02_color12.png
+  artifactKey: Guid(b19fe68db17e961428b61f47be52196c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape092_style02_color12.png using Guid(b19fe68db17e961428b61f47be52196c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4b8f95e937d48bd923be0e2f725d01e') in 0.009785 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape092_style03_color04.png
+  artifactKey: Guid(c8e6aa3be8ce90e4b991f4c1260213f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape092_style03_color04.png using Guid(c8e6aa3be8ce90e4b991f4c1260213f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '427601deb5b17ea4cd0c4fefc2638800') in 0.008780 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape092_style03_color08.png
+  artifactKey: Guid(77dc13aaf29e81545a88184d3c94b8c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape092_style03_color08.png using Guid(77dc13aaf29e81545a88184d3c94b8c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecde1eed7df161c9c14c1a79b46ecf65') in 0.007759 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape008_style02_color04.png
+  artifactKey: Guid(643435e6077e2f147b881a2f322dfc01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape008_style02_color04.png using Guid(643435e6077e2f147b881a2f322dfc01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aed35589253453dd1620e51f86b008f3') in 0.007599 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons/shape096_style01_color03.png
+  artifactKey: Guid(113016d3968ecaf4e9f1f88b941508bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape096_style01_color03.png using Guid(113016d3968ecaf4e9f1f88b941508bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '725ed837a98e308e293f2d6116be5fc9') in 0.007700 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape008_style02_color05.png
+  artifactKey: Guid(2803aa4026205d44d99ae9c270128f07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape008_style02_color05.png using Guid(2803aa4026205d44d99ae9c270128f07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ec05fd269e94f38fec5744a0fbfb1ee') in 0.007866 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape096_style01_color06.png
+  artifactKey: Guid(77a91156c7a23c548bbc310be301551d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape096_style01_color06.png using Guid(77a91156c7a23c548bbc310be301551d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e932fed543a72e70b2bdf11b627b59f') in 0.008329 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape069_style01_color08.png
+  artifactKey: Guid(24aee5808fa9c8a47bcc7adc85a0d7ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape069_style01_color08.png using Guid(24aee5808fa9c8a47bcc7adc85a0d7ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f0754a303db04d6e24fb74cc4374721') in 0.007454 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape005_style02_color07.png
+  artifactKey: Guid(e6b4ecbbada86d249bdd840d90f6226f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape005_style02_color07.png using Guid(e6b4ecbbada86d249bdd840d90f6226f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '058b31b0284760e326a6b3e100cbd8f4') in 0.006588 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape098_style02_color03.png
+  artifactKey: Guid(5acf97b6aec1d4e43911f224a5eadf9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape098_style02_color03.png using Guid(5acf97b6aec1d4e43911f224a5eadf9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abeaec768476ebc4174a7e00da3fd7c1') in 0.007088 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape098_style02_color10.png
+  artifactKey: Guid(cbe3d957afef44548959fcd6671ef3c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape098_style02_color10.png using Guid(cbe3d957afef44548959fcd6671ef3c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b46c629e9d673e4a9427d271b45b649d') in 0.007101 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape001_style02_color10.png
+  artifactKey: Guid(535e0f154d11d5c4cbfb822e0848506a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape001_style02_color10.png using Guid(535e0f154d11d5c4cbfb822e0848506a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d88440cab25c66e0f5a0aac93620c89') in 0.006753 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape099_style03_color07.png
+  artifactKey: Guid(2b153bc41b3e035428cab7b356c2ba10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape099_style03_color07.png using Guid(2b153bc41b3e035428cab7b356c2ba10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '564123fed0e6e9ab2cfc049ac9b3228b') in 0.006502 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape099_style03_color11.png
+  artifactKey: Guid(e7e23cd736b9ac3408b039457b1373b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape099_style03_color11.png using Guid(e7e23cd736b9ac3408b039457b1373b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '520be7a97614673b2c12cc2052e843c6') in 0.008219 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons/shape100_style01_color01.png
+  artifactKey: Guid(940b38bf9a550334e8da149810d9027f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape100_style01_color01.png using Guid(940b38bf9a550334e8da149810d9027f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bef22957c79ab9de2aa63409c8ffd139') in 0.007174 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000123 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape099_style03_color12.png
+  artifactKey: Guid(81a1486ffd66e764ca5b80f0c121ff28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape099_style03_color12.png using Guid(81a1486ffd66e764ca5b80f0c121ff28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59d7ab33f5ec0cd0a6da6f73aa8b6bf0') in 0.007808 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape060_style01_color05.png
+  artifactKey: Guid(fecc9ae3d5434b64a814b281782a6a9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape060_style01_color05.png using Guid(fecc9ae3d5434b64a814b281782a6a9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '845c6d79e00bfe246bcd0c781c4ce9d6') in 0.008293 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape088_style03_color06.png
+  artifactKey: Guid(7e89b8839790a6a479fc13109f998773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape088_style03_color06.png using Guid(7e89b8839790a6a479fc13109f998773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10504785aea462fedae8ad59f19e2146') in 0.007625 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape088_style03_color12.png
+  artifactKey: Guid(95e95b0ff7edbbd4893856c0e4aa9f2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape088_style03_color12.png using Guid(95e95b0ff7edbbd4893856c0e4aa9f2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd93c05ba1bcd9cc1ad0bdc61c452f8af') in 0.006627 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape098_style02_color04.png
+  artifactKey: Guid(0e1c3b44b95d0864381da9c70f1697bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape098_style02_color04.png using Guid(0e1c3b44b95d0864381da9c70f1697bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04ddd1873fdcb70e998022d5f0b0b382') in 0.007678 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color09.png
+  artifactKey: Guid(af6f70d14fb7f3e4583c710840fcc59f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color09.png using Guid(af6f70d14fb7f3e4583c710840fcc59f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '932871555be5974d5fab8a8eeffb1884') in 0.007116 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape099_style03_color10.png
+  artifactKey: Guid(b1c61d7a573255146bd199fca82ff0db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape099_style03_color10.png using Guid(b1c61d7a573255146bd199fca82ff0db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1afe3185c9640f2b074b88627018e01c') in 0.007279 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape069_style02_color01.png
+  artifactKey: Guid(d01a41d54ef8d98479f2e87e63384ca4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape069_style02_color01.png using Guid(d01a41d54ef8d98479f2e87e63384ca4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a41c0d9cebf09408ce8ec3f2b0d3d671') in 0.006921 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape098_style02_color09.png
+  artifactKey: Guid(cbb2d0454509d76409204c1232affe94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape098_style02_color09.png using Guid(cbb2d0454509d76409204c1232affe94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64358a13738682179d80a5baecb48443') in 0.006751 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape076_style02_color04.png
+  artifactKey: Guid(92f09520d16814645a63381c139ab1b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape076_style02_color04.png using Guid(92f09520d16814645a63381c139ab1b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb3e2624d1bffd3286d41041c34e09bb') in 0.008253 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape092_style03_color05.png
+  artifactKey: Guid(33bb771f55c89994a9cd36b5d32f649e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape092_style03_color05.png using Guid(33bb771f55c89994a9cd36b5d32f649e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1120a9487fae4a3424531ac4bcea4778') in 0.009494 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape063_style02_color04.png
+  artifactKey: Guid(71979e7dbcf56474191e559efd77be5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape063_style02_color04.png using Guid(71979e7dbcf56474191e559efd77be5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5962d75f068fadaad1bf52af8df8a2b') in 0.007004 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape063_style02_color05.png
+  artifactKey: Guid(7c9e2693e467fc846a2bce3b59a79450) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape063_style02_color05.png using Guid(7c9e2693e467fc846a2bce3b59a79450) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08fde88a268a31acca6f095dd7a83c42') in 0.007199 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons/shape022_style01_color08.png
+  artifactKey: Guid(217cc9397fdea434bb42a619e1607b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape022_style01_color08.png using Guid(217cc9397fdea434bb42a619e1607b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebecdd390a772f3b4eb5ad9e53d2281e') in 0.006789 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape083_style01_color05.png
+  artifactKey: Guid(77253e97d89c93242bd436ad27049a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape083_style01_color05.png using Guid(77253e97d89c93242bd436ad27049a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2382de1c0c55a1071e3d1829667c0ad2') in 0.008240 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape050_style01_color07.png
+  artifactKey: Guid(7290e118f9d88b94d86d25fb18d2088c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape050_style01_color07.png using Guid(7290e118f9d88b94d86d25fb18d2088c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea79ff45fcfe98c4d6b1639a1e8aefe0') in 0.007856 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape063_style02_color06.png
+  artifactKey: Guid(e049a0e148d224b4d94ca163721ca352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape063_style02_color06.png using Guid(e049a0e148d224b4d94ca163721ca352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ef5b7ed80bd1f4ac786912c82e29def') in 0.008116 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape063_style02_color07.png
+  artifactKey: Guid(3f168f910c9aa2c418e77cea31d62723) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape063_style02_color07.png using Guid(3f168f910c9aa2c418e77cea31d62723) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b0b09f663eacdfdae083523ab6363b6e') in 0.007292 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape005_style02_color02.png
+  artifactKey: Guid(6572bc8145270c74a9b35aa15f5c5e9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape005_style02_color02.png using Guid(6572bc8145270c74a9b35aa15f5c5e9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0870e57fbdf73571991ed5a7fed90cbe') in 0.006762 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape088_style03_color11.png
+  artifactKey: Guid(2c1d5b860a52c774c97d3ff8291058b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape088_style03_color11.png using Guid(2c1d5b860a52c774c97d3ff8291058b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dadcee35dbd59dc2071cdf7ed998c150') in 0.006356 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape091_style02_color12.png
+  artifactKey: Guid(6bce3cb915ba3d14e9d98bb374e56d8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape091_style02_color12.png using Guid(6bce3cb915ba3d14e9d98bb374e56d8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2c8d4d8c09ead0ba104aa57768bbba6') in 0.006505 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000103 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape091_style03_color02.png
+  artifactKey: Guid(9ba43d60bac212e43a2d329bd1c62024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape091_style03_color02.png using Guid(9ba43d60bac212e43a2d329bd1c62024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d0e4ef44c1eb1e067cd36956ea22321') in 0.006769 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape091_style03_color06.png
+  artifactKey: Guid(0bf4bd021e9aaac428f84ce6e6d7cf27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape091_style03_color06.png using Guid(0bf4bd021e9aaac428f84ce6e6d7cf27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f8f6d553cb8968bb2e6f63eb3f84d33') in 0.008258 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape091_style03_color03.png
+  artifactKey: Guid(02f7c9cc015840646a445377af269f4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape091_style03_color03.png using Guid(02f7c9cc015840646a445377af269f4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82f78f204cbe4045c16447b5a0ec3b4a') in 0.007519 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape091_style03_color01.png
+  artifactKey: Guid(ba8f6ec80e9606647bae375a0b52a4b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape091_style03_color01.png using Guid(ba8f6ec80e9606647bae375a0b52a4b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84e1654c5258958c0adff233bd72b90b') in 0.005760 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape070_style02_color12.png
+  artifactKey: Guid(39b7d9668eecd9246b9daf6d66137b43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape070_style02_color12.png using Guid(39b7d9668eecd9246b9daf6d66137b43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e9dd25a8e2cbd8303c451433c4c8ee4') in 0.005558 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape070_style02_color11.png
+  artifactKey: Guid(b02e296699596474da6e9a9cebc26bdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape070_style02_color11.png using Guid(b02e296699596474da6e9a9cebc26bdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e0fa8e16f1c2a52d9eeacca588d4ef9') in 0.006095 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape091_style03_color08.png
+  artifactKey: Guid(e9506e83d156e644a95ed2d62a14baee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape091_style03_color08.png using Guid(e9506e83d156e644a95ed2d62a14baee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39b4e2e1a748cdcb8cec90e203e2195b') in 0.013829 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape070_style03_color02.png
+  artifactKey: Guid(d25c11673224baf408303cea26450173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape070_style03_color02.png using Guid(d25c11673224baf408303cea26450173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd68244e4278c1a06ac33491582b9caab') in 0.007812 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape070_style03_color03.png
+  artifactKey: Guid(d0421a6687803af46a8ac40702d67adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape070_style03_color03.png using Guid(d0421a6687803af46a8ac40702d67adf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '146cec1d98ab5729c848d0f3ed4d4624') in 0.008342 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape091_style03_color05.png
+  artifactKey: Guid(57929013791c3c14b8c1653acea4afc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape091_style03_color05.png using Guid(57929013791c3c14b8c1653acea4afc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c33f26ac4f566e29a1cd87e53822026') in 0.055559 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons/shape069_style01_color07.png
+  artifactKey: Guid(41d0b34b0275d604d91dd5b3352c3aa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape069_style01_color07.png using Guid(41d0b34b0275d604d91dd5b3352c3aa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8c9fe541691923e7fc6bea66d05215a') in 0.007560 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape070_style03_color05.png
+  artifactKey: Guid(d6142209b7381bf47847d926b1e3c86f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape070_style03_color05.png using Guid(d6142209b7381bf47847d926b1e3c86f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f77bbc9bd7186a24efe97279f72ee6f7') in 0.010323 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape070_style03_color06.png
+  artifactKey: Guid(05bf3408e34f9044b94424b35bae2ba0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape070_style03_color06.png using Guid(05bf3408e34f9044b94424b35bae2ba0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5235ea5e929e66ead66111ba1851551') in 0.009773 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape070_style03_color04.png
+  artifactKey: Guid(aa7ae5e316975a44e8de9d464b6f424a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape070_style03_color04.png using Guid(aa7ae5e316975a44e8de9d464b6f424a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f07f614f4c7542d1a4e04b1ca4e461fe') in 0.010599 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color06.png
+  artifactKey: Guid(13ff77aeb17d7204b8b830fd19d9a0fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color06.png using Guid(13ff77aeb17d7204b8b830fd19d9a0fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44107b4d57002e6cbb13bb77abb16aad') in 0.007633 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
   Time since last request: 0.000027 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Terrain.FBX
-  artifactKey: Guid(f3dd2dace832efa4fa391170674edcc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Terrain.FBX using Guid(f3dd2dace832efa4fa391170674edcc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa1c0c75a4597c3a362b729a9137ac33') in 0.038629 seconds
+  path: Assets/Art/Textures/InitButtons (1)/shape057_style02_color01.png
+  artifactKey: Guid(cbc6a641bd5b5aa46a380911543f7196) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape057_style02_color01.png using Guid(cbc6a641bd5b5aa46a380911543f7196) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56312920de5c6e71005b8c2a94975497') in 0.009619 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 7
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 25.698460 seconds.
-  path: Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials
-  artifactKey: Guid(f5f2b39f73ab79f42a2dd2ccadae1581) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials using Guid(f5f2b39f73ab79f42a2dd2ccadae1581) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2a2c88bd33ee837df391d4c33b542c4') in 0.001040 seconds
+  Time since last request: 0.000023 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape088_style03_color09.png
+  artifactKey: Guid(db6102f8c9d1769448b6fd9928b4d167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape088_style03_color09.png using Guid(db6102f8c9d1769448b6fd9928b4d167) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ad40f2f967896e65cdd48e4f2054851') in 0.012837 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 22.145772 seconds.
-  path: Assets/Levels/Testing.unity
-  artifactKey: Guid(c23382718fda8ac4eb72d68a3cbe6346) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Levels/Testing.unity using Guid(c23382718fda8ac4eb72d68a3cbe6346) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89920031868a2d0299de90f0e568df30') in 0.000808 seconds
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/Textures/InitButtons/shape076_style01_color12.png
+  artifactKey: Guid(eb48801bb108c674bb1b968d320a11d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape076_style01_color12.png using Guid(eb48801bb108c674bb1b968d320a11d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '23305658e0c5aa73587f7bf11b58d037') in 0.008981 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape055_style02_color03.png
+  artifactKey: Guid(479077614f4655742aab8ce3ff88a84a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape055_style02_color03.png using Guid(479077614f4655742aab8ce3ff88a84a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb4d7156c3e1cab54cc6e7f6e6d7ab65') in 0.008784 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape005_style02_color03.png
+  artifactKey: Guid(44ffa5aabec4f1344a987cb44872a559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape005_style02_color03.png using Guid(44ffa5aabec4f1344a987cb44872a559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40f9d2e120f53b7034e98ca0c58697d2') in 0.011775 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Art/Textures/InitButtons/shape050_style01_color08.png
+  artifactKey: Guid(4b4f62e392ff5574ebfcb917ab319d82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape050_style01_color08.png using Guid(4b4f62e392ff5574ebfcb917ab319d82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3c9eb577e5a3960241a80c97235fd31') in 0.007831 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons/shape096_style01_color04.png
+  artifactKey: Guid(54839f4f046fa8940bed44ba01d54aee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape096_style01_color04.png using Guid(54839f4f046fa8940bed44ba01d54aee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '741fe8dd81fded2c1baa00e4d2d3faed') in 0.008522 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape041_style02_color07.png
+  artifactKey: Guid(f33a3f0fa07f7d941b2288ab66fbdd47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape041_style02_color07.png using Guid(f33a3f0fa07f7d941b2288ab66fbdd47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1c67cf42f85813b4e84c0b175568ba5') in 0.007407 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Art/Textures/InitButtons/shape050_style01_color05.png
+  artifactKey: Guid(0f2d1a7378303f740aece28ff996a3c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape050_style01_color05.png using Guid(0f2d1a7378303f740aece28ff996a3c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf18f502b61c9cc34d332680dbf4dee6') in 0.007174 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Art/Textures/InitButtons/shape022_style01_color11.png
+  artifactKey: Guid(0957719adb73b4146883f914e2df05fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape022_style01_color11.png using Guid(0957719adb73b4146883f914e2df05fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adb9ee968fdfd827f0c6986c6cc287ba') in 0.008495 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Art/Textures/InitButtons/shape083_style01_color03.png
+  artifactKey: Guid(38721d7d9841aad4bb0bd6d8869b0050) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape083_style01_color03.png using Guid(38721d7d9841aad4bb0bd6d8869b0050) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44fd8dd01d6be83fea7388ad26479daa') in 0.007330 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape070_style02_color10.png
+  artifactKey: Guid(9146b8725be1b564e8c0f3b1449cb748) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape070_style02_color10.png using Guid(9146b8725be1b564e8c0f3b1449cb748) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ff99387fadc0bcd677cdfaa38cef59c') in 0.007742 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape034_style02_color10.png
+  artifactKey: Guid(87a770c0f3b0abd4aad865bc5e4b25cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape034_style02_color10.png using Guid(87a770c0f3b0abd4aad865bc5e4b25cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95ef591fe8332dbc705ac2e1efc7f142') in 0.006752 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape005_style02_color10.png
+  artifactKey: Guid(4c16f7f460e84cb4cad6d4193274e17b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape005_style02_color10.png using Guid(4c16f7f460e84cb4cad6d4193274e17b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8f6726efb06924e05ffb53703f5bb5a') in 0.008434 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Art/Textures/InitButtons/shape060_style01_color06.png
+  artifactKey: Guid(8dea84f4d04c36e4dbd24ddd191ee71b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape060_style01_color06.png using Guid(8dea84f4d04c36e4dbd24ddd191ee71b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c98b539f10f228adc9752bd3dc41e95f') in 0.007502 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape046_style01_color07.png
+  artifactKey: Guid(befcca5246d0e0846b44c11e88f19f54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape046_style01_color07.png using Guid(befcca5246d0e0846b44c11e88f19f54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '878b9e9798d5b229d0a9de67ee5db438') in 0.008512 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape063_style02_color09.png
+  artifactKey: Guid(e9d188fff4f538a4a8080d55153f410c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape063_style02_color09.png using Guid(e9d188fff4f538a4a8080d55153f410c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f37e2498552abd679f3a6a5a53d1e25d') in 0.009083 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons/shape069_style01_color09.png
+  artifactKey: Guid(d9dfbf3685bf8244eab76336dc0ca270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape069_style01_color09.png using Guid(d9dfbf3685bf8244eab76336dc0ca270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96da0e74f14070956bfe9769b9a62226') in 0.008074 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape098_style02_color05.png
+  artifactKey: Guid(d730b16dcaeea8f4c80eb32de25fe1fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape098_style02_color05.png using Guid(d730b16dcaeea8f4c80eb32de25fe1fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae628d8eba018f68f5ec8e4307c434b6') in 0.008494 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape099_style03_color08.png
+  artifactKey: Guid(ca08afd532f4243488ffe06a4ca7561a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape099_style03_color08.png using Guid(ca08afd532f4243488ffe06a4ca7561a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dee5ccd4f682d141c2c735327b0bfb16') in 0.007861 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Art/Textures/InitButtons/shape055_style01_color11.png
+  artifactKey: Guid(dfa948085047a0d44972c461b40cc0ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape055_style01_color11.png using Guid(dfa948085047a0d44972c461b40cc0ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70623df431338e3dc9a58d0afd40ef4e') in 0.008664 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape069_style02_color02.png
+  artifactKey: Guid(75e33416d0a85b448a26748ccf155c87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape069_style02_color02.png using Guid(75e33416d0a85b448a26748ccf155c87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5783024c0b038b2b0b438f3fb550a4d4') in 0.007480 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons/shape053_style01_color12.png
+  artifactKey: Guid(1d435a3110f055842b1a05658b85e6ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape053_style01_color12.png using Guid(1d435a3110f055842b1a05658b85e6ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a46156089b91fbe880e3d4219cc3ebe') in 0.006684 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons (2)/shape092_style03_color06.png
+  artifactKey: Guid(385c31d8b2a003e43abf013d4880b90b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (2)/shape092_style03_color06.png using Guid(385c31d8b2a003e43abf013d4880b90b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f4271b8ce9477c4323d4028ef77ba19') in 0.007096 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape076_style02_color03.png
+  artifactKey: Guid(73c980bff52dedc4593388211e8521cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape076_style02_color03.png using Guid(73c980bff52dedc4593388211e8521cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da5811c6c6c82666ef059f0f45b3abed') in 0.007486 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape069_style01_color12.png
+  artifactKey: Guid(dd13c0c2180a29745aeeefede3c5b168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape069_style01_color12.png using Guid(dd13c0c2180a29745aeeefede3c5b168) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e40c857b897cb2404a2bd65aa602afc') in 0.008359 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Art/Textures/InitButtons/shape060_style01_color03.png
+  artifactKey: Guid(735eeb3108ef3284ba3e38d8688b68c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape060_style01_color03.png using Guid(735eeb3108ef3284ba3e38d8688b68c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6175e511e7f5f3e9bf1a0267974736e3') in 0.009074 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Art/Textures/InitButtons/shape096_style01_color07.png
+  artifactKey: Guid(45fe982c2e94b5241a200118800f0c4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape096_style01_color07.png using Guid(45fe982c2e94b5241a200118800f0c4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b728dad19b00d6b89c0b6e9529f305f') in 0.008194 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape083_style01_color02.png
+  artifactKey: Guid(f09b791f9a3310b47826713f01856c86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape083_style01_color02.png using Guid(f09b791f9a3310b47826713f01856c86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1545916c1d9373efea5bd8ba8ff9bbe0') in 0.008471 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Art/Textures/InitButtons/shape060_style01_color09.png
+  artifactKey: Guid(e6434f8ba2f78e840bdbd083ba5ee84d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape060_style01_color09.png using Guid(e6434f8ba2f78e840bdbd083ba5ee84d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe7accc06e216f4675a2957bc4a315dc') in 0.008890 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Art/Textures/InitButtons (1)/shape055_style02_color01.png
+  artifactKey: Guid(3c10593dd38114c4fa5c4a2cdf576f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons (1)/shape055_style02_color01.png using Guid(3c10593dd38114c4fa5c4a2cdf576f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a04b2881151f36b805cf6d70fe837031') in 0.008028 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Art/Textures/InitButtons/shape057_style01_color12.png
+  artifactKey: Guid(87d2aeb7561ba8a44aaf8c327c77bd2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Textures/InitButtons/shape057_style01_color12.png using Guid(87d2aeb7561ba8a44aaf8c327c77bd2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61ea6bde5baebd674faf64f2fcbdded4') in 0.007886 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
