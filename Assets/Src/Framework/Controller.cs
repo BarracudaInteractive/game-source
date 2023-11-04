@@ -32,10 +32,9 @@ public class Controller : MonoBehaviour
     private int _iGearNum = 1;
     private float _fKPH;
     private float _fEngineRPM;
-    private float _fGas = 0.0f;
+    private float _fGas = 100.0f;
     private float _fDemo = 100.0f; //demo mode to see the gas drop
     private float _fDmg = 0.0f;
-    private float _fAccDmg = 0.0f;
     private bool _isReverse = false;
     private bool _isAcc = false;
     private GameObject _gWheelMeshes;
@@ -50,7 +49,7 @@ public class Controller : MonoBehaviour
     private WheelFrictionCurve _ForwardFriction;
     private WheelFrictionCurve _SidewaysFriction;
     private float _fRadius = 6.0f;
-    private float _fBrakPower = 0.0f;
+    private float _fBrakPower = 12.0f;
     private float _fDownForceValue = 10.0f;
     private float _fWheelsRPM;
     private float _fDriftFactor;
@@ -60,7 +59,12 @@ public class Controller : MonoBehaviour
     private float _fTotalPower;
     private float _fLastKPH = 0.0f;
     private float _fSpeedBaseDmg = 15.0f;
+    private float _fVerticalSpeed;
     private bool _isBelowRPM = false;
+    private bool _isOutOfTrack = false;
+    
+    private const float MIN_DAMAGE = 5.0f;
+    private const float BASE_FALL_DAMAGE = 3.0f;
     
     public bool IsAcc => _isAcc;
     
@@ -83,6 +87,13 @@ public class Controller : MonoBehaviour
     public string GetCarName => _sCarName;
     
     public int GetCarPrice => _iCarPrice;
+    
+    public bool IsOutOfTrack => _isOutOfTrack;
+
+    public void StopCar()
+    {
+        _InputManager.SetAcceleration = 0.0f;
+    }
     
     private void _CalculateEnginePower()
     {
@@ -138,6 +149,26 @@ public class Controller : MonoBehaviour
 
     private bool _CheckGears() { return _fKPH >= fGearChangeSpeed[_iGearNum]; }
 
+    private bool _IsGrounded()
+    {
+        if (_Wheels[0].isGrounded && _Wheels[1].isGrounded && _Wheels[2].isGrounded && _Wheels[3].isGrounded) return true;
+        else return false;
+    }
+
+    private bool _IsOutOfTrack()
+    {
+        int outOfTrack = 0;
+        WheelHit hit;
+        
+        foreach (WheelCollider wheel in _Wheels)
+        {
+            wheel.GetGroundHit(out hit);
+            if (hit.collider.gameObject.tag == "off-piste") outOfTrack++;
+        }
+
+        return (outOfTrack == 4);
+    }
+    
     private void _Shifter()
     {
         if(!_IsGrounded())return;
@@ -155,12 +186,6 @@ public class Controller : MonoBehaviour
             _iGearNum--;
             //_GameManager.changeGear();
         }
-    }
- 
-    private bool _IsGrounded()
-    {
-        if (_Wheels[0].isGrounded && _Wheels[1].isGrounded && _Wheels[2].isGrounded && _Wheels[3].isGrounded) return true;
-        else return false;
     }
 
     private void _MoveVehicle()
@@ -192,6 +217,7 @@ public class Controller : MonoBehaviour
                 _Wheels[i].brakeTorque = _fBrakPower;
         }
         _fKPH = _Rigidbody.velocity.magnitude * 3.6f;
+        if (!_IsGrounded()) _fVerticalSpeed = _Rigidbody.velocity.y;
     }
 
     private void _BrakeVehicle()
@@ -261,12 +287,6 @@ public class Controller : MonoBehaviour
     }
 
     private void _AddDownForce() { _Rigidbody.AddForce(-transform.up * (_fDownForceValue * _Rigidbody.velocity.magnitude)); }
-
-    private void _DmgLoop ()
-    {
-        if (_fKPH > _fSpeedBaseDmg) _fAccDmg += .033f * (_fKPH/_fSpeedBaseDmg);
-        else _fAccDmg += .033f;
-    }
     
     private void Awake() 
     {
@@ -274,13 +294,22 @@ public class Controller : MonoBehaviour
         _GetObjects();
         StartCoroutine(_SteerRadiusUpdate());
         StartCoroutine(_OilUpdate());
+        StartCoroutine(_isOutOfTrackUpdate());
     }
     
     private void FixedUpdate()
     {
         if(SceneManager.GetActiveScene().name == "Prefs") return;
-        if (!_IsGrounded()) _DmgLoop();
-        else { _fDmg += _fAccDmg; _fAccDmg = 0.0f; }
+        if (_IsGrounded() && Mathf.Abs(_fVerticalSpeed) > 1.0f)
+        {
+            Transform massCenter = gameObject.transform.Find("mass").gameObject.GetComponent<Transform>();
+            Vector3 direction = massCenter.forward;
+            direction.Normalize();
+            float fallAngle = Mathf.Abs(Vector3.Angle(direction, Vector3.forward));
+            float damageReceived = (Mathf.Abs(_fVerticalSpeed) / 5.0f) * BASE_FALL_DAMAGE * Mathf.Pow((fallAngle - 90.0f) / 90.0f, 2) + BASE_FALL_DAMAGE / 6.0f;
+            if (damageReceived > MIN_DAMAGE) SetDmg = GetDmg + damageReceived; 
+            _fVerticalSpeed = 0.0f;
+        }
     }
 
     private void Update() 
@@ -311,14 +340,25 @@ public class Controller : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             if (_IsGrounded()) //flying does not consume oil
             {
+                //keep same velocity
+                if (_InputManager.GetAcceleration == 0) _fGas -= 0.01f * _fDemo;
                 //decelerate
-                if (_fLastKPH > _fKPH) _fGas += (float)0.015*_fDemo; 
+                else if (_fLastKPH > _fKPH) _fGas -= 0.015f * _fDemo; 
                 //accelerate
-                else if (_fKPH / fGearChangeSpeed[_iGearNum] > 0.8f) _fGas += (float)0.02*_fDemo; 
+                else if (_fKPH / fGearChangeSpeed[_iGearNum] > 0.8f) _fGas -= 0.02f * _fDemo; 
                 //accelerate slightly
-                else if (_fKPH / fGearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas += (float)0.015*_fDemo; 
+                else if (_fKPH / fGearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas -= 0.015f * _fDemo; 
             }
             _fLastKPH = _fKPH;
+        }
+    }
+    
+    private IEnumerator _isOutOfTrackUpdate()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            if (_IsGrounded())  _isOutOfTrack = _IsOutOfTrack();
         }
     }
 }

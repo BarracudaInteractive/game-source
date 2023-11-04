@@ -13,6 +13,8 @@ TagManager:
   - FreezeButton
   - car
   - obstacle
+  - off-piste
+  - wheel
   layers:
   - Default
   - TransparentFX

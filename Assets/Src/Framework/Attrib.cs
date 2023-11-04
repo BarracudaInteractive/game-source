@@ -25,7 +25,7 @@ public class Attrib : MonoBehaviour
 
     public float SetSf { set => _fSteerForce = value; }
 
-private void Update() { _fChrono += Time.deltaTime; }
+    private void Update() { _fChrono += Time.deltaTime; }
     
     private void OnTriggerEnter(Collider coll)
     {

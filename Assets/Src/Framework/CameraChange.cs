@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class CameraChange : MonoBehaviour
 {
     [Header("Cameras")]
-    public GameObject _gCarView;
-    public GameObject _gFreeView;
+    public GameObject gCarView;
+    public GameObject gFreeView;
     
     private Button _buttonChange;
     private bool _isFreeView = true;
@@ -18,14 +18,14 @@ public class CameraChange : MonoBehaviour
     {
         if (_isFreeView)
         {
-            _gFreeView.SetActive(false);
-            _gCarView.SetActive(true);
+            gFreeView.SetActive(false);
+            gCarView.SetActive(true);
             _isFreeView = false;
         }
         else if (!_isFreeView)
         {
-            _gCarView.SetActive(false);
-            _gFreeView.SetActive(true);
+            gCarView.SetActive(false);
+            gFreeView.SetActive(true);
             _isFreeView = true;
         }
     }

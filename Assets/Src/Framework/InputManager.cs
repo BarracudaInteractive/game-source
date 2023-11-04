@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     private TrackWaypoints _Waypoints;
     private Transform _tCurrentWaypoint;
     private List<Transform> _NodesList = new List<Transform>();
-    
+
     private float _fAcceleration = 0.2f;
     private int _iDistanceOffset = 3;
     private float _fSteerForce = 0.2f;
@@ -20,14 +20,19 @@ public class InputManager : MonoBehaviour
     private float _fHorizontal;
     private float _fZet;
 
+    private const float MIN_DAMAGE = 5.0f;
+    private const float BASE_COLLISION_DAMAGE = 50.0f;
+
     public float SetAcceleration { set => _fAcceleration = value; }
-    
+
     public float SetSteerForce { set => _fSteerForce = value; }
-    
+
     public float GetVertical => _fVertical;
-    
+
     public float GetHorizontal => _fHorizontal;
-    
+
+    public float GetAcceleration => _fAcceleration;
+
     private void _CalculateDistanceOfWaypoints()
     {
         Vector3 position = gameObject.transform.position;
@@ -37,7 +42,7 @@ public class InputManager : MonoBehaviour
         {
             Vector3 difference = _NodesList[i].transform.position - position;
             float currentDistance = difference.magnitude;
-            
+
             if (currentDistance < distance)
             {
                 if ((i + _iDistanceOffset) >= _NodesList.Count)
@@ -63,7 +68,7 @@ public class InputManager : MonoBehaviour
         _fHorizontal = (relative.x / relative.magnitude) * _fSteerForce;
         _fZet = (relative.z / relative.magnitude) * _fSteerForce;
     }
-    
+
     private void Awake() { _Controller = GetComponent<Controller>(); }
 
     private void Start()
@@ -82,6 +87,16 @@ public class InputManager : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "obstacle") _Controller.SetDmg = _Controller.GetDmg + _Controller.GetKPH * 0.167f;
+        if (collision.gameObject.tag == "obstacle")
+        {
+            Transform massCenter = gameObject.transform.Find("mass").gameObject.GetComponent<Transform>();
+            Transform objCenter = collision.gameObject.GetComponent<Transform>();
+            Vector3 direction = objCenter.position - massCenter.position;
+            direction.Normalize();
+            float collisionAngle = Vector3.Angle(direction, massCenter.forward) + 1.0f;
+            float damageReceived = (_Controller.GetKPH / 60) * (BASE_COLLISION_DAMAGE / ((collisionAngle / 22.5f) + 1));
+            
+            if (damageReceived > MIN_DAMAGE) _Controller.SetDmg = _Controller.GetDmg + damageReceived;
+        }
     }
 }
