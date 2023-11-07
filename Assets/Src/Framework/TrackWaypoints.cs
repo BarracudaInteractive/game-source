@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class TrackWaypoints : MonoBehaviour{
+public class TrackWaypoints : MonoBehaviour
+{
 
-    public Color LineColor;
-    [Range(0, 1)] public float fSphereRadius;
+    private Color LineColor = Color.red;
+    private float fSphereRadius = 0.2f;
     public List<Transform> NodesList = new List<Transform>();
 
     public void OnDrawGizmosSelected()
