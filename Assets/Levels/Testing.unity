@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1701123706}
-  m_IndirectSpecularColor: {r: 0.36292896, g: 0.5661848, b: 0.84371, a: 1}
+  m_IndirectSpecularColor: {r: 0.53428715, g: 0.6797026, b: 0.8621281, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1897,7 +1897,7 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 2
+  m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
@@ -5610,7 +5610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833559992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: -40}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5630,7 +5630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae4f42c0925d784ea1a114fcb545659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gCamera: {fileID: 280501641}
+  CameraControl:
+    m_Name: Camera Control
+    m_Id: c8ba5484-b36f-4a11-9a63-f3d725a7e9d0
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
 --- !u!1001 &854014533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6519,6 +6524,7 @@ GameObject:
   - component: {fileID: 972161107}
   - component: {fileID: 972161106}
   - component: {fileID: 972161108}
+  - component: {fileID: 972161109}
   m_Layer: 0
   m_Name: MANAGER
   m_TagString: gameManager
@@ -6585,6 +6591,84 @@ MonoBehaviour:
   gTemperSlider: {fileID: 1600819327}
   gSubmitButton: {fileID: 733148065}
   tText: {fileID: 864310232}
+--- !u!114 &972161109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972161105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 33b87fdc7f9417346bdeae127d1cf3ab, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 833559994}
+        m_TargetAssemblyTypeName: CameraMovComponentFH, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a223cd23-c4a3-4db0-9297-0ad0c7acf540
+    m_ActionName: CameraControl/Camera_move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 833559994}
+        m_TargetAssemblyTypeName: CameraMovComponentFH, Assembly-CSharp
+        m_MethodName: OnRotateToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3764a827-3f57-459c-b333-317afef70bb3
+    m_ActionName: CameraControl/Camera_rotate_toggle[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 833559994}
+        m_TargetAssemblyTypeName: CameraMovComponentFH, Assembly-CSharp
+        m_MethodName: OnRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 31de0dc5-947e-49ad-afdb-e2cd669d78b2
+    m_ActionName: CameraControl/Camera_rotate[/Mouse/rightButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: CameraControl
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!4 &972448666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
@@ -6596,11 +6680,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1592374568}
     m_Modifications:
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6620,15 +6704,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6651,6 +6735,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
+--- !u!4 &991761380 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
+  m_PrefabInstance: {fileID: 991761379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1041976994
 GameObject:
   m_ObjectHideFlags: 0
@@ -10294,6 +10383,7 @@ Transform:
   - {fileID: 1457996356}
   - {fileID: 2066596637}
   - {fileID: 1262925389}
+  - {fileID: 991761380}
   - {fileID: 1076260970}
   m_Father: {fileID: 0}
   m_RootOrder: 1
