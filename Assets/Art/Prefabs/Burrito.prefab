@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7636344721337278753}
   - component: {fileID: 4460788415121422482}
   - component: {fileID: 7974374042694657082}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Burrito
   m_TagString: section
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -121,11 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc65243e6d3eef5468e752abac7b75c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  reverse: 0
-  sf: 0
-  txt: {fileID: 3633387933847796798, guid: 8e5862804175b90499ac048bd0bbaf5e, type: 3}
-  time: 0
+  gGameManager: {fileID: 0}
+  iId: 0
+  isReverse: 0
+  tText: {fileID: 0}
 --- !u!1 &8565023389419397230
 GameObject:
   m_ObjectHideFlags: 0

@@ -338,7 +338,7 @@ public class Controller : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(1.0f);
-            if (_IsGrounded()) //flying does not consume oil
+            if (_IsGrounded() && GetComponent<Rigidbody>().isKinematic == false) //flying does not consume oil
             {
                 //keep same velocity
                 if (_InputManager.GetAcceleration == 0) _fGas -= 0.01f * _fDemo;

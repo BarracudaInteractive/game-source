@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1701123706}
-  m_IndirectSpecularColor: {r: 0.53428715, g: 0.6797026, b: 0.8621281, a: 1}
+  m_IndirectSpecularColor: {r: 0.36292896, g: 0.5661848, b: 0.84371, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -268,6 +272,10 @@ PrefabInstance:
       propertyPath: tText
       value: 
       objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -515,6 +523,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -575,6 +587,10 @@ PrefabInstance:
       propertyPath: tText
       value: 
       objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -843,6 +859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -911,6 +931,10 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2723,6 +2747,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2779,6 +2807,14 @@ PrefabInstance:
       propertyPath: iId
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: tText
+      value: 
+      objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2943,6 +2979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3000,6 +3040,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: tText
+      value: 
+      objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: reverse
       value: 1
       objectReference: {fileID: 0}
@@ -3007,6 +3051,10 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3028,6 +3076,10 @@ PrefabInstance:
     - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_Name
       value: Burrito (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
@@ -3097,6 +3149,10 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3477,6 +3533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3533,6 +3593,10 @@ PrefabInstance:
       propertyPath: tText
       value: 
       objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4752,6 +4816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -4820,6 +4888,10 @@ PrefabInstance:
       propertyPath: isReverse
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4844,7 +4916,7 @@ GameObject:
   - component: {fileID: 690910678}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4906,14 +4978,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690910674}
-  m_LocalRotation: {x: 0.02088339, y: 0.8299301, z: -0.32646394, w: 0.4518863}
-  m_LocalPosition: {x: -887.5913, y: -259.7047, z: -78.96103}
+  m_LocalRotation: {x: -0, y: -0.7325234, z: -0, w: 0.6807419}
+  m_LocalPosition: {x: -3.74, y: 0, z: 25.65}
   m_LocalScale: {x: 3.6719394, y: 3.67194, z: 3.6719396}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1882541236}
+  m_Father: {fileID: 1592374568}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 34.099003, y: 117.103004, z: -18.028002}
+  m_LocalEulerAnglesHint: {x: 0, y: -94.197, z: 0}
 --- !u!64 &690910678
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6095,6 +6167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -6163,6 +6239,10 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6313,6 +6393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -6377,6 +6461,10 @@ PrefabInstance:
       propertyPath: tText
       value: 
       objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6544,6 +6632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35dbb4930d17ca4db3d6eff16a32bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gCar: {fileID: 1523563714}
   gGasolineBar: {fileID: 1822105188}
   gDamageBar: {fileID: 665436807}
   tText: {fileID: 540079713}
@@ -6725,6 +6814,10 @@ PrefabInstance:
     - target: {fileID: 1324725955716200356, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369803421258570096, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
+      propertyPath: m_Center.y
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2610125035370890679, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
       propertyPath: m_Name
@@ -10183,6 +10276,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+--- !u!1 &1523563714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2610125035370890679, guid: 9d2297b10c367ff449367c3ab7c975ee, type: 3}
+  m_PrefabInstance: {fileID: 991761379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1528597694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10382,6 +10480,7 @@ Transform:
   - {fileID: 520138314}
   - {fileID: 1457996356}
   - {fileID: 2066596637}
+  - {fileID: 690910677}
   - {fileID: 1262925389}
   - {fileID: 991761380}
   - {fileID: 1076260970}
@@ -12238,8 +12337,7 @@ Transform:
   m_LocalPosition: {x: -894.30133, y: 265.4247, z: -95.161026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 690910677}
+  m_Children: []
   m_Father: {fileID: 2066596637}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12697,6 +12795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Burrito (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1213827912788323394, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2697918492332782074, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -12757,6 +12859,10 @@ PrefabInstance:
       propertyPath: tText
       value: 
       objectReference: {fileID: 9049833653870575351}
+    - target: {fileID: 7974374042694657082, guid: 63826651e95c30847976e2e3557e98cc, type: 3}
+      propertyPath: gGameManager
+      value: 
+      objectReference: {fileID: 972161105}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
