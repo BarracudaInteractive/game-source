@@ -6,14 +6,13 @@ using UnityEngine.UI;
 
 public class scri : MonoBehaviour
 {
-    public GameObject logo;
-    public GameObject idioma;
-    public GameObject english;
-    
-    private Button _bEnglish;
-    // Start is called before the first frame update
+    public GameObject splashScreen;
+    public GameObject languageSelector;
+    public GameObject midScreen;
 
-    private void _NextScene()
+    private bool screenActive = false;
+
+    /*private void _NextScene()
     {
         logo.SetActive(true);
         idioma.SetActive(false);
@@ -26,5 +25,25 @@ public class scri : MonoBehaviour
         logo.SetActive(false);
         _bEnglish = english.GetComponent<Button>();
         _bEnglish.onClick.AddListener(() => _NextScene());
+    }*/
+
+    void Update()
+    {
+        if (!screenActive && splashScreen.activeSelf)
+        {
+            // Verifica si se presiona cualquier tecla o se hace clic en el ratón
+            if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
+            {
+                // Desactiva el splashScreen
+                languageSelector.SetActive(false);
+
+                // Activa el siguienteScreen
+                languageSelector.SetActive(true);
+
+                // Marca que la pantalla ha sido activada
+                screenActive = true;
+            }
+        }
+
     }
 }
