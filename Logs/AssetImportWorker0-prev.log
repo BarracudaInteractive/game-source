@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2022.3/staging' branch; Version is '2022.3.2f1 (d74737c6db50) revision 14108471'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.22621) 64bit Professional' Language: 'en' Physical Memory: 32636 MB
+OS: 'Windows 11  (10.0.22621) 64bit Professional' Language: 'es' Physical Memory: 32694 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -11,13 +11,13 @@ C:\Program Files\Unity\Hub\Editor\2022.3.2f1\Editor\Unity.exe
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/aleja/Unity/game-source
+C:/Users/Adrián/Desktop/GitHub/game-source-code
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-51504
-Successfully changed project path to: C:/Users/aleja/Unity/game-source
-C:/Users/aleja/Unity/game-source
+57808
+Successfully changed project path to: C:/Users/Adrián/Desktop/GitHub/game-source-code
+C:/Users/Adrián/Desktop/GitHub/game-source-code
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -49,71 +49,64 @@ C:/Users/aleja/Unity/game-source
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [7308] Host "[IP] 192.168.0.180 [Port] 0 [Flags] 2 [Guid] 2774253383 [EditorId] 2774253383 [Version] 1048832 [Id] WindowsEditor(7,CALYPSO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [37468] Host "[IP] 192.168.1.143 [Port] 0 [Flags] 2 [Guid] 3969030763 [EditorId] 3969030763 [Version] 1048832 [Id] WindowsEditor(7,TheBoy) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [7308] Host "[IP] 192.168.0.180 [Port] 0 [Flags] 2 [Guid] 2774253383 [EditorId] 2774253383 [Version] 1048832 [Id] WindowsEditor(7,CALYPSO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [37468] Host "[IP] 192.168.1.143 [Port] 0 [Flags] 2 [Guid] 3969030763 [EditorId] 3969030763 [Version] 1048832 [Id] WindowsEditor(7,TheBoy) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 10.27 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 5.09 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.2f1 (d74737c6db50)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/aleja/Unity/game-source/Assets
+[Subsystems] Discovering subsystems at path C:/Users/Adrián/Desktop/GitHub/game-source-code/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 3080 (ID=0x2206)
+    Renderer: NVIDIA GeForce RTX 3060 (ID=0x2504)
     Vendor:   NVIDIA
-    VRAM:     10067 MB
-    Driver:   31.0.15.4601
+    VRAM:     12129 MB
+    Driver:   31.0.15.2849
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56928
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56692
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.2f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.013350 seconds.
-- Loaded All Assemblies, in  0.364 seconds
-Native extension for UWP target not found
+Registered in 0.004215 seconds.
+- Loaded All Assemblies, in  0.221 seconds
 Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 293 ms
-Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.622 seconds
-Domain Reload Profiling: 984ms
-	BeginReloadAssembly (81ms)
+- Finished resetting the current domain, in  0.200 seconds
+Domain Reload Profiling: 421ms
+	BeginReloadAssembly (60ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (61ms)
-	LoadAllAssembliesAndSetupDomain (180ms)
-		LoadAssemblies (79ms)
+	RebuildCommonClasses (23ms)
+	RebuildNativeTypeToScriptingClass (7ms)
+	initialDomainReloadingComplete (40ms)
+	LoadAllAssembliesAndSetupDomain (90ms)
+		LoadAssemblies (59ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (173ms)
-			TypeCache.Refresh (172ms)
-				TypeCache.ScanAssembly (159ms)
-			ScanForSourceGeneratedMonoScriptInfo (1ms)
-			ResolveRequiredComponents (1ms)
-	FinalizeReload (623ms)
+		AnalyzeDomain (86ms)
+			TypeCache.Refresh (85ms)
+				TypeCache.ScanAssembly (77ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (201ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (567ms)
+		SetupLoadedEditorAssemblies (154ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (430ms)
-			SetLoadedEditorAssemblies (4ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (93ms)
-			ProcessInitializeOnLoadMethodAttributes (38ms)
+			ProcessInitializeOnLoadAttributes (103ms)
+			ProcessInitializeOnLoadMethodAttributes (36ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -121,62 +114,59 @@ Domain Reload Profiling: 984ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.813 seconds
-Refreshing native plugins compatible for Editor in 3.06 ms, found 3 plugins.
-Native extension for UWP target not found
+- Loaded All Assemblies, in  0.500 seconds
+Refreshing native plugins compatible for Editor in 2.03 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Native extension for WebGL target not found
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.626 seconds
-Domain Reload Profiling: 1435ms
-	BeginReloadAssembly (117ms)
+- Finished resetting the current domain, in  0.505 seconds
+Domain Reload Profiling: 1003ms
+	BeginReloadAssembly (90ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
+		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (23ms)
-	RebuildCommonClasses (27ms)
-	RebuildNativeTypeToScriptingClass (8ms)
-	initialDomainReloadingComplete (38ms)
-	LoadAllAssembliesAndSetupDomain (619ms)
-		LoadAssemblies (254ms)
+		CreateAndSetChildDomain (16ms)
+	RebuildCommonClasses (22ms)
+	RebuildNativeTypeToScriptingClass (7ms)
+	initialDomainReloadingComplete (29ms)
+	LoadAllAssembliesAndSetupDomain (350ms)
+		LoadAssemblies (185ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (411ms)
-			TypeCache.Refresh (389ms)
-				TypeCache.ScanAssembly (371ms)
-			ScanForSourceGeneratedMonoScriptInfo (19ms)
-			ResolveRequiredComponents (4ms)
-	FinalizeReload (626ms)
+		AnalyzeDomain (205ms)
+			TypeCache.Refresh (190ms)
+				TypeCache.ScanAssembly (182ms)
+			ScanForSourceGeneratedMonoScriptInfo (12ms)
+			ResolveRequiredComponents (3ms)
+	FinalizeReload (505ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (464ms)
+		SetupLoadedEditorAssemblies (392ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (26ms)
+			InitializePlatformSupportModulesInManaged (4ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (66ms)
-			ProcessInitializeOnLoadAttributes (339ms)
-			ProcessInitializeOnLoadMethodAttributes (22ms)
-			AfterProcessingInitializeOnLoad (7ms)
+			BeforeProcessingInitializeOnLoad (67ms)
+			ProcessInitializeOnLoadAttributes (299ms)
+			ProcessInitializeOnLoadMethodAttributes (13ms)
+			AfterProcessingInitializeOnLoad (4ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 6.28 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (5ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 3.28 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3547 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 40 unused Assets / (57.2 KB). Loaded Objects now: 4023.
-Memory consumption went from 139.0 MB to 139.0 MB.
-Total: 4.195100 ms (FindLiveObjects: 0.239500 ms CreateObjectMapping: 0.109900 ms MarkObjects: 3.659900 ms  DeleteObjects: 0.185000 ms)
+Unloading 3548 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 40 unused Assets / (57.3 KB). Loaded Objects now: 4018.
+Memory consumption went from 133.0 MB to 133.0 MB.
+Total: 2.647900 ms (FindLiveObjects: 0.206200 ms CreateObjectMapping: 0.081300 ms MarkObjects: 2.268900 ms  DeleteObjects: 0.091000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-codec-MediaFoundation-h265: e54d7ab0439102e2317fc1e4b246158d -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
@@ -188,158 +178,9 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 10036.482663 seconds.
-  path: Assets/Art/Textures/RTT_Logo_MMDD.png
-  artifactKey: Guid(c8c78e897b77dda428ef19f6ac6d122c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/RTT_Logo_MMDD.png using Guid(c8c78e897b77dda428ef19f6ac6d122c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8ed4ac601a984681774ee7eb8991ea2') in 0.096125 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Art/Textures/Front_Lights.flare
-  artifactKey: Guid(d85cd9a3c67d71d4ebfb280677f8dae7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/Front_Lights.flare using Guid(d85cd9a3c67d71d4ebfb280677f8dae7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e820dd3153b9dec9245863113ac344a') in 0.001031 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 1
-========================================================================
-Received Import Request.
-  Time since last request: 2.594880 seconds.
-  path: Assets/Art/Textures/UI
-  artifactKey: Guid(ca68af38c5ebd5b4084294bb0369e9bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI using Guid(ca68af38c5ebd5b4084294bb0369e9bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ce078d7d4379ce2092817b340f33833') in 0.001197 seconds
+  Time since last request: 35817.840942 seconds.
+  path: Assets/Levels/Testing.unity
+  artifactKey: Guid(c23382718fda8ac4eb72d68a3cbe6346) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Levels/Testing.unity using Guid(c23382718fda8ac4eb72d68a3cbe6346) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01259ffd44b08d07f1bb57e6c7e8c2ad') in 0.002015 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 13.516036 seconds.
-  path: Assets/Art/Textures/InitSpeed
-  artifactKey: Guid(2cd086a05a2e7cb48bc7fc9558d8f2e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/InitSpeed using Guid(2cd086a05a2e7cb48bc7fc9558d8f2e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7444b24ae445edc08007bbdb6c0b78e') in 0.001330 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.862195 seconds.
-  path: Assets/Art/Textures/UI/RTT_BasicButton_1_1102.png
-  artifactKey: Guid(762d7693558f58145bac7066fab421e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_BasicButton_1_1102.png using Guid(762d7693558f58145bac7066fab421e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee5dc4dfe2ca643a8de5dced03a32d5b') in 0.008591 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.003719 seconds.
-  path: Assets/Art/Textures/UI/RTT_BasicButton_4_1102.png
-  artifactKey: Guid(2e0054b7b49e0bd40a400dd1b10cf488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_BasicButton_4_1102.png using Guid(2e0054b7b49e0bd40a400dd1b10cf488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '214a69bd547c63b9d37d4e83d77c2d0b') in 0.013557 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Art/Textures/UI/RTT_TextBackground_3_1102.png
-  artifactKey: Guid(20e2c53c3a9aa0a4381ef4c83295e8a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_TextBackground_3_1102.png using Guid(20e2c53c3a9aa0a4381ef4c83295e8a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a17436c65e15cddad3ca7ea0b40c3db') in 0.016833 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Art/Textures/UI/RTT_BasicButton_6_1102.png
-  artifactKey: Guid(f79198eac65a36a4e97046b4741e5fbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_BasicButton_6_1102.png using Guid(f79198eac65a36a4e97046b4741e5fbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7611337e9eb3407cdde3ea71f46a51f') in 0.011598 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Art/Textures/UI/RTT_BuyButton_1_1102.png
-  artifactKey: Guid(57af02349ae92cd418cde80576b04a4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_BuyButton_1_1102.png using Guid(57af02349ae92cd418cde80576b04a4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d3c308e1e85c3cfef67f7f3c8fb94af') in 0.010067 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Art/Textures/UI/RTT_MenuBackground_1_1102.png
-  artifactKey: Guid(9af39fabd70eebe43b168d8628871b8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_MenuBackground_1_1102.png using Guid(9af39fabd70eebe43b168d8628871b8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '680bfd08cf69813a43f1ad1482994e95') in 0.012271 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/Art/Textures/UI/RTT_TextBackground_2_1102.png
-  artifactKey: Guid(71ba98b57e250a846bac41d09b51a4f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_TextBackground_2_1102.png using Guid(71ba98b57e250a846bac41d09b51a4f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afef6e6bf7d9eb5648587e15ceec8f26') in 0.012764 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Art/Textures/UI/RTT_StretchMap_1_1102.png
-  artifactKey: Guid(ce509895909ec914aaf099643c7e3c29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_StretchMap_1_1102.png using Guid(ce509895909ec914aaf099643c7e3c29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24f72634eba6572c95fda67ceaf12601') in 0.011546 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Art/Textures/UI/RTT_BlockButton_1_1102.png
-  artifactKey: Guid(15c9e0b0f02ead14e92a6558a749be62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_BlockButton_1_1102.png using Guid(15c9e0b0f02ead14e92a6558a749be62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f45c3425ce0df3507d3d850610f7a6e') in 0.008931 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Art/Textures/UI/RTT_BasicButton_7_1102.png
-  artifactKey: Guid(e2e25b20497a05c4995b70526f542fe0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_BasicButton_7_1102.png using Guid(e2e25b20497a05c4995b70526f542fe0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55a697399a4ddde8cba894af933cc5ca') in 0.009090 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Art/Textures/UI/RTT_EnglishFlag_1_1102.png
-  artifactKey: Guid(8eb4d54d0a3ff7b4a8b65f72b2406d0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_EnglishFlag_1_1102.png using Guid(8eb4d54d0a3ff7b4a8b65f72b2406d0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cc651a702f8803f2324c7f6ef6aeef0') in 0.007529 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Art/Textures/UI/RTT_SelectionButtonL_1_1102.png
-  artifactKey: Guid(ea51f92fb47204a4f877823a5f0942fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_SelectionButtonL_1_1102.png using Guid(ea51f92fb47204a4f877823a5f0942fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2071b16e20279d61ad526acee8d5233e') in 0.005766 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Art/Textures/UI/RTT_ErrorBox_1_1102.png
-  artifactKey: Guid(4e1c3bd727ce7f04082a7748d324ef07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_ErrorBox_1_1102.png using Guid(4e1c3bd727ce7f04082a7748d324ef07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c5ca0123a1edeefceb74c5de3f3b505') in 0.008578 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Art/Textures/UI/RTT_TextBackground_1_1102.png
-  artifactKey: Guid(0efa3e3c72ae2954bac5020795b9e3e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_TextBackground_1_1102.png using Guid(0efa3e3c72ae2954bac5020795b9e3e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a34e0f7fe9b8dd0348f744502793719') in 0.007341 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000146 seconds.
-  path: Assets/Art/Textures/UI/RTT_ExitButton_1_1102.png
-  artifactKey: Guid(80488641ddd9bdc45894b9dfe7f09f14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Art/Textures/UI/RTT_ExitButton_1_1102.png using Guid(80488641ddd9bdc45894b9dfe7f09f14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bacee5c977daa6e9b3661ea6a7c10d0b') in 0.008074 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0
