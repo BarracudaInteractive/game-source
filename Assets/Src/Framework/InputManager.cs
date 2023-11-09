@@ -12,9 +12,9 @@ public class InputManager : MonoBehaviour
     private Transform _tCurrentWaypoint;
     private List<Transform> _NodesList = new List<Transform>();
 
-    private float _fAcceleration = 0.2f;
+    private float _fAcceleration = 1.0f;
     private int _iDistanceOffset = 3;
-    private float _fSteerForce = 0.2f;
+    private float _fSteerForce = 0.6f;
     private int _iCurrentNode;
     private float _fVertical;
     private float _fHorizontal;

@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
+    [Header("Car")]
+    public GameObject gCar;
+    
     [Header("Gasoline bar")] // 0.2 - 1.0
     public GameObject gGasolineBar;
     
@@ -43,6 +46,8 @@ public class GameManager : MonoBehaviour
     private Slider _GasSlider;
     private Slider _DmgSlider;
     
+    public float GetTime => _fTime;
+    
     private void _SetText()
     {
         string zeroU = "";
@@ -52,9 +57,9 @@ public class GameManager : MonoBehaviour
         tText.text = $"{zeroD}{Mathf.FloorToInt(_fTime / 60).ToString()}:{zeroU}{Mathf.FloorToInt(_fTime % 60).ToString()}";
     }
     
-    private void _PauseGame() { Time.timeScale = 0; }
+    private void _PauseGame() { gCar.GetComponent<Rigidbody>().isKinematic = true; }
 
-    private void _ResumeGame() { Time.timeScale = 1; _hasStarted = true; }
+    private void _ResumeGame() { gCar.GetComponent<Rigidbody>().isKinematic = false; _hasStarted = true; }
     
     private void _LoadTesting() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     

@@ -659,59 +659,6 @@ Transform:
   m_Father: {fileID: 6592561501966142193}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1448073470839246488
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1420420933240080885}
-  - component: {fileID: 8447851154868938092}
-  m_Layer: 0
-  m_Name: FinishLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1420420933240080885
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448073470839246488}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.000014409421}
-  m_LocalPosition: {x: 0, y: 0.62700003, z: 2.743299}
-  m_LocalScale: {x: 0.89375, y: 0.80208987, z: 0.121642664}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2214770924555375400}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -180.002, z: 0}
---- !u!65 &8447851154868938092
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448073470839246488}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.1862488, y: 0.5591936, z: 2.233284}
-  m_Center: {x: 0.027687073, y: -0.029118061, z: 0.14849472}
 --- !u!1 &1568300321224706495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1080,6 @@ Transform:
   - {fileID: 2214770924668300465}
   - {fileID: 2214770923848926156}
   - {fileID: 2214770922880669626}
-  - {fileID: 1420420933240080885}
   m_Father: {fileID: 1324725955716200356}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1204,6 +1150,7 @@ GameObject:
   - component: {fileID: 2610125035370890678}
   - component: {fileID: 2610125035370890633}
   - component: {fileID: 3136624902066826794}
+  - component: {fileID: 1369803421258570096}
   m_Layer: 3
   m_Name: Sunburst_Racer
   m_TagString: AI
@@ -1232,7 +1179,7 @@ Transform:
   - {fileID: 696121052971446413}
   - {fileID: 1467767}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2610125035370890677
 Rigidbody:
@@ -1448,6 +1395,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &1369803421258570096
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610125035370890679}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0.56, z: 2.75}
 --- !u!1 &2726045350175764038
 GameObject:
   m_ObjectHideFlags: 0

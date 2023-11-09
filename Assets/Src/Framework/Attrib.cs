@@ -9,10 +9,14 @@ using UnityEngine.UI;
 
 public class Attrib : MonoBehaviour
 {
+    [Header("Game manager")]
+    public GameObject gGameManager;
+    
     [Header("Section attributes")] public short iId = 0;
     public bool isReverse = false;
-
-    [Header("Text to write in")] public TMP_Text tText;
+    
+    [Header("Text to write in")] 
+    public TMP_Text tText;
 
     private float _fSteerForce = 0.0f;
     private float _fChrono = 0.0f;
@@ -25,14 +29,14 @@ public class Attrib : MonoBehaviour
 
     public float SetSf { set => _fSteerForce = value; }
 
-    private void Update() { _fChrono += Time.deltaTime; }
-    
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.gameObject.tag == "AI" && _fSteerForce != 0.0f)
+        if (coll.gameObject.tag == "AI")
         {
+            _fChrono = gGameManager.GetComponent<GameManager>().GetTime;
             _SetText();
             //coll.gameObject.GetComponent<InputManager>().SetAcceleration = _fSteerForce;
+            coll.gameObject.GetComponent<InputManager>().SetAcceleration = _fSteerForce;
             coll.gameObject.GetComponent<InputManager>().SetSteerForce = _fSteerForce;
         }
     }

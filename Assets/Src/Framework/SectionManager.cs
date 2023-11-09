@@ -25,7 +25,7 @@ public class SectionManager : MonoBehaviour
     [Header("Submit button")] 
     public GameObject gSubmitButton;
 
-    [Header("Text field")] //straight, shallow curve, tight curve, very tight curve, hairpin
+    [Header("Text field")]
     public TMP_Text tText;
     
     private short _iHigh = 12;
