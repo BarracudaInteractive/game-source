@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1213827912788323394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 20, y: 10, z: 0}
+  m_LocalScale: {x: 25, y: 10, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8531307266473392558}
@@ -123,8 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gGameManager: {fileID: 0}
   iId: 0
-  isReverse: 0
   tText: {fileID: 0}
+  fSteerForce: 0
+  iDistanceOffset: 0
 --- !u!1 &8565023389419397230
 GameObject:
   m_ObjectHideFlags: 0

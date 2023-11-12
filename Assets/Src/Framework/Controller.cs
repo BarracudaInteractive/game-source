@@ -33,7 +33,7 @@ public class Controller : MonoBehaviour
     private float _fKPH;
     private float _fEngineRPM;
     private float _fGas = 100.0f;
-    private float _fDemo = 100.0f; //demo mode to see the gas drop
+    private float _fDemo = 50.0f; //demo mode to see the gas drop
     private float _fDmg = 0.0f;
     private bool _isReverse = false;
     private bool _isAcc = false;
@@ -163,7 +163,7 @@ public class Controller : MonoBehaviour
         foreach (WheelCollider wheel in _Wheels)
         {
             wheel.GetGroundHit(out hit);
-            if (hit.collider.gameObject.tag == "off-piste") outOfTrack++;
+            if (hit.collider.gameObject.CompareTag("off-piste")) outOfTrack++;
         }
 
         return (outOfTrack == 4);
