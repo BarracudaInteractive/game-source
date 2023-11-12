@@ -12,8 +12,8 @@ public class InputManager : MonoBehaviour
     private Transform _tCurrentWaypoint;
     private List<Transform> _NodesList = new List<Transform>();
 
-    private float _fAcceleration = 1.0f;
-    private int _iDistanceOffset = 3;
+    private float _fAcceleration = 0.2f;
+    private int _iDistanceOffset = 5;
     private float _fSteerForce = 0.6f;
     private int _iCurrentNode;
     private float _fVertical;
@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour
     public float SetAcceleration { set => _fAcceleration = value; }
 
     public float SetSteerForce { set => _fSteerForce = value; }
+    
+    public int SetDistanceOffset { set => _iDistanceOffset = value; }
 
     public float GetVertical => _fVertical;
 
@@ -83,11 +85,12 @@ public class InputManager : MonoBehaviour
         _CalculateDistanceOfWaypoints();
         _Steer();
         _fVertical = _fAcceleration;
+        Debug.Log($"{_iCurrentNode.ToString()}");
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "obstacle")
+        if (collision.gameObject.CompareTag("obstacle"))
         {
             Transform massCenter = gameObject.transform.Find("mass").gameObject.GetComponent<Transform>();
             Transform objCenter = collision.gameObject.GetComponent<Transform>();

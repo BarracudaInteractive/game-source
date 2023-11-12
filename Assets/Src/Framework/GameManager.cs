@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         gGameOver.SetActive(true);
         if (D) tDefeat.text = "You lost because your car has suffered many breakdowns";
         else if (F) tDefeat.text = "You lost because you ran out of fuel";
-        else if (O) tDefeat.text = "You have lost because you have gone completely off track";
+        //else if (O) tDefeat.text = "You have lost because you have gone completely off track";
     }
     
     private void Awake() 
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         DmgUpdate();
         bool isDamaged = _fDamage >= 100.0f;
         bool noFuel = _fGasoline < 0.0f;
-        if (isDamaged || noFuel || _isOut)
+        if (isDamaged || noFuel) // || _isOut
         {
             _GameOver(isDamaged, noFuel, _isOut);
             _Controller.StopCar();
