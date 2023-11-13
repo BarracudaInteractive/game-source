@@ -269,7 +269,7 @@ public class SectionManager : MonoBehaviour
     
     private void _StartSectionSet(bool b){ SectionSetCanvas.SetActive(b);  }
     
-    private void _SetText() { tText.text = $"Section: {_iSectionId.ToString()}"; }
+    private void _SetText() { tText.text = $"CHECKPOINT {_iSectionId.ToString()}"; }
     
     private void Awake()
     {

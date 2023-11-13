@@ -16,9 +16,6 @@ public class Attrib : MonoBehaviour
     [Header("Section attributes")] 
     public short iId = 0;
     
-    [Header("Text to write in")] 
-    public TMP_Text tText;
-    
     [Header("Assets")]
     public float fSteerForce = 0.0f;
     public int iDistanceOffset = 0;
@@ -26,8 +23,9 @@ public class Attrib : MonoBehaviour
     private float _fAcceleration = 0.0f;
     private float _fChrono = 0.0f;
     private float _fHigh = 0.0f;
-
-    private void _SetText() { tText.text = $"Section {iId.ToString()}: {Math.Round(_fChrono, 2).ToString()}"; }
+    private List<(string,float)> _TimerList;
+    
+    private void _SetTime() { _TimerList.Add((iId.ToString(),(float)Math.Round(_fChrono, 2))); }
 
     public short GetId => iId;
     
@@ -44,7 +42,7 @@ public class Attrib : MonoBehaviour
         if (coll.gameObject.CompareTag("AI"))
         {
             _fChrono = gGameManager.GetComponent<GameManager>().GetTime;
-            _SetText();
+            _SetTime();
 
             coll.gameObject.GetComponent<InputManager>().SetAcceleration = _fAcceleration;
             coll.gameObject.GetComponent<InputManager>().SetSteerForce = fSteerForce;

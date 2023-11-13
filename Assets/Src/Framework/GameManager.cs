@@ -18,18 +18,32 @@ public class GameManager : MonoBehaviour
     [Header("Damage bar")] // 0.2 - 1.0
     public GameObject gDamageBar;
     
-    [Header("Text and button")]
-    public TMP_Text tText;
+    [Header("Recon")]
     public GameObject gFreezeButton;
+    public GameObject gRestart;
+    public GameObject gSettings;
     
+    [Header("Ingame")]
+    public GameObject gIngame;
+    public TMP_Text tText;
+
     [Header("Game Over")]
     public GameObject gCarView;
     public GameObject gFreeView;
-    public GameObject gUI; 
     public GameObject gGameOver;
     public TMP_Text tDefeat;
     public GameObject gRestartButton;
+
+    [Header("Settings")] 
+    public GameObject gSettingsCanvas;
+    public GameObject gReturn;
+    public GameObject gExit;
     
+    private Button _bReturn;
+    private Button _bExit;
+    
+    private Button _bRestart;
+    private Button _bSettings;
     private Button _RestartButton;
     
     private Button _FreezeButton;
@@ -59,7 +73,12 @@ public class GameManager : MonoBehaviour
     
     private void _PauseGame() { gCar.GetComponent<Rigidbody>().isKinematic = true; }
 
-    private void _ResumeGame() { gCar.GetComponent<Rigidbody>().isKinematic = false; _hasStarted = true; }
+    private void _ResumeGame()
+    {
+        gCar.GetComponent<Rigidbody>().isKinematic = false; 
+        _hasStarted = true;
+        gIngame.SetActive(true);
+    }
     
     private void _LoadTesting() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     
@@ -71,24 +90,40 @@ public class GameManager : MonoBehaviour
     {
         gFreeView.SetActive(false);
         gCarView.SetActive(true);
-        gUI.SetActive(false);
+        gIngame.SetActive(false);
+        gFreezeButton.SetActive(false);
         gGameOver.SetActive(true);
         if (D) tDefeat.text = "You lost because your car has suffered many breakdowns";
         else if (F) tDefeat.text = "You lost because you ran out of fuel";
         //else if (O) tDefeat.text = "You have lost because you have gone completely off track";
     }
     
+    private void _Settings() { gSettingsCanvas.SetActive(true); }
+    
+    private void _Exit() { gSettingsCanvas.SetActive(false); }
+
+    private void _Return() { SceneManager.LoadScene("Prefs"); }
+    
     private void Awake() 
     {
         Application.targetFrameRate = 60;
-        _FreezeButton = gFreezeButton.GetComponent<Button>();        
-        _FreezeButton.onClick.AddListener(() => _ResumeGame());
         _Controller = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
         _InputManager = GameObject.FindGameObjectWithTag("AI").GetComponent<InputManager>();
+        _FreezeButton = gFreezeButton.GetComponent<Button>();        
+        _FreezeButton.onClick.AddListener(() => _ResumeGame());
         _GasSlider = gGasolineBar.GetComponent<Slider>();
         _DmgSlider = gDamageBar.GetComponent<Slider>();
         _RestartButton = gRestartButton.GetComponent<Button>();        
         _RestartButton.onClick.AddListener(() => _LoadTesting());
+        _bRestart = gRestart.GetComponent<Button>();
+        _bRestart.onClick.AddListener(() => _LoadTesting());
+        _bSettings = gSettings.GetComponent<Button>();
+        _bSettings.onClick.AddListener(() => _Settings());
+        _bExit = gExit.GetComponent<Button>();
+        _bExit.onClick.AddListener(() => _Exit());
+        _bReturn = gReturn.GetComponent<Button>();
+        _bReturn.onClick.AddListener(() => _Return());
+        
         _PauseGame();
     }
 
