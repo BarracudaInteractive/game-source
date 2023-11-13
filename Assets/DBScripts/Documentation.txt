@@ -1,0 +1,9 @@
+PHP Files are to connect and send queries to the data base. It returns text messages if everything went ok, or error codes as numbers if something went wrong.
+
+MySQLManager is a class that creates methods to send info to the php files, and manages the info recived from the database (from the php files).
+
+UserData is a script that must be attached to a gameObject in unity. It can be a an empty object. This object is not going to be destroyed when the scene changes. This is important to save the classiffication of a level in another scene. It also implements methods that uses MySQLManager to send info to the database, so you must fill the only attribute this class has, username. Password and other data must be passed to the corresponding method.
+
+Classiffication is exactly the same as the SQL class in the database. It includes methods that changes its own attributes with the ones of the data base, or uses his own attributes to send queries for comparison. It also includes methods to delete all classiffication from a user, or get all classiffication of all users and levels of the database.
+
+TimeData is a simple class that stores both total time in seconds and time in minutes and seconds. Updating and saving info to the database is donde with total time, but it simplifies work for displaying time in minutes and seconds.
