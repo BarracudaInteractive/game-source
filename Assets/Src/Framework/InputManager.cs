@@ -85,7 +85,6 @@ public class InputManager : MonoBehaviour
         _CalculateDistanceOfWaypoints();
         _Steer();
         _fVertical = _fAcceleration;
-        Debug.Log($"{_iCurrentNode.ToString()}");
     }
 
     void OnCollisionEnter(Collision collision)
