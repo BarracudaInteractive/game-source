@@ -15,23 +15,15 @@ public class PrefsManager : MonoBehaviour
 
     [Header("Deafault Canvas")]
     public GameObject gDeafaultCanvas;
-    public Text tDeafaultCanvasCurrency;
 
     [Header("Map Canvas")]
     public GameObject gMapSelectorCanvas;
-
-    [Header("Upgrades Canvas")]
-    public Text tUpgradesCurrency;
-    public GameObject gUpgradesCanvas;
+    public GameObject gPlayButton;
 
     [Header("Vehicle Select Canvas")]
     public GameObject gVehicleSelectCanvas;
-    public GameObject gBuyButton;
     public GameObject gStartButton;
     public VehicleList ListOfVehicles;
-    public Text tCurrency;
-    public Text tCarInfo;
-    
     public GameObject gToRotate;
     
     private float fLerpTime = 2.0f;
@@ -39,7 +31,8 @@ public class PrefsManager : MonoBehaviour
     private int _iVehiclePointer = 0;
     private bool _finalToStart;
     private bool _startToFinal;
-
+    private Button _bPlayButton;
+    
     private void _RightButton()
     {
         if (_iVehiclePointer < ListOfVehicles.Vehicles.Length-1)
@@ -89,18 +82,12 @@ public class PrefsManager : MonoBehaviour
         if (ListOfVehicles.Vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<Controller>().GetCarName.ToString() == 
                                    PlayerPrefs.GetString(ListOfVehicles.Vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<Controller>().GetCarName.ToString()))
         {
-            tCarInfo.text = $"Owned";
             gStartButton.SetActive(true);
-            gBuyButton.SetActive(false);
-            tCurrency.text = $"${PlayerPrefs.GetInt("currency").ToString("")}";
             return;
 
         }
         
-        tCurrency.text = $"${PlayerPrefs.GetInt("currency").ToString("")}";
-        tCarInfo.text = $"{ListOfVehicles.Vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<Controller>().GetCarName.ToString()} ${ListOfVehicles.Vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<Controller>().GetCarPrice.ToString()}"; 
         gStartButton.SetActive(false);
-        gBuyButton.SetActive(gBuyButton);
     }
 
     private void _DeafaultCanvasStartButton()
@@ -108,7 +95,6 @@ public class PrefsManager : MonoBehaviour
         gMapSelectorCanvas.SetActive(false);
         gDeafaultCanvas.SetActive(false);
         gVehicleSelectCanvas.SetActive(true);
-        gUpgradesCanvas.SetActive(false);
         _startToFinal = true;
         _finalToStart = false;
     }
@@ -124,7 +110,6 @@ public class PrefsManager : MonoBehaviour
 
     private void _UpgradesCanvasButton()
     {
-        gUpgradesCanvas.SetActive(true);
         gVehicleSelectCanvas.SetActive(false);
     }
 
@@ -141,19 +126,17 @@ public class PrefsManager : MonoBehaviour
     private void Awake() 
     {
         Application.targetFrameRate = 60;
-        
         gMapSelectorCanvas.SetActive(false);
         gDeafaultCanvas.SetActive(true);
         gVehicleSelectCanvas.SetActive(false);
         
-        PlayerPrefs.SetInt("currency",80000);
-        tDeafaultCanvasCurrency.text = $"${PlayerPrefs.GetInt("currency").ToString()}";
-        tUpgradesCurrency.text = $"${PlayerPrefs.GetInt("currency").ToString()}";
-        
+        PlayerPrefs.SetInt("currency",99999);
         _iVehiclePointer = PlayerPrefs.GetInt("pointer");
         GameObject childObject = Instantiate(ListOfVehicles.Vehicles[_iVehiclePointer],Vector3.zero,gToRotate.transform.rotation) as GameObject;
         childObject.transform.parent = gToRotate.transform;
         _GetCarInfo();
+        _bPlayButton = gPlayButton.GetComponent<Button>();
+        _bPlayButton.onClick.AddListener(() => LoadTesting());
     }
 
     private void FixedUpdate() 
