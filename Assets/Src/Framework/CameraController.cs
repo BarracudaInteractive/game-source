@@ -16,7 +16,8 @@ public class CameraController : MonoBehaviour
     private float _fDefaltFOV = 0;
     private float _fDesiredFOV = 0;
 
-    private void _Follow () {
+    private void _Follow () 
+    {
         _fSpeed = _Controller.GetKPH / fSmothTime;
         gameObject.transform.position = Vector3.Lerp (transform.position, _gCameraPos.transform.position ,  Time.deltaTime * _fSpeed);
         gameObject.transform.LookAt (_gCameraLookAt.gameObject.transform.position);
@@ -24,7 +25,8 @@ public class CameraController : MonoBehaviour
     
     private void _BoostFOV () { Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, _fDefaltFOV, Time.deltaTime * 5); }
     
-    private void Awake () {
+    private void Awake () 
+    {
         _gCar = GameObject.FindGameObjectWithTag("AI");
         _Controller = _gCar.GetComponent<Controller> ();
         _gCameraLookAt = _gCar.transform.Find("camera lookAt").gameObject;
@@ -33,5 +35,5 @@ public class CameraController : MonoBehaviour
         _fDesiredFOV = _fDefaltFOV + 15;
     }
 
-    private void FixedUpdate () { _Follow (); _BoostFOV (); }
+    private void FixedUpdate () { _Follow(); _BoostFOV(); }
 }

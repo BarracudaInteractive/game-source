@@ -40,7 +40,7 @@ public class Attrib : MonoBehaviour
         if (coll.gameObject.CompareTag("AI"))
         {
             _fChrono = gGameManager.GetComponent<GameManager>().GetTime;
-            _TimerList.Add((iId.ToString(),(float)Math.Round(_fChrono, 2)));
+            //_TimerList.Add((iId.ToString(),(float)Math.Round(_fChrono, 2)));
 
             coll.gameObject.GetComponent<InputManager>().SetAcceleration = _fAcceleration;
             coll.gameObject.GetComponent<InputManager>().SetSteerForce = fSteerForce;
