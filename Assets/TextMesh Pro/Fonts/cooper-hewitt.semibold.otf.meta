@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 204bf11c126c21945b5e323bd9a6d298
+guid: 407ed19a2c8c6094499f8276792c25c6
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Monofonto
+  - Cooper Hewitt
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
