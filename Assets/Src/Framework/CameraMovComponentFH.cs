@@ -8,9 +8,11 @@ using UnityEngine.InputSystem;
 
 public class CameraMovComponentFH : MonoBehaviour
 {
-    public Input PlayerInputSystem;
-    public InputActionMap CameraControl;
+    public GameObject gFirstCameraPosition;
+    public GameObject gSecondCameraPosition;
+    public GameObject gThirdCameraPosition;
     
+    private float _fLerpTime = 2.0f;
     private float LookOffset = 1;
     private float CameraAngle = 30;
     private float RotationSpeed = 6;
@@ -30,6 +32,11 @@ public class CameraMovComponentFH : MonoBehaviour
     private const float InternalRotationSpeed = 8;
     private Quaternion _rotationTarget;
     private Vector2 _mouseDelta;
+
+    private bool _playingTutorial = true;
+    private bool _pos1 = true;
+    private bool _pos2 = false;
+    private bool _pos3 = false;
     
     public void OnRotateToggle(InputAction.CallbackContext context)
     {
@@ -50,27 +57,35 @@ public class CameraMovComponentFH : MonoBehaviour
     /// </summary>
     public void OnMove(InputAction.CallbackContext context)
     {
-        //Read the input value that is being sent by the Input System
         Vector2 value = context.ReadValue<Vector2>();
-        //Store the value as a Vector3, making sure to move the Y input on the Z axis.
         _vec3MovDirection = new Vector3(value.x, 0, value.y);
-        //Increment the new move Target position of the camera
+    }
+    
+    private void _CameraTransition()
+    {
+        if (_pos1)
+            _actualCamera.transform.position = Vector3.Lerp(_actualCamera.transform.position,
+                gFirstCameraPosition.transform.position, _fLerpTime/4 * Time.deltaTime);
+        
+        if (_pos2)
+            _actualCamera.transform.position = Vector3.Lerp(_actualCamera.transform.position,
+                gSecondCameraPosition.transform.position, _fLerpTime * Time.deltaTime);
+        
+        if (_pos3)
+            _actualCamera.transform.position = Vector3.Lerp(_actualCamera.transform.position, 
+                gThirdCameraPosition.transform.position, _fLerpTime * Time.deltaTime);
     }
     
     public void Awake()
     {
-        //Store a reference to the camera rig
         _actualCamera = GetComponentInChildren<Camera>();
-        //Set the rotation of the camera based on the CameraAngle property
         _actualCamera.transform.rotation = Quaternion.AngleAxis(CameraAngle, Vector3.right);
 
         transform.position += new Vector3(0, _fHeight, 0);
         _cameraPositionTarget = (Vector3.up * LookOffset + new Vector3(0,_fHeight,0)) + (Quaternion.AngleAxis(CameraAngle, 
             Vector3.right) * Vector3.back);
-        //Set the initial position of the camera
         _actualCamera.transform.position = _cameraPositionTarget;
 
-        //Set the initial rotation value
         _rotationTarget = transform.rotation;
     }
 
@@ -82,13 +97,18 @@ public class CameraMovComponentFH : MonoBehaviour
 
     private void LateUpdate()
     {
-        //Lerp  the camera to a new move target position
-        transform.position = Vector3.Lerp(transform.position, _vec3MovTarget, Time.deltaTime * INTERNAL_MOVE_SPEED);
-        transform.position = new Vector3(transform.position.x, _fHeight, transform.position.z);
-        _rotationTarget *= Quaternion.AngleAxis(_mouseDelta.x * Time.deltaTime * RotationSpeed, Vector3.up);
-        
-        //Slerp the camera rig's rotation based on the new target
-        transform.rotation = Quaternion.Slerp(transform.rotation, _rotationTarget, Time.deltaTime * InternalRotationSpeed);
-        
+        if (!_playingTutorial)
+        {
+            transform.position = Vector3.Lerp(transform.position, _vec3MovTarget, Time.deltaTime * INTERNAL_MOVE_SPEED);
+            transform.position = new Vector3(transform.position.x, _fHeight, transform.position.z);
+            _rotationTarget *= Quaternion.AngleAxis(_mouseDelta.x * Time.deltaTime * RotationSpeed, Vector3.up);
+
+            transform.rotation =
+                Quaternion.Slerp(transform.rotation, _rotationTarget, Time.deltaTime * InternalRotationSpeed);
+        }
+        else
+        {
+            _CameraTransition();
+        }
     }
 }

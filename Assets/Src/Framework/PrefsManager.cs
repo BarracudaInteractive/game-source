@@ -50,6 +50,9 @@ public class PrefsManager : MonoBehaviour
     public GameObject gStageExitY;
     public GameObject gStageExitN;
     public GameObject gStageBack;
+    public GameObject gStageOne;
+    public GameObject gStageTwo;
+    public GameObject gStageThree;
     public GameObject gStageRight;
     public GameObject gStageLeft;
     public GameObject gStageRace;
@@ -109,9 +112,11 @@ public class PrefsManager : MonoBehaviour
     private Button _bPlayButton;
     
     private List<GameObject> _CanvasList = new List<GameObject>();
+    private List<GameObject> _StagesList = new List<GameObject>();
     private int _iCurrentCanvas = 0;
     private int _iLastCanvas = 0;
     private char _cLanguage = 'e';
+    private int _iStage = 0;
 
     private void _ExitGame()
     {
@@ -213,7 +218,12 @@ public class PrefsManager : MonoBehaviour
         SceneManager.LoadScene("Menu"); 
     }
 
-    private void _LoadTesting() { SceneManager.LoadScene("Testing"); }
+    private void _LoadStage()
+    {
+        if (_iStage == 0) SceneManager.LoadScene("Testing");
+        else if (_iStage == 1) SceneManager.LoadScene("Testing");
+        else if (_iStage == 2) SceneManager.LoadScene("Testing");
+    }
 
     public void _BackLog(GameObject canvas)
     {
@@ -223,6 +233,21 @@ public class PrefsManager : MonoBehaviour
         {
             canvas.SetActive(false);
             _CanvasList[_iCurrentCanvas - 1].SetActive(true);
+        }
+    }
+
+    private void _ChangeStage(int val)
+    {
+        _iStage += val;
+        if (_iStage < 0)
+            _iStage = 2;
+        _iStage %= 3;
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == _iStage)
+                _StagesList[_iStage].SetActive(true);
+            else
+                _StagesList[i].SetActive(false);
         }
     }
 
@@ -298,9 +323,9 @@ public class PrefsManager : MonoBehaviour
         _bStageExitY.onClick.AddListener(() => _ExitGame());
         _bStageExitN.onClick.AddListener(() => gStageExitOrder.SetActive(false));
         _bStageSettings.onClick.AddListener(() => _EnterSettings(gStageCanvas));
-        //_bStageRight.onClick.AddListener(() => );
-        //_bStageLeft.onClick.AddListener(() => );
-        _bStageRace.onClick.AddListener(() => _LoadTesting());
+        _bStageRight.onClick.AddListener(() => _ChangeStage(1));
+        _bStageLeft.onClick.AddListener(() => _ChangeStage(-1));
+        _bStageRace.onClick.AddListener(() => _LoadStage());
         
         _bSettingsClose.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _bSettingsApply.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
@@ -321,6 +346,13 @@ public class PrefsManager : MonoBehaviour
         _CanvasList.Add(gStageCanvas);
         _CanvasList.Add(gSettingsCanvas);
     }
+    
+    private void _InitStagesList()
+    {
+        _StagesList.Add(gStageOne);
+        _StagesList.Add(gStageTwo);
+        _StagesList.Add(gStageThree);
+    }
 
     private void _InitAudio()
     {
@@ -339,6 +371,7 @@ public class PrefsManager : MonoBehaviour
         gStageCanvas.SetActive(false);
         _InitButtons();
         _InitCanvasList();
+        _InitStagesList();
         GameObject childObject = Instantiate(ListOfVehicles.Vehicles[0], Vector3.zero, gToRotate.transform.rotation) as GameObject;
         childObject.transform.parent = gToRotate.transform;
         _StopCar();
