@@ -37,13 +37,27 @@ public class GameManager : MonoBehaviour
     [Header("Settings")] 
     public GameObject gSettingsCanvas;
     public GameObject gReturn;
+    public GameObject gSettingsMusic;
+    public GameObject gSettingsEffects;
+    public GameObject gSettingsSound;
+    public GameObject gSettingsLanguage;
     public GameObject gExit;
+    
+    [Header("Audio Manager")] 
+    public GameObject gAudioManager;
     
     private Button _bReturn;
     private Button _bExit;
     
     private Button _bRestart;
     private Button _bSettings;
+    private Slider _sSettingsMusic;
+    private Slider _sSettingsEffects;
+    private Slider _sSettingsSound;
+    private TMP_Dropdown _dSettingsLanguage;
+    
+    private AudioSource _aSource;
+    
     private Button _RestartButton;
     
     private Button _FreezeButton;
@@ -59,6 +73,8 @@ public class GameManager : MonoBehaviour
     
     private Slider _GasSlider;
     private Slider _DmgSlider;
+
+    private char _cLanguage = 'e';
     
     public float GetTime => _fTime;
     
@@ -80,7 +96,7 @@ public class GameManager : MonoBehaviour
         gIngame.SetActive(true);
     }
     
-    private void _LoadTesting() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
+    private void _ReloadScene() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     
     public void OilUpdate() { _GasSlider.value = _fGasoline; }
     
@@ -89,7 +105,9 @@ public class GameManager : MonoBehaviour
     private void _GameOver(bool D, bool F, bool O)
     {
         gFreeView.SetActive(false);
+        gFreeView.GetComponent<AudioListener>().enabled = false;
         gCarView.SetActive(true);
+        gCarView.GetComponent<AudioListener>().enabled = true;
         gIngame.SetActive(false);
         gFreezeButton.SetActive(false);
         gGameOver.SetActive(true);
@@ -102,28 +120,90 @@ public class GameManager : MonoBehaviour
     
     private void _Exit() { gSettingsCanvas.SetActive(false); }
 
-    private void _Return() { SceneManager.LoadScene("Prefs"); }
+    private void _Return()
+    {
+        PlayerPrefs.SetString("Language", _cLanguage.ToString());
+        PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
+        PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
+        PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
+        SceneManager.LoadScene("Prefs");
+    }
+
+    private void _InitButtons()
+    {
+        _Controller = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
+        _InputManager = GameObject.FindGameObjectWithTag("AI").GetComponent<InputManager>();
+        
+        _FreezeButton = gFreezeButton.GetComponent<Button>();        
+        _FreezeButton.onClick.AddListener(() => _ResumeGame());
+        
+        _GasSlider = gGasolineBar.GetComponent<Slider>();
+        _DmgSlider = gDamageBar.GetComponent<Slider>();
+        
+        _RestartButton = gRestartButton.GetComponent<Button>();        
+        _RestartButton.onClick.AddListener(() => _ReloadScene());
+        
+        _bRestart = gRestart.GetComponent<Button>();
+        _bRestart.onClick.AddListener(() => _ReloadScene());
+        
+        _bExit = gExit.GetComponent<Button>();
+        _bExit.onClick.AddListener(() => _Exit());
+        
+        _bSettings = gSettings.GetComponent<Button>();
+        _bSettings.onClick.AddListener(() => _Settings());
+        
+        _bReturn = gReturn.GetComponent<Button>();
+        _bReturn.onClick.AddListener(() => _Return());
+        
+        _aSource = gAudioManager.GetComponent<AudioSource>();
+        
+        _sSettingsMusic = gSettingsMusic.GetComponent<Slider>();
+        _sSettingsMusic.onValueChanged.AddListener(delegate { _aSource.volume = _sSettingsMusic.value; });
+        
+        _sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
+        _sSettingsEffects.onValueChanged.AddListener(delegate {  });
+        
+        _sSettingsSound = gSettingsSound.GetComponent<Slider>();
+        _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
+        
+        _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
+        _dSettingsLanguage.onValueChanged.AddListener(delegate
+        {
+            if (_dSettingsLanguage.value == 0) _cLanguage = 'e'; else _cLanguage = 's';
+        });
+    }
+    
+    void _LoadPlayerPrefs()
+    {
+        _cLanguage = Convert.ToChar(PlayerPrefs.GetString("Language"));
+        if (_cLanguage == 'e')
+            _dSettingsLanguage.value = 0;
+        else
+            _dSettingsLanguage.value = 1;
+    }
+    
+    private void _InitAudio()
+    {
+        if (PlayerPrefs.HasKey("User"))
+        {
+            _sSettingsMusic.value = PlayerPrefs.GetFloat("Music");
+            _sSettingsEffects.value = PlayerPrefs.GetFloat("Effects");
+            _sSettingsSound.value = PlayerPrefs.GetFloat("Sound");
+        }
+        else 
+        {
+            _sSettingsMusic.value = 0.1f;
+            _sSettingsEffects.value = 0.4f;
+            AudioListener.volume = 1.0f;
+        }
+    }
     
     private void Awake() 
     {
         Application.targetFrameRate = 60;
-        _Controller = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
-        _InputManager = GameObject.FindGameObjectWithTag("AI").GetComponent<InputManager>();
-        _FreezeButton = gFreezeButton.GetComponent<Button>();        
-        _FreezeButton.onClick.AddListener(() => _ResumeGame());
-        _GasSlider = gGasolineBar.GetComponent<Slider>();
-        _DmgSlider = gDamageBar.GetComponent<Slider>();
-        _RestartButton = gRestartButton.GetComponent<Button>();        
-        _RestartButton.onClick.AddListener(() => _LoadTesting());
-        _bRestart = gRestart.GetComponent<Button>();
-        _bRestart.onClick.AddListener(() => _LoadTesting());
-        _bSettings = gSettings.GetComponent<Button>();
-        _bSettings.onClick.AddListener(() => _Settings());
-        _bExit = gExit.GetComponent<Button>();
-        _bExit.onClick.AddListener(() => _Exit());
-        _bReturn = gReturn.GetComponent<Button>();
-        _bReturn.onClick.AddListener(() => _Return());
-        
+        _InitButtons();
+        _LoadPlayerPrefs();
+        _InitAudio();
         _PauseGame();
     }
 
