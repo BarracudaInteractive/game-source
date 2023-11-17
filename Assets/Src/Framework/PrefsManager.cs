@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -8,85 +10,352 @@ using UnityEngine.Serialization;
 public class PrefsManager : MonoBehaviour
 {
     [Header("Camera")] public GameObject gCameraObject;
-    public GameObject gFinalCameraPosition;
+    public GameObject gFourthCameraPosition;
+    public GameObject gThirdCameraPosition;
+    public GameObject gSecondCameraPosition;
     public GameObject gStartCameraPosition;
 
     [Header("Deafault Canvas")] public GameObject gDeafaultCanvas;
-
-    [Header("Map Canvas")] public GameObject gMapSelectorCanvas;
-    public GameObject gPlayButton;
-
-    [Header("Vehicle Select Canvas")] public GameObject gVehicleSelectCanvas;
-    public GameObject gStartButton;
+    public GameObject gDefaultSettings;
+    public GameObject gDefaultExit;
+    public GameObject gDefaultExitOrder;
+    public GameObject gDefaultExitY;
+    public GameObject gDefaultExitN;
+    public GameObject gDefaultBack;
+    public GameObject gDefaultProfile;
+    
+    [Header("Vehicle Canvas")] public GameObject gVehicleSelectCanvas;
+    public GameObject gVehicleSettings;
+    public GameObject gVehicleExit;
+    public GameObject gVehicleExitOrder;
+    public GameObject gVehicleExitY;
+    public GameObject gVehicleExitN;
+    public GameObject gVehicleBack;
     public VehicleList ListOfVehicles;
     public GameObject gToRotate;
     
+    [Header("Leg Canvas")] public GameObject gMapSelectorCanvas;
+    public GameObject gLegSettings;
+    public GameObject gLegExit;
+    public GameObject gLegExitOrder;
+    public GameObject gLegExitY;
+    public GameObject gLegExitN;
+    public GameObject gLegBack;
+    public GameObject gLegPlay;
+    
+    [Header("Stage Canvas")] public GameObject gStageCanvas;
+    public GameObject gStageSettings;
+    public GameObject gStageExit;
+    public GameObject gStageExitOrder;
+    public GameObject gStageExitY;
+    public GameObject gStageExitN;
+    public GameObject gStageBack;
+    public GameObject gStageRight;
+    public GameObject gStageLeft;
+    public GameObject gStageRace;
+    
+    [Header("Settings Canvas")] public GameObject gSettingsCanvas;
+    public GameObject gSettingsClose;
+    public GameObject gSettingsApply;
+    public GameObject gSettingsMusic;
+    public GameObject gSettingsEffects;
+    public GameObject gSettingsSound;
+    public GameObject gSettingsLanguage;
+    
+    //Objects
+    private Button _bDefaultSettings;
+    private Button _bDefaultExit;
+    private Button _bDefaultExitY;
+    private Button _bDefaultExitN;
+    private Button _bDefaultBack;
+    private Button _bDefaultProfile;
+    
+    private Button _bVehicleSettings;
+    private Button _bVehicleExit;
+    private Button _bVehicleExitY;
+    private Button _bVehicleExitN;
+    private Button _bVehicleBack;
+    
+    private Button _bLegSettings;
+    private Button _bLegExit;
+    private Button _bLegExitY;
+    private Button _bLegExitN;
+    private Button _bLegBack;
+    
+    private Button _bStageSettings;
+    private Button _bStageExit;
+    private Button _bStageExitY;
+    private Button _bStageExitN;
+    private Button _bStageBack;
+    private Button _bStageRight;
+    private Button _bStageLeft;
+    private Button _bStageRace;
+    
+    private Button _bSettingsClose;
+    private Button _bSettingsApply;
+    private Slider _sSettingsMusic;
+    private Slider _sSettingsEffects;
+    private Slider _sSettingsSound;
+    private TMP_Dropdown _dSettingsLanguage;
+    
+    private AudioSource _aSourceMusic;
+    
     private float fLerpTime = 2.0f;
     private float _fRotateSpeed = 5f;
-    private int _iVehiclePointer = 0;
-    private bool _finalToStart;
-    private bool _startToFinal;
+    private bool _fourth;
+    private bool _third;
+    private bool _second;
+    private bool _start;
     private Button _bPlayButton;
-    private bool _hasStarted = false;
-
-    private void _StopCar() { GameObject.FindGameObjectWithTag("AI").GetComponent<Rigidbody>().isKinematic = true; }
     
-    private void _StartGameButton()
+    private List<GameObject> _CanvasList = new List<GameObject>();
+    private int _iCurrentCanvas = 0;
+    private int _iLastCanvas = 0;
+    private char _cLanguage = 'e';
+
+    private void _ExitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+    
+    private void _EnterSettings(GameObject canvas)
+    {
+        _iLastCanvas = _iCurrentCanvas;
+        canvas.SetActive(false);
+        gSettingsCanvas.SetActive(true);
+    }
+
+    private void _ExitSettings(GameObject canvas)
+    {
+        gSettingsCanvas.SetActive(false);
+        canvas.SetActive(true);
+    }
+    
+    private void _StopCar() { GameObject.FindGameObjectWithTag("AI").GetComponent<Rigidbody>().isKinematic = true; }
+
+    public void StageCanvas()
+    {
+        gDeafaultCanvas.SetActive(false);
+        gVehicleSelectCanvas.SetActive(false);
+        gMapSelectorCanvas.SetActive(false);
+        gStageCanvas.SetActive(true);
+        _start = false;
+        _second = false;
+        _third = false;
+        _fourth = true;
+    }
+    
+    public void MapCanvas()
     {
         gDeafaultCanvas.SetActive(false);
         gVehicleSelectCanvas.SetActive(false);
         gMapSelectorCanvas.SetActive(true);
+        gStageCanvas.SetActive(false);
+        _start = false;
+        _second = false;
+        _third = true;
+        _fourth = false;
     }
 
-    private void _DeafaultCanvasStartButton()
+    public void VehicleCanvas()
     {
         gMapSelectorCanvas.SetActive(false);
         gDeafaultCanvas.SetActive(false);
         gVehicleSelectCanvas.SetActive(true);
-        _startToFinal = true;
-        _finalToStart = false;
+        gStageCanvas.SetActive(false);
+        _start = true;
+        _second = false;
+        _third = false;
+        _fourth = false;
     }
 
-    private void _VehicleSelectCanvasStartButton()
+    public void DefaultCanvas()
     {
         gMapSelectorCanvas.SetActive(false);
         gDeafaultCanvas.SetActive(true);
         gVehicleSelectCanvas.SetActive(false);
-        _finalToStart = true;
-        _startToFinal = false;
+        gStageCanvas.SetActive(false);
+        _second = true;
+        _start = false;
+        _third = false;
+        _fourth = false;
     }
-
+    
     private void _CameraTransition()
     {
-        if (_startToFinal)
+        if (_start)
             gCameraObject.transform.position = Vector3.Lerp(gCameraObject.transform.position,
-                gFinalCameraPosition.transform.position, fLerpTime * Time.deltaTime);
-        if (_finalToStart)
+                gSecondCameraPosition.transform.position, fLerpTime * Time.deltaTime);
+        
+        if (_second)
             gCameraObject.transform.position = Vector3.Lerp(gCameraObject.transform.position,
                 gStartCameraPosition.transform.position, fLerpTime * Time.deltaTime);
+        
+        if (_third)
+            gCameraObject.transform.position = Vector3.Lerp(gCameraObject.transform.position, 
+                gThirdCameraPosition.transform.position, fLerpTime * Time.deltaTime);
+        
+        if (_fourth)
+            gCameraObject.transform.position = Vector3.Lerp(gCameraObject.transform.position, 
+                gFourthCameraPosition.transform.position, fLerpTime * Time.deltaTime);
     }
 
-    private void LoadTesting()
+    private void _LoadMenu() 
+    { 
+        PlayerPrefs.SetString("Language", _cLanguage.ToString());
+        PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
+        PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
+        PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
+        SceneManager.LoadScene("Menu"); 
+    }
+
+    private void _LoadTesting() { SceneManager.LoadScene("Testing"); }
+
+    public void _BackLog(GameObject canvas)
     {
-        SceneManager.LoadScene("Testing");
+        if (_iCurrentCanvas == 0)
+            _LoadMenu();
+        else
+        {
+            canvas.SetActive(false);
+            _CanvasList[_iCurrentCanvas - 1].SetActive(true);
+        }
     }
 
+    private void _LoadPlayerPrefs()
+    {
+        _cLanguage = Convert.ToChar(PlayerPrefs.GetString("Language"));
+        if (_cLanguage == 'e')
+            _dSettingsLanguage.value = 0;
+        else if (_cLanguage == 's')
+            _dSettingsLanguage.value = 1;
+    }
+    
+    private void _InitButtons()
+    {
+        //Get buttons
+        _bDefaultBack = gDefaultBack.GetComponent<Button>();
+        _bDefaultExit = gDefaultExit.GetComponent<Button>();
+        _bDefaultExitY = gDefaultExitY.GetComponent<Button>();
+        _bDefaultExitN = gDefaultExitN.GetComponent<Button>();
+        _bDefaultSettings = gDefaultSettings.GetComponent<Button>();
+        _bDefaultProfile = gDefaultProfile.GetComponent<Button>();
+        
+        _bVehicleBack = gVehicleBack.GetComponent<Button>();
+        _bVehicleExit = gVehicleExit.GetComponent<Button>();
+        _bVehicleExitY = gVehicleExitY.GetComponent<Button>();
+        _bVehicleExitN = gVehicleExitN.GetComponent<Button>();
+        _bVehicleSettings = gVehicleSettings.GetComponent<Button>();
+        
+        _bLegBack = gLegBack.GetComponent<Button>();
+        _bLegExit = gLegExit.GetComponent<Button>();
+        _bLegExitY = gLegExitY.GetComponent<Button>();
+        _bLegExitN = gLegExitN.GetComponent<Button>();
+        _bLegSettings = gLegSettings.GetComponent<Button>();
+        
+        _bStageBack = gStageBack.GetComponent<Button>();
+        _bStageExit = gStageExit.GetComponent<Button>();
+        _bStageExitY = gStageExitY.GetComponent<Button>();
+        _bStageExitN = gStageExitN.GetComponent<Button>();
+        _bStageSettings = gStageSettings.GetComponent<Button>();
+        _bStageRight = gStageRight.GetComponent<Button>();
+        _bStageLeft = gStageLeft.GetComponent<Button>();
+        _bStageRace = gStageRace.GetComponent<Button>();
+        
+        _bSettingsClose = gSettingsClose.GetComponent<Button>();
+        _bSettingsApply = gSettingsApply.GetComponent<Button>();
+        _sSettingsMusic = gSettingsMusic.GetComponent<Slider>();
+        _sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
+        _sSettingsSound = gSettingsSound.GetComponent<Slider>();
+        _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
+        
+        //Actions
+        _bDefaultBack.onClick.AddListener(() => _BackLog(gDeafaultCanvas));
+        _bDefaultExit.onClick.AddListener(() => gDefaultExitOrder.SetActive(true));
+        _bDefaultExitY.onClick.AddListener(() => _ExitGame());
+        _bDefaultExitN.onClick.AddListener(() => gDefaultExitOrder.SetActive(false));
+        _bDefaultSettings.onClick.AddListener(() => _EnterSettings(gDeafaultCanvas));
+        //_bDefaultProfile.onClick.AddListener(() => );
+        
+        _bVehicleBack.onClick.AddListener(() => _BackLog(gVehicleSelectCanvas));
+        _bVehicleExit.onClick.AddListener(() => gVehicleExitOrder.SetActive(true));
+        _bVehicleExitY.onClick.AddListener(() => _ExitGame());
+        _bVehicleExitN.onClick.AddListener(() => gVehicleExitOrder.SetActive(false));
+        _bVehicleSettings.onClick.AddListener(() => _EnterSettings(gVehicleSelectCanvas));
+        
+        _bLegBack.onClick.AddListener(() => _BackLog(gMapSelectorCanvas));
+        _bLegExit.onClick.AddListener(() => gLegExitOrder.SetActive(true));
+        _bLegExitY.onClick.AddListener(() => _ExitGame());
+        _bLegExitN.onClick.AddListener(() => gLegExitOrder.SetActive(false));
+        _bLegSettings.onClick.AddListener(() => _EnterSettings(gMapSelectorCanvas));
+        
+        _bStageBack.onClick.AddListener(() => _BackLog(gStageCanvas));
+        _bStageExit.onClick.AddListener(() => gStageExitOrder.SetActive(true));
+        _bStageExitY.onClick.AddListener(() => _ExitGame());
+        _bStageExitN.onClick.AddListener(() => gStageExitOrder.SetActive(false));
+        _bStageSettings.onClick.AddListener(() => _EnterSettings(gStageCanvas));
+        //_bStageRight.onClick.AddListener(() => );
+        //_bStageLeft.onClick.AddListener(() => );
+        _bStageRace.onClick.AddListener(() => _LoadTesting());
+        
+        _bSettingsClose.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
+        _bSettingsApply.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
+        _sSettingsMusic.onValueChanged.AddListener(delegate { _aSourceMusic.volume = _sSettingsMusic.value; });
+        _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
+        _dSettingsLanguage.onValueChanged.AddListener
+            (delegate 
+            { 
+                if (_dSettingsLanguage.value == 0) _cLanguage = 'e'; else _cLanguage = 's'; 
+            });
+    }
+    
+    private void _InitCanvasList()
+    {
+        _CanvasList.Add(gDeafaultCanvas);
+        _CanvasList.Add(gVehicleSelectCanvas);
+        _CanvasList.Add(gMapSelectorCanvas);
+        _CanvasList.Add(gStageCanvas);
+        _CanvasList.Add(gSettingsCanvas);
+    }
+
+    private void _InitAudio()
+    {
+        _aSourceMusic = gCameraObject.GetComponent<AudioSource>();
+        _sSettingsMusic.value = PlayerPrefs.GetFloat("Music");
+        _sSettingsEffects.value = PlayerPrefs.GetFloat("Effects");
+        _sSettingsSound.value = PlayerPrefs.GetFloat("Sound");
+    }
+    
     private void Awake()
     {
         Application.targetFrameRate = 60;
         gMapSelectorCanvas.SetActive(false);
         gDeafaultCanvas.SetActive(true);
         gVehicleSelectCanvas.SetActive(false);
+        gStageCanvas.SetActive(false);
+        _InitButtons();
+        _InitCanvasList();
         GameObject childObject = Instantiate(ListOfVehicles.Vehicles[0], Vector3.zero, gToRotate.transform.rotation) as GameObject;
         childObject.transform.parent = gToRotate.transform;
-        _bPlayButton = gPlayButton.GetComponent<Button>();
-        _bPlayButton.onClick.AddListener(() => LoadTesting());
+        _StopCar();
+        _LoadPlayerPrefs();
+        _InitAudio();
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < _CanvasList.Count; i++)
+            if (_CanvasList[i].activeSelf)
+                _iCurrentCanvas = i;
+    }
+    
     private void FixedUpdate()
     {
         gToRotate.transform.Rotate(Vector3.up * _fRotateSpeed * Time.deltaTime);
         _CameraTransition();
-        if (!_hasStarted) { _hasStarted = true; _StopCar(); }
     }
 }

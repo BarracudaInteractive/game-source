@@ -1,3 +1,0 @@
-admin	admin
-A	A
-1	2
