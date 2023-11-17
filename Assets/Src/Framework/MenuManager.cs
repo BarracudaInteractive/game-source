@@ -72,6 +72,11 @@ public class MenuManager : MonoBehaviour
     public GameObject gSettingsEffects;
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
+    public GameObject gSettingsCredits;
+    
+    [Header("Credits Canvas")]
+    public GameObject gCreditsCanvas;
+    public GameObject gCreditsClose;
 
     //Objects
     private Button _bLanguageExit;
@@ -121,6 +126,9 @@ public class MenuManager : MonoBehaviour
     private Slider _sSettingsEffects;
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
+    private Button _bSettingsCredits;
+    
+    private Button _bCreditsClose;
     
     private AudioSource _aSourceMusic;
     
@@ -149,11 +157,14 @@ public class MenuManager : MonoBehaviour
         while (file != null)
         {
             file = sr.ReadLine();
-            line = file.Split('|');
-            if (line[0] == u && line[1] == p)
+            if (file == null || file != "")
             {
-                sr.Close();
-                return true;
+                line = file.Split('|');
+                if (line[0] == u && line[1] == p)
+                {
+                    sr.Close();
+                    return true;
+                }
             }
         }
         
@@ -309,7 +320,10 @@ public class MenuManager : MonoBehaviour
         _sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
         _sSettingsSound = gSettingsSound.GetComponent<Slider>();
         _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
-
+        _bSettingsCredits = gSettingsCredits.GetComponent<Button>();
+    
+        _bCreditsClose = gCreditsClose.GetComponent<Button>();
+        
         //Actions
         _bLanguageExit.onClick.AddListener(() => gLanguageExitOrder.SetActive(true));
         _bLanguageExitY.onClick.AddListener(() => _ExitGame());
@@ -354,6 +368,9 @@ public class MenuManager : MonoBehaviour
             {
                 if (_dSettingsLanguage.value == 0) _cLanguage = 'e'; else _cLanguage = 's';
             });
+        _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
+        
+        _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
     }
 
     private void _InitCanvasList()

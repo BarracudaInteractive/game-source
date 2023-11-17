@@ -19,13 +19,17 @@ public class CameraChange : MonoBehaviour
         if (_isFreeView)
         {
             gFreeView.SetActive(false);
+            gFreeView.GetComponent<AudioListener>().enabled = false;
             gCarView.SetActive(true);
+            gCarView.GetComponent<AudioListener>().enabled = true;
             _isFreeView = false;
         }
         else if (!_isFreeView)
         {
             gCarView.SetActive(false);
+            gCarView.GetComponent<AudioListener>().enabled = false;
             gFreeView.SetActive(true);
+            gFreeView.GetComponent<AudioListener>().enabled = true;
             _isFreeView = true;
         }
     }
