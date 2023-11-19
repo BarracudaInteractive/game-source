@@ -28,12 +28,10 @@ public class Controller : MonoBehaviour
     
     private GameManager _GameManager;
     private InputManager _InputManager;
-    //private CarEffects CarEffects;
     private int _iGearNum = 1;
     private float _fKPH;
     private float _fEngineRPM;
     private float _fGas = 100.0f;
-    private float _fDemo = 50.0f; //demo mode to see the gas drop
     private float _fDmg = 0.0f;
     private bool _isReverse = false;
     private bool _isAcc = false;
@@ -63,6 +61,7 @@ public class Controller : MonoBehaviour
     private bool _isBelowRPM = false;
     private bool _isOutOfTrack = false;
     
+    private const int BASE_FUEL_CONSUMPTION = 30;
     private const float MIN_DAMAGE = 5.0f;
     private const float BASE_FALL_DAMAGE = 3.0f;
     
@@ -138,12 +137,12 @@ public class Controller : MonoBehaviour
         if (_fWheelsRPM < 0 && !_isReverse )
         {
             _isReverse = true;
-            //_GameManager.changeGear();
+            _GameManager.ChangeGear();
         }
         else if (_fWheelsRPM > 0 && _isReverse)
         {
             _isReverse = false;
-            //_GameManager.changeGear();
+            _GameManager.ChangeGear();
         }
     }
 
@@ -177,14 +176,14 @@ public class Controller : MonoBehaviour
         if(_fEngineRPM > fMaxRPM && _iGearNum < fGears.Length - 1 && !_isReverse && _CheckGears() )
         {
             _iGearNum++;
-            //_GameManager.changeGear();
+            _GameManager.ChangeGear();
             return;
         }
         
         if(_fEngineRPM < fMinRPM && _iGearNum > 0)
         {
             _iGearNum--;
-            //_GameManager.changeGear();
+            _GameManager.ChangeGear();
         }
     }
 
@@ -217,6 +216,7 @@ public class Controller : MonoBehaviour
                 _Wheels[i].brakeTorque = _fBrakPower;
         }
         _fKPH = _Rigidbody.velocity.magnitude * 3.6f;
+        _GameManager.ChangeKPH();
         if (!_IsGrounded()) _fVerticalSpeed = _Rigidbody.velocity.y;
     }
 
@@ -265,7 +265,6 @@ public class Controller : MonoBehaviour
    
     private void _GetObjects()
     {
-        //CarEffects = GetComponent<CarEffects>();
         _InputManager = GetComponent<InputManager>();
         _GameManager = GameObject.FindGameObjectWithTag("gameManager").GetComponent<GameManager>();
         _Rigidbody = GetComponent<Rigidbody>();
@@ -341,13 +340,13 @@ public class Controller : MonoBehaviour
             if (_IsGrounded() && GetComponent<Rigidbody>().isKinematic == false) //flying does not consume oil
             {
                 //keep same velocity
-                if (_InputManager.GetAcceleration == 0) _fGas -= 0.01f * _fDemo;
+                if (_InputManager.GetAcceleration == 0) _fGas -= 0.01f * BASE_FUEL_CONSUMPTION;
                 //decelerate
-                else if (_fLastKPH > _fKPH) _fGas -= 0.015f * _fDemo; 
+                else if (_fLastKPH > _fKPH) _fGas -= 0.015f * BASE_FUEL_CONSUMPTION; 
                 //accelerate
-                else if (_fKPH / fGearChangeSpeed[_iGearNum] > 0.8f) _fGas -= 0.02f * _fDemo; 
+                else if (_fKPH / fGearChangeSpeed[_iGearNum] > 0.8f) _fGas -= 0.02f * BASE_FUEL_CONSUMPTION; 
                 //accelerate slightly
-                else if (_fKPH / fGearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas -= 0.015f * _fDemo; 
+                else if (_fKPH / fGearChangeSpeed[_iGearNum] <= 0.8f || _fKPH > 20.0f) _fGas -= 0.015f * BASE_FUEL_CONSUMPTION; 
             }
             _fLastKPH = _fKPH;
         }

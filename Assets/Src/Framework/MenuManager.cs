@@ -78,6 +78,8 @@ public class MenuManager : MonoBehaviour
     public GameObject gCreditsCanvas;
     public GameObject gCreditsClose;
 
+    public GameObject gAudioManager;
+    
     //Objects
     private Button _bLanguageExit;
     private Button _bLanguageExitY;
@@ -131,6 +133,7 @@ public class MenuManager : MonoBehaviour
     private Button _bCreditsClose;
     
     private AudioSource _aSourceMusic;
+    private SoundManager _SoundManager;
     
     private string _sFilePath;
 
@@ -142,11 +145,11 @@ public class MenuManager : MonoBehaviour
 
     private void _ExitGame()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
             Application.Quit();
-#endif
+        #endif
     }
 
     private bool _FindInDB(string u, string p)
@@ -253,7 +256,7 @@ public class MenuManager : MonoBehaviour
         if (_cLogOrSign == 's')
         {
             StreamWriter sw = new StreamWriter(_sFilePath, true);
-            sw.WriteLine($"{_iSignInUser.text}|{_iSignInPasswd.text}|{_sSignInAge.value.ToString()}|{_dSignInSex.value.ToString()}|{DateTime.Now.ToString()}\n");
+            sw.WriteLine($"{_iSignInUser.text}|{_iSignInPasswd.text}|{_sSignInAge.value.ToString()}|{_dSignInSex.value.ToString()}|{DateTime.Now.ToString()}");
             sw.Close();
         }
         if (_cLogOrSign == 'l')
@@ -359,9 +362,12 @@ public class MenuManager : MonoBehaviour
         _bLogInBack.onClick.AddListener(() => _BackLog(gLogInCanvas));
         _bLogInContinue.onClick.AddListener(() => _LoadPrefs());
 
+        _SoundManager = gAudioManager.GetComponent<SoundManager>();
+        
         _bSettingsClose.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _bSettingsApply.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _sSettingsMusic.onValueChanged.AddListener(delegate { _aSourceMusic.volume = _sSettingsMusic.value; });
+        _sSettingsEffects.onValueChanged.AddListener(delegate { _SoundManager.SetVolume(_sSettingsEffects.value); });
         _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
         _dSettingsLanguage.onValueChanged.AddListener
             (delegate
@@ -387,7 +393,7 @@ public class MenuManager : MonoBehaviour
     private void _InitAudio()
     {
         _aSourceMusic = gCameraObject.GetComponent<AudioSource>();
-        if (PlayerPrefs.HasKey("User"))
+        if (PlayerPrefs.HasKey("User") && PlayerPrefs.HasKey("Language"))
         {
             _sSettingsMusic.value = PlayerPrefs.GetFloat("Music");
             _sSettingsEffects.value = PlayerPrefs.GetFloat("Effects");
@@ -396,20 +402,27 @@ public class MenuManager : MonoBehaviour
         else 
         {
             _sSettingsMusic.value = 0.1f;
-            _sSettingsEffects.value = 0.4f;
+            _sSettingsEffects.value = 0.2f;
             AudioListener.volume = 1.0f;
         }
     }
     
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
+        Time.timeScale = 1.0f;
+        Application.targetFrameRate = 60;
         _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileSystem.txt";
         _InitButtons();
         _InitCanvasList();
-        if (PlayerPrefs.HasKey("User"))
+        if (PlayerPrefs.HasKey("User") && PlayerPrefs.HasKey("Language"))
             _LoadPlayerPrefs();
-        _InitAudio();
         Invoke("_StudioNext", 1.0f);
+    }
+
+    private void Start()
+    {
+        _InitAudio();
     }
 
     private void Update()

@@ -65,6 +65,8 @@ public class PrefsManager : MonoBehaviour
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
     
+    public GameObject gAudioManager;
+    
     //Objects
     private Button _bDefaultSettings;
     private Button _bDefaultExit;
@@ -102,6 +104,7 @@ public class PrefsManager : MonoBehaviour
     private TMP_Dropdown _dSettingsLanguage;
     
     private AudioSource _aSourceMusic;
+    private SoundManager _SoundManager;
     
     private float fLerpTime = 2.0f;
     private float _fRotateSpeed = 5f;
@@ -220,9 +223,9 @@ public class PrefsManager : MonoBehaviour
 
     private void _LoadStage()
     {
-        if (_iStage == 0) SceneManager.LoadScene("Testing");
-        else if (_iStage == 1) SceneManager.LoadScene("Testing");
-        else if (_iStage == 2) SceneManager.LoadScene("Testing");
+        if (_iStage == 0) SceneManager.LoadScene("Day1M");
+        else if (_iStage == 1) SceneManager.LoadScene("Day1M");
+        else if (_iStage == 2) SceneManager.LoadScene("Day1M");
     }
 
     public void _BackLog(GameObject canvas)
@@ -327,9 +330,12 @@ public class PrefsManager : MonoBehaviour
         _bStageLeft.onClick.AddListener(() => _ChangeStage(-1));
         _bStageRace.onClick.AddListener(() => _LoadStage());
         
+        _SoundManager = gAudioManager.GetComponent<SoundManager>();
+        
         _bSettingsClose.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _bSettingsApply.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _sSettingsMusic.onValueChanged.AddListener(delegate { _aSourceMusic.volume = _sSettingsMusic.value; });
+        _sSettingsEffects.onValueChanged.AddListener(delegate { _SoundManager.SetVolume(_sSettingsEffects.value); });
         _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
         _dSettingsLanguage.onValueChanged.AddListener
             (delegate 
@@ -376,6 +382,10 @@ public class PrefsManager : MonoBehaviour
         childObject.transform.parent = gToRotate.transform;
         _StopCar();
         _LoadPlayerPrefs();
+    }
+    
+    private void Start()
+    {
         _InitAudio();
     }
 
