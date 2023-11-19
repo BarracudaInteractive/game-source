@@ -253,6 +253,9 @@ public class MenuManager : MonoBehaviour
     
     private void _LoadPrefs()
     {
+        /*
+         *  WebGL cannot write nor read files
+         *
         if (_cLogOrSign == 's')
         {
             StreamWriter sw = new StreamWriter(_sFilePath, true);
@@ -267,6 +270,7 @@ public class MenuManager : MonoBehaviour
                 return;
             }
         }
+         */
 
         _InitPlayerPrefs();
         gLogInError.SetActive(false);
@@ -409,7 +413,6 @@ public class MenuManager : MonoBehaviour
     
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
         Time.timeScale = 1.0f;
         Application.targetFrameRate = 60;
         _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileSystem.txt";

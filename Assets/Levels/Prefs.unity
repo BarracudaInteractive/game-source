@@ -5716,7 +5716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1065471323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9889,7 +9889,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CURRENTLY IN \nDEVELOPMENT\nRedirects to: \nDay 1 - Mornign"
+  m_text: "CURRENTLY IN \nDEVELOPMENT\nRedirects to: \nDay 1 - Morning"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c4572d84701e6f44802c812f90d98ed, type: 2}
   m_sharedMaterial: {fileID: 1590332298053725805, guid: 3c4572d84701e6f44802c812f90d98ed, type: 2}
@@ -13521,7 +13521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CURRENTLY IN \nDEVELOPMENT\nRedirects to: \nDay 1 - Mornign"
+  m_text: "CURRENTLY IN \nDEVELOPMENT\nRedirects to: \nDay 1 - Morning"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c4572d84701e6f44802c812f90d98ed, type: 2}
   m_sharedMaterial: {fileID: 1590332298053725805, guid: 3c4572d84701e6f44802c812f90d98ed, type: 2}

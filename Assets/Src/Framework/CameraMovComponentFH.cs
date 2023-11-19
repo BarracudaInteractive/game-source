@@ -41,7 +41,7 @@ public class CameraMovComponentFH : MonoBehaviour
     private float _fLerpTime = 2.0f;
     private float LookOffset = 1;
     private float CameraAngle = 30;
-    private float RotationSpeed = 12;
+    private float RotationSpeed = 6;
     private Camera _CurrentCamera;
     private Vector3 _CameraPositionTarget = Vector3.zero;
     
@@ -55,7 +55,7 @@ public class CameraMovComponentFH : MonoBehaviour
     
     //Rotation variables
     private bool _rightMouseDown = false;
-    private const float InternalRotationSpeed = 16;
+    private const float InternalRotationSpeed = 8;
     private Quaternion _rotationTarget;
     private Vector2 _mouseDelta;
 
