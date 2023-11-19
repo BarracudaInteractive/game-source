@@ -11,7 +11,7 @@ Assets/Plugins/Editor/JetBrains*
 
 ### Unity ###
 [Ll]ibrary/
-Logs/
+[Ll]ogs/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
@@ -39,18 +39,6 @@ ExportedObj/
 *.pdb
 *.opendb
 *.VC.db
-*Worker0.log
-*Worker1.log
-*Worker2.log
-*Worker3.log
-*Worker4.log
-*Worker5.log
-*Compiler.exe0.log
-*Compiler.exe1.log
-*Compiler.exe2.log
-*Compiler.exe3.log
-*Compiler.exe4.log
-*Compiler.exe5.log
 
 # Unity3D generated meta files
 *.pidb.meta
