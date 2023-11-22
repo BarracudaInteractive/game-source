@@ -15,6 +15,7 @@ TagManager:
   - obstacle
   - off-piste
   - wheel
+  - deco
   layers:
   - Default
   - TransparentFX
