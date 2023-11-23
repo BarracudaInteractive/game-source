@@ -415,7 +415,7 @@ public class MenuManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Application.targetFrameRate = 60;
-        _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileSystem.txt";
+        _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FilePrefs.txt";
         _InitButtons();
         _InitCanvasList();
         if (PlayerPrefs.HasKey("User") && PlayerPrefs.HasKey("Language"))
