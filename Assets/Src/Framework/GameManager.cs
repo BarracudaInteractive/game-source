@@ -788,7 +788,7 @@ public void EndTutorial() { gReconCanvas.SetActive(true); }
 private void Awake()
 {
 Application.targetFrameRate = 60;
-_sFilePath = $"{Application.dataPath}\\Src\\Framework\\TimeTables.txt";
+_sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileTimeTables.txt";
 _InitLists();
 _InitButtons();
 _LoadPlayerPrefs();
