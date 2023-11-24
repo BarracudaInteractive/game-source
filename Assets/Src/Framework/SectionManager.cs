@@ -270,6 +270,7 @@ public class SectionManager : MonoBehaviour
     {
         if (_iPositions > 1)
         {
+            CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
             _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
             _GameManager.SectionPacenoteList[_iCurrentPosition] = _iCurrentPacenote;
             _GameManager.SectionHeightList[_iCurrentPosition] = BASE_HEIGHT + _fCurrentHeight;
@@ -283,6 +284,7 @@ public class SectionManager : MonoBehaviour
         }
         else
         {
+            CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
             _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
             _GameManager.SectionPacenoteList[_iCurrentPosition] = _iCurrentPacenote;
             _GameManager.SectionHeightList[_iCurrentPosition] = BASE_HEIGHT + _fCurrentHeight;

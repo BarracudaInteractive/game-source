@@ -21104,7 +21104,7 @@ MonoBehaviour:
   Cameras: []
   _PressButtonSE: {fileID: 8300000, guid: 7734b026e74e3734ab5c2af3858e28fe, type: 3}
   _GoodSelectionSE: {fileID: 0}
-  _BadSelectionSE: {fileID: 0}
+  _BadSelectionSE: {fileID: 8300000, guid: 0a932e3634c5aac42a8e366d9839efb7, type: 3}
   _EndSE: {fileID: 0}
 --- !u!1 &2136549034
 GameObject:

@@ -271,7 +271,18 @@ public class MenuManager : MonoBehaviour
             }
         }
          */
-
+        if ((_iLogInUser.text == "" || _iLogInPasswd.text == "") && _cLogOrSign == 'l')
+        {
+            _SoundManager.BadSelectionSE();
+            gLogInError.SetActive(true);
+            return;
+        }
+        else if ((_iSignInUser.text == "" || _iSignInPasswd.text == "") && _cLogOrSign == 's')
+        {
+            _SoundManager.BadSelectionSE();
+            gLogInError.SetActive(true);
+            return;
+        }
         _InitPlayerPrefs();
         gLogInError.SetActive(false);
         SceneManager.LoadScene("Prefs");
