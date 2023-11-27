@@ -77,6 +77,12 @@ public class SectionManager : MonoBehaviour
     
     public void SetTemper(float val) { _fTemperValue = val; }
     
+    public void HideUIs()
+    {
+        foreach (GameObject checkpoint in CheckpointArray)
+            checkpoint.GetComponent<CheckpointHandler>().HideUIs();
+    }
+    
     public void MoveNodes(int _iPacenoteSelected, int id, Vector3 _v3Pos, Vector3 _v3Rot, float _iHigh)
     {
         Vector3 mov;
