@@ -64,6 +64,10 @@ public class PrefsManager : MonoBehaviour
     public GameObject gSettingsEffects;
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
+    public GameObject gSettingsCredits;
+
+    [Header("Credits Canvas")] public GameObject gCreditsCanvas;
+    public GameObject gCreditsClose;
     
     public GameObject gAudioManager;
     
@@ -102,6 +106,9 @@ public class PrefsManager : MonoBehaviour
     private Slider _sSettingsEffects;
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
+    private Button _bSettingsCredits;
+
+    private Button _bCreditsClose;
     
     private AudioSource _aSourceMusic;
     private SoundManager _SoundManager;
@@ -121,6 +128,8 @@ public class PrefsManager : MonoBehaviour
     private char _cLanguage = 'e';
     private int _iStage = 0;
 
+    public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
+    
     private void _ExitGame()
     {
         #if UNITY_EDITOR
@@ -284,6 +293,9 @@ public class PrefsManager : MonoBehaviour
         _bLegExitY = gLegExitY.GetComponent<Button>();
         _bLegExitN = gLegExitN.GetComponent<Button>();
         _bLegSettings = gLegSettings.GetComponent<Button>();
+        _bSettingsCredits = gSettingsCredits.GetComponent<Button>();
+
+        _bCreditsClose = gCreditsClose.GetComponent<Button>();
         
         _bStageBack = gStageBack.GetComponent<Button>();
         _bStageExit = gStageExit.GetComponent<Button>();
@@ -342,6 +354,9 @@ public class PrefsManager : MonoBehaviour
             { 
                 if (_dSettingsLanguage.value == 0) _cLanguage = 'e'; else _cLanguage = 's'; 
             });
+        _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
+
+        _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
     }
     
     private void _InitCanvasList()

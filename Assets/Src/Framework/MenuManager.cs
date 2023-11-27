@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     [Header("Camera")] public GameObject gCameraObject;
-    
+
     [Header("Studio Canvas")] public GameObject gStudioCanvas;
 
     [Header("Language Canvas")] public GameObject gLanguageCanvas;
@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour
     public GameObject gSignInAge;
     public GameObject gSignInAgeText;
     public GameObject gSignInSex;
+    public GameObject gSignInError;
 
     [Header("Log In Canvas")] public GameObject gLogInCanvas;
     public GameObject gLogInExit;
@@ -73,13 +74,12 @@ public class MenuManager : MonoBehaviour
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
     public GameObject gSettingsCredits;
-    
-    [Header("Credits Canvas")]
-    public GameObject gCreditsCanvas;
+
+    [Header("Credits Canvas")] public GameObject gCreditsCanvas;
     public GameObject gCreditsClose;
 
     public GameObject gAudioManager;
-    
+
     //Objects
     private Button _bLanguageExit;
     private Button _bLanguageExitY;
@@ -129,12 +129,12 @@ public class MenuManager : MonoBehaviour
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
     private Button _bSettingsCredits;
-    
+
     private Button _bCreditsClose;
-    
+
     private AudioSource _aSourceMusic;
     private SoundManager _SoundManager;
-    
+
     private string _sFilePath;
 
     private List<GameObject> _CanvasList = new List<GameObject>();
@@ -143,13 +143,15 @@ public class MenuManager : MonoBehaviour
     private char _cLanguage = 'e';
     private char _cLogOrSign = 'l';
 
+    public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
+
     private void _ExitGame()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
             Application.Quit();
-        #endif
+#endif
     }
 
     private bool _FindInDB(string u, string p)
@@ -170,7 +172,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
-        
+
         sr.Close();
         return false;
     }
@@ -227,7 +229,10 @@ public class MenuManager : MonoBehaviour
         gSelectorCanvas.SetActive(true);
     }
 
-    public void OnAgeChanged(Slider a) { _tSignInAge.text = $"{a.value.ToString()} y/o"; }
+    public void OnAgeChanged(Slider a)
+    {
+        _tSignInAge.text = $"{a.value.ToString()} y/o";
+    }
 
     private void _LoadPlayerPrefs()
     {
@@ -237,7 +242,7 @@ public class MenuManager : MonoBehaviour
         else
             _dSettingsLanguage.value = 1;
     }
-    
+
     private void _InitPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
@@ -250,7 +255,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
         PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
     }
-    
+
     private void _LoadPrefs()
     {
         /*
@@ -275,16 +280,20 @@ public class MenuManager : MonoBehaviour
         {
             _SoundManager.BadSelectionSE();
             gLogInError.SetActive(true);
+            gSignInError.SetActive(false);
             return;
         }
         else if ((_iSignInUser.text == "" || _iSignInPasswd.text == "") && _cLogOrSign == 's')
         {
             _SoundManager.BadSelectionSE();
-            gLogInError.SetActive(true);
+            gSignInError.SetActive(true);
+            gLogInError.SetActive(false);
             return;
         }
+
         _InitPlayerPrefs();
         gLogInError.SetActive(false);
+        gSignInError.SetActive(false);
         SceneManager.LoadScene("Prefs");
     }
 
@@ -339,9 +348,9 @@ public class MenuManager : MonoBehaviour
         _sSettingsSound = gSettingsSound.GetComponent<Slider>();
         _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
         _bSettingsCredits = gSettingsCredits.GetComponent<Button>();
-    
+
         _bCreditsClose = gCreditsClose.GetComponent<Button>();
-        
+
         //Actions
         _bLanguageExit.onClick.AddListener(() => gLanguageExitOrder.SetActive(true));
         _bLanguageExitY.onClick.AddListener(() => _ExitGame());
@@ -378,19 +387,20 @@ public class MenuManager : MonoBehaviour
         _bLogInContinue.onClick.AddListener(() => _LoadPrefs());
 
         _SoundManager = gAudioManager.GetComponent<SoundManager>();
-        
+
         _bSettingsClose.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _bSettingsApply.onClick.AddListener(() => _ExitSettings(_CanvasList[_iLastCanvas]));
         _sSettingsMusic.onValueChanged.AddListener(delegate { _aSourceMusic.volume = _sSettingsMusic.value; });
         _sSettingsEffects.onValueChanged.AddListener(delegate { _SoundManager.SetVolume(_sSettingsEffects.value); });
         _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
         _dSettingsLanguage.onValueChanged.AddListener
-            (delegate
-            {
-                if (_dSettingsLanguage.value == 0) _cLanguage = 'e'; else _cLanguage = 's';
-            });
+        (delegate
+        {
+            if (_dSettingsLanguage.value == 0) _cLanguage = 'e';
+            else _cLanguage = 's';
+        });
         _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
-        
+
         _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
     }
 
@@ -414,18 +424,19 @@ public class MenuManager : MonoBehaviour
             _sSettingsEffects.value = PlayerPrefs.GetFloat("Effects");
             _sSettingsSound.value = PlayerPrefs.GetFloat("Sound");
         }
-        else 
+        else
         {
             _sSettingsMusic.value = 0.1f;
             _sSettingsEffects.value = 0.2f;
             AudioListener.volume = 1.0f;
         }
     }
-    
+
     private void Awake()
     {
         Time.timeScale = 1.0f;
         Application.targetFrameRate = 60;
+        Screen.fullScreen = true;
         _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FilePrefs.txt";
         _InitButtons();
         _InitCanvasList();

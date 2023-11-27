@@ -83,6 +83,13 @@ public class CheckpointHandler : MonoBehaviour
         gNoSelected.SetActive(false);
     }
     
+    public void HideUIs()
+    {
+        gCheckpointCanvas.SetActive(false);
+        foreach (GameObject g in PositionsArray)
+            g.transform.GetChild(2).gameObject.SetActive(false);
+    }
+    
     public void ShowPacenoteSelected(int p, int id)
     {
         switch (p)
@@ -548,9 +555,8 @@ public class CheckpointHandler : MonoBehaviour
 
     private void _InitRotations()
     {
-        gArrow.transform.localRotation	= Quaternion.Euler (0, 180, 180);
-        if (PositionsArray.Length == 1)
-            return;
+        gArrow.transform.localRotation	= Quaternion.Euler (0, 180, 0);
+        if (PositionsArray.Length > 0)
         {
             gMCheckpointPacenotes00.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes01.transform.localRotation = Quaternion.Euler(0, 180, 0);
@@ -562,7 +568,7 @@ public class CheckpointHandler : MonoBehaviour
             gMCheckpointPacenotes07.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes08.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
-        if (PositionsArray.Length == 2)
+        if (PositionsArray.Length > 1)
         {
             gMCheckpointPacenotes10.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes11.transform.localRotation = Quaternion.Euler(0, 180, 0);
@@ -574,7 +580,7 @@ public class CheckpointHandler : MonoBehaviour
             gMCheckpointPacenotes17.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes18.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
-        if (PositionsArray.Length == 3)
+        if (PositionsArray.Length > 2)
         {
             gMCheckpointPacenotes20.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes21.transform.localRotation = Quaternion.Euler(0, 180, 0);
@@ -586,7 +592,7 @@ public class CheckpointHandler : MonoBehaviour
             gMCheckpointPacenotes27.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes28.transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
-        if (PositionsArray.Length == 4)
+        if (PositionsArray.Length > 3)
         {
             gMCheckpointPacenotes30.transform.localRotation = Quaternion.Euler(0, 180, 0);
             gMCheckpointPacenotes31.transform.localRotation = Quaternion.Euler(0, 180, 0);

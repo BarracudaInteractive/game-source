@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
     public GameObject gExit;
+    public GameObject gSettingsCredits;
+
+    [Header("Credits Canvas")] public GameObject gCreditsCanvas;
+    public GameObject gCreditsClose;
     
     [Header("End screen")] public GameObject gEndCanvas;
     public GameObject gEndExit;
@@ -103,6 +107,9 @@ public class GameManager : MonoBehaviour
     private Slider _sSettingsEffects;
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
+    private Button _bSettingsCredits;
+
+    private Button _bCreditsClose;
 
     private AudioSource _aSource;
 
@@ -163,6 +170,8 @@ public class GameManager : MonoBehaviour
     
     public float GetTime => _fTime;
     
+    public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
+    
     private void _SetText()
     {
         string zeroU = "";
@@ -198,6 +207,7 @@ public class GameManager : MonoBehaviour
                 SectionRotationsList[i],
                 SectionHeightList[i]);
             _SectionManager.SetAccelerations(i, SectionAccelerationList[i], SectionPacenoteList[i]);
+            _SectionManager.HideUIs();
         }
     }
 
@@ -216,18 +226,11 @@ public class GameManager : MonoBehaviour
         if (_AllCheckpointsSelected())
         {
             _SendInstructions();
+            
             gCar.GetComponent<Rigidbody>().isKinematic = false;
             _hasStarted = true;
-            
             gFreezeButton.SetActive(false);
-            
             gIngame.SetActive(true);
-            gIngameCanvas0.SetActive(false);
-            gIngameCanvas1.SetActive(false);
-            gIngameCanvas2.SetActive(false);
-            gIngameCanvas3.SetActive(false);
-            gIngameCanvas4.SetActive(false);
-            gIngameCanvas5.SetActive(false);
         }
         else
         {
@@ -439,6 +442,12 @@ _bReconLoadN.onClick.AddListener(() => _DeletePlayerPrefsLong());
 
 _bSettings = gSettings.GetComponent<Button>();
 _bSettings.onClick.AddListener(() => _Settings());
+
+_bSettingsCredits = gSettingsCredits.GetComponent<Button>();
+_bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
+
+_bCreditsClose = gCreditsClose.GetComponent<Button>();
+_bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
 
 _bReturn = gReturn.GetComponent<Button>();
 _bReturn.onClick.AddListener(() => _Return());
