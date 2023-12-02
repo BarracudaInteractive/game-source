@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Damage bar")] // 0.2 - 1.0
     public GameObject gDamageBar;
-
+    
     [Header("Recon")] public GameObject gReconCanvas;
     public GameObject gFreezeButton;
     public GameObject gRestart;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public GameObject gIngameCanvas3;
     public GameObject gIngameCanvas4;
     public GameObject gIngameCanvas5;
+    public GameObject gCameraChange;
 
     [Header("Game Over")] public GameObject gCarView;
     public GameObject gFreeView;
@@ -155,7 +156,9 @@ public class GameManager : MonoBehaviour
     private TMP_Text _tEndRow5Time;
     private TMP_Text _tEndRow5Fuel;
     private TMP_Text _tEndRow5Damage;
-    
+    private CameraChange _CameraChange;
+    private CameraMovComponentFH _CameraMovComponentFH;
+    private CameraController _CameraController;
 
     private SectionManager _SectionManager;
     private SoundManager _SoundManager;
@@ -230,7 +233,11 @@ public class GameManager : MonoBehaviour
             gCar.GetComponent<Rigidbody>().isKinematic = false;
             _hasStarted = true;
             gFreezeButton.SetActive(false);
+            gCameraChange.SetActive(false); 
             gIngame.SetActive(true);
+            
+            _CameraChange.ChangeCamera();
+            _CameraMovComponentFH.MoveCameraToOrigin();
         }
         else
         {
@@ -342,173 +349,180 @@ public class GameManager : MonoBehaviour
     _tEndRow5Damage.text = $"0";
 }
 
-private void _GameOver(bool D, bool F, bool O)
-{
-gFreeView.SetActive(false);
-gFreeView.GetComponent<AudioListener>().enabled = false;
-gCarView.SetActive(true);
-gCarView.GetComponent<AudioListener>().enabled = true;
-gIngame.SetActive(false);
-gFreezeButton.SetActive(false);
-gGameOver.SetActive(true);
-if (D) tDefeat.text = "You lost because your car has suffered many breakdowns";
-else if (F) tDefeat.text = "You lost because you ran out of fuel";
-//else if (O) tDefeat.text = "You have lost because you have gone completely off track";
-}
+    private void _GameOver(bool D, bool F, bool O)
+    {
+    /*gFreeView.SetActive(false);
+    gFreeView.GetComponent<AudioListener>().enabled = false;
+    gCarView.SetActive(true);
+    gCarView.GetComponent<AudioListener>().enabled = true;*/
+    gIngame.SetActive(false);
+    gFreezeButton.SetActive(false);
+    gGameOver.SetActive(true);
+    if (D) tDefeat.text = "You lost because your car has suffered many breakdowns";
+    else if (F) tDefeat.text = "You lost because you ran out of fuel";
+    //else if (O) tDefeat.text = "You have lost because you have gone completely off track";
+    }
 
-private void _Settings()
-{
-gSettingsCanvas.SetActive(true);
-}
+    private void _Settings()
+    {
+        gSettingsCanvas.SetActive(true);
+    }
 
-private void _Exit() { gSettingsCanvas.SetActive(false); }
+    private void _Exit() { gSettingsCanvas.SetActive(false); }
 
-private void _Return()
-{
-PlayerPrefs.SetString("Language", _cLanguage.ToString());
-PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
-PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
-PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
-Time.timeScale = 1.0f;
-SceneManager.LoadScene("Prefs");
-}
+    private void _Return()
+    {
+        PlayerPrefs.SetString("Language", _cLanguage.ToString());
+        PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
+        PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
+        PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Prefs");
+    }
 
-public void ChangeGear() { _tIngameGear.text = $"GEAR: {_Controller.GetGear.ToString()}"; }
+    public void ChangeGear() { _tIngameGear.text = $"GEAR: {_Controller.GetGear.ToString()}"; }
 
-public void ChangeKPH() { _tIngameKPH.text = $"KPH: {((int)_Controller.GetKPH).ToString()}"; }
+    public void ChangeKPH() { _tIngameKPH.text = $"KPH: {((int)_Controller.GetKPH).ToString()}"; }
 
-private void _ChangeTimeSpeed(float f) { _fTimeSpeed = f; Time.timeScale = f; }
+    private void _ChangeTimeSpeed(float f) { _fTimeSpeed = f; Time.timeScale = f; }
 
-private void _LoadPlayerPrefs()
-{
-_cLanguage = Convert.ToChar(PlayerPrefs.GetString("Language"));
-if (_cLanguage == 'e')
-    _dSettingsLanguage.value = 0;
-else
-    _dSettingsLanguage.value = 1;
-}
+    private void _LoadPlayerPrefs()
+    {
+        _cLanguage = Convert.ToChar(PlayerPrefs.GetString("Language"));
+        if (_cLanguage == 'e')
+            _dSettingsLanguage.value = 0;
+        else
+            _dSettingsLanguage.value = 1;
+    }
 
-private void _LoadDay1N()
-{
-PlayerPrefs.SetString("Language", _cLanguage.ToString());
-PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
-PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
-PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
-Time.timeScale = 1.0f;
-SceneManager.LoadScene("Day1M");
-}
+    private void _LoadDay1N()
+    {
+        PlayerPrefs.SetString("Language", _cLanguage.ToString());
+        PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
+        PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
+        PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Day1M");
+    }
 
-public void EndScreen(float time, float fuel, float damage)
-{
-gFreeView.SetActive(false);
-gFreeView.GetComponent<AudioListener>().enabled = false;
-gCarView.SetActive(true);
-gCarView.GetComponent<AudioListener>().enabled = true;
-gIngame.SetActive(false);
-gFreezeButton.SetActive(false);
-gEndCanvas.SetActive(true);
-_WriteTimeTables(time, fuel, damage);
-_ReadTimeTables(time, fuel, damage);
-_SoundManager.EndSE();
-}
+    public void EndScreen(float time, float fuel, float damage)
+    {
+        /*
+        gFreeView.SetActive(false);
+        gFreeView.GetComponent<AudioListener>().enabled = false;
+        gCarView.SetActive(true);
+        */
+        _CameraController.hasFinished = true;
+        gCarView.GetComponent<AudioListener>().enabled = true;
+        gIngame.SetActive(false);
+        gFreezeButton.SetActive(false);
+        gEndCanvas.SetActive(true);
+        _WriteTimeTables(time, fuel, damage);
+        _ReadTimeTables(time, fuel, damage);
+        _SoundManager.EndSE();
+    }
 
-private void _InitButtons()
-{
-_Controller = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
-_InputManager = GameObject.FindGameObjectWithTag("AI").GetComponent<InputManager>();
+    private void _InitButtons()
+    {
+        _Controller = GameObject.FindGameObjectWithTag("AI").GetComponent<Controller>();
+        _InputManager = GameObject.FindGameObjectWithTag("AI").GetComponent<InputManager>();
 
-_FreezeButton = gFreezeButton.GetComponent<Button>();
-_FreezeButton.onClick.AddListener(() => _ResumeGame());
+        _FreezeButton = gFreezeButton.GetComponent<Button>();
+        _FreezeButton.onClick.AddListener(() => _ResumeGame());
 
-_GasSlider = gGasolineBar.GetComponent<Slider>();
-_DmgSlider = gDamageBar.GetComponent<Slider>();
+        _GasSlider = gGasolineBar.GetComponent<Slider>();
+        _DmgSlider = gDamageBar.GetComponent<Slider>();
 
-_RestartButton = gRestartButton.GetComponent<Button>();
-_RestartButton.onClick.AddListener(() => _ReloadScene());
+        _RestartButton = gRestartButton.GetComponent<Button>();
+        _RestartButton.onClick.AddListener(() => _ReloadScene());
 
-_bRestart = gRestart.GetComponent<Button>();
-_bRestart.onClick.AddListener(() => _ReloadScene());
+        _bRestart = gRestart.GetComponent<Button>();
+        _bRestart.onClick.AddListener(() => _ReloadScene());
 
-_bExit = gExit.GetComponent<Button>();
-_bExit.onClick.AddListener(() => _Exit());
+        _bExit = gExit.GetComponent<Button>();
+        _bExit.onClick.AddListener(() => _Exit());
 
-_tReconAdvice = gReconAdvice.GetComponent<TMP_Text>();
+        _tReconAdvice = gReconAdvice.GetComponent<TMP_Text>();
 
-_bReconLoadY = gReconLoadY.GetComponent<Button>();
-_bReconLoadY.onClick.AddListener(() => _LoadPlayerPrefsLong());
+        _bReconLoadY = gReconLoadY.GetComponent<Button>();
+        _bReconLoadY.onClick.AddListener(() => _LoadPlayerPrefsLong());
 
-_bReconLoadN = gReconLoadN.GetComponent<Button>();
-_bReconLoadN.onClick.AddListener(() => _DeletePlayerPrefsLong());
+        _bReconLoadN = gReconLoadN.GetComponent<Button>();
+        _bReconLoadN.onClick.AddListener(() => _DeletePlayerPrefsLong());
 
-_bSettings = gSettings.GetComponent<Button>();
-_bSettings.onClick.AddListener(() => _Settings());
+        _bSettings = gSettings.GetComponent<Button>();
+        _bSettings.onClick.AddListener(() => _Settings());
 
-_bSettingsCredits = gSettingsCredits.GetComponent<Button>();
-_bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
+        _bSettingsCredits = gSettingsCredits.GetComponent<Button>();
+        _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
 
-_bCreditsClose = gCreditsClose.GetComponent<Button>();
-_bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
+        _bCreditsClose = gCreditsClose.GetComponent<Button>();
+        _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
 
-_bReturn = gReturn.GetComponent<Button>();
-_bReturn.onClick.AddListener(() => _Return());
+        _bReturn = gReturn.GetComponent<Button>();
+        _bReturn.onClick.AddListener(() => _Return());
 
-_aSource = gAudioManager.GetComponent<AudioSource>();
+        _aSource = gAudioManager.GetComponent<AudioSource>();
 
-_sSettingsMusic = gSettingsMusic.GetComponent<Slider>();
-_sSettingsMusic.onValueChanged.AddListener(delegate { _aSource.volume = _sSettingsMusic.value; });
+        _sSettingsMusic = gSettingsMusic.GetComponent<Slider>();
+        _sSettingsMusic.onValueChanged.AddListener(delegate { _aSource.volume = _sSettingsMusic.value; });
 
-_sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
-_sSettingsEffects.onValueChanged.AddListener(delegate { _SoundManager.SetVolume(_sSettingsEffects.value); });
+        _sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
+        _sSettingsEffects.onValueChanged.AddListener(delegate { _SoundManager.SetVolume(_sSettingsEffects.value); });
 
-_sSettingsSound = gSettingsSound.GetComponent<Slider>();
-_sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
+        _sSettingsSound = gSettingsSound.GetComponent<Slider>();
+        _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
 
-_tIngameGear = gIngameGear.GetComponent<TMP_Text>();
-_tIngameKPH = gIngameKPH.GetComponent<TMP_Text>();
+        _tIngameGear = gIngameGear.GetComponent<TMP_Text>();
+        _tIngameKPH = gIngameKPH.GetComponent<TMP_Text>();
 
-_bIngameResumePlay = gIngameResumePlay.GetComponent<Button>();
-_bIngameResumePlay.onClick.AddListener(() => _ChangeTimeSpeed(0.0f));
+        _bIngameResumePlay = gIngameResumePlay.GetComponent<Button>();
+        _bIngameResumePlay.onClick.AddListener(() => _ChangeTimeSpeed(0.0f));
 
-_bIngameNormal = gIngameNormal.GetComponent<Button>();
-_bIngameNormal.onClick.AddListener(() => _ChangeTimeSpeed(1.0f));
+        _bIngameNormal = gIngameNormal.GetComponent<Button>();
+        _bIngameNormal.onClick.AddListener(() => _ChangeTimeSpeed(1.0f));
 
-_bIngameFast = gIngameFast.GetComponent<Button>();
-_bIngameFast.onClick.AddListener(() => _ChangeTimeSpeed(2.0f));
+        _bIngameFast = gIngameFast.GetComponent<Button>();
+        _bIngameFast.onClick.AddListener(() => _ChangeTimeSpeed(2.0f));
 
-_dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
-_dSettingsLanguage.onValueChanged.AddListener(delegate
-{
-    if (_dSettingsLanguage.value == 0) _cLanguage = 'e';
-    else _cLanguage = 's';
-});
+        _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
+        _dSettingsLanguage.onValueChanged.AddListener(delegate
+        {
+            if (_dSettingsLanguage.value == 0) _cLanguage = 'e';
+            else _cLanguage = 's';
+        });
 
-_bEndExit = gEndExit.GetComponent<Button>();
-_bEndExit.onClick.AddListener(() => _Return());
+        _bEndExit = gEndExit.GetComponent<Button>();
+        _bEndExit.onClick.AddListener(() => _Return());
 
-_bEndContinue = gEndContinue.GetComponent<Button>();
-_bEndContinue.onClick.AddListener(() => _LoadDay1N());
+        _bEndContinue = gEndContinue.GetComponent<Button>();
+        _bEndContinue.onClick.AddListener(() => _LoadDay1N());
 
-_tEndRow1Name = gEndRow1Name.GetComponent<TMP_Text>();
-_tEndRow1Time = gEndRow1Time.GetComponent<TMP_Text>();
-_tEndRow1Fuel = gEndRow1Fuel.GetComponent<TMP_Text>();
-_tEndRow1Damage = gEndRow1Damage.GetComponent<TMP_Text>();
-_tEndRow2Name = gEndRow2Name.GetComponent<TMP_Text>();
-_tEndRow2Time = gEndRow2Time.GetComponent<TMP_Text>();
-_tEndRow2Fuel = gEndRow2Fuel.GetComponent<TMP_Text>();
-_tEndRow2Damage = gEndRow2Damage.GetComponent<TMP_Text>();
-_tEndRow3Name = gEndRow3Name.GetComponent<TMP_Text>();
-_tEndRow3Time = gEndRow3Time.GetComponent<TMP_Text>();
-_tEndRow3Fuel = gEndRow3Fuel.GetComponent<TMP_Text>();
-_tEndRow3Damage = gEndRow3Damage.GetComponent<TMP_Text>();
-_tEndRow4Name = gEndRow4Name.GetComponent<TMP_Text>();
-_tEndRow4Time = gEndRow4Time.GetComponent<TMP_Text>();
-_tEndRow4Fuel = gEndRow4Fuel.GetComponent<TMP_Text>();
-_tEndRow4Damage = gEndRow4Damage.GetComponent<TMP_Text>();
-_tEndRow5Name = gEndRow5Name.GetComponent<TMP_Text>();
-_tEndRow5Time = gEndRow5Time.GetComponent<TMP_Text>();
-_tEndRow5Fuel = gEndRow5Fuel.GetComponent<TMP_Text>();
-_tEndRow5Damage = gEndRow5Damage.GetComponent<TMP_Text>();
-}
+        _tEndRow1Name = gEndRow1Name.GetComponent<TMP_Text>();
+        _tEndRow1Time = gEndRow1Time.GetComponent<TMP_Text>();
+        _tEndRow1Fuel = gEndRow1Fuel.GetComponent<TMP_Text>();
+        _tEndRow1Damage = gEndRow1Damage.GetComponent<TMP_Text>();
+        _tEndRow2Name = gEndRow2Name.GetComponent<TMP_Text>();
+        _tEndRow2Time = gEndRow2Time.GetComponent<TMP_Text>();
+        _tEndRow2Fuel = gEndRow2Fuel.GetComponent<TMP_Text>();
+        _tEndRow2Damage = gEndRow2Damage.GetComponent<TMP_Text>();
+        _tEndRow3Name = gEndRow3Name.GetComponent<TMP_Text>();
+        _tEndRow3Time = gEndRow3Time.GetComponent<TMP_Text>();
+        _tEndRow3Fuel = gEndRow3Fuel.GetComponent<TMP_Text>();
+        _tEndRow3Damage = gEndRow3Damage.GetComponent<TMP_Text>();
+        _tEndRow4Name = gEndRow4Name.GetComponent<TMP_Text>();
+        _tEndRow4Time = gEndRow4Time.GetComponent<TMP_Text>();
+        _tEndRow4Fuel = gEndRow4Fuel.GetComponent<TMP_Text>();
+        _tEndRow4Damage = gEndRow4Damage.GetComponent<TMP_Text>();
+        _tEndRow5Name = gEndRow5Name.GetComponent<TMP_Text>();
+        _tEndRow5Time = gEndRow5Time.GetComponent<TMP_Text>();
+        _tEndRow5Fuel = gEndRow5Fuel.GetComponent<TMP_Text>();
+        _tEndRow5Damage = gEndRow5Damage.GetComponent<TMP_Text>();
+
+        _CameraController = gCarView.GetComponent<CameraController>();
+        _CameraChange = gCameraChange.GetComponent<CameraChange>();
+        _CameraMovComponentFH = gFreeView.GetComponent<CameraMovComponentFH>();
+    }
 
 private void _InitAudio()
 {

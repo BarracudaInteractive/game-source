@@ -53,6 +53,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Camera_zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""0d787251-a536-42b3-bca9-fa7e83ff9e4c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Camera_move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbdb7f82-1a50-4b80-b05c-6ae6bca6e70c"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": ""NormalizeVector2"",
+                    ""groups"": """",
+                    ""action"": ""Camera_zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_CameraControl_Camera_move = m_CameraControl.FindAction("Camera_move", throwIfNotFound: true);
         m_CameraControl_Camera_rotate_toggle = m_CameraControl.FindAction("Camera_rotate_toggle", throwIfNotFound: true);
         m_CameraControl_Camera_rotate = m_CameraControl.FindAction("Camera_rotate", throwIfNotFound: true);
+        m_CameraControl_Camera_zoom = m_CameraControl.FindAction("Camera_zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +283,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraControl_Camera_move;
     private readonly InputAction m_CameraControl_Camera_rotate_toggle;
     private readonly InputAction m_CameraControl_Camera_rotate;
+    private readonly InputAction m_CameraControl_Camera_zoom;
     public struct CameraControlActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -269,6 +291,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @Camera_move => m_Wrapper.m_CameraControl_Camera_move;
         public InputAction @Camera_rotate_toggle => m_Wrapper.m_CameraControl_Camera_rotate_toggle;
         public InputAction @Camera_rotate => m_Wrapper.m_CameraControl_Camera_rotate;
+        public InputAction @Camera_zoom => m_Wrapper.m_CameraControl_Camera_zoom;
         public InputActionMap Get() { return m_Wrapper.m_CameraControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -287,6 +310,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Camera_rotate.started += instance.OnCamera_rotate;
             @Camera_rotate.performed += instance.OnCamera_rotate;
             @Camera_rotate.canceled += instance.OnCamera_rotate;
+            @Camera_zoom.started += instance.OnCamera_zoom;
+            @Camera_zoom.performed += instance.OnCamera_zoom;
+            @Camera_zoom.canceled += instance.OnCamera_zoom;
         }
 
         private void UnregisterCallbacks(ICameraControlActions instance)
@@ -300,6 +326,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Camera_rotate.started -= instance.OnCamera_rotate;
             @Camera_rotate.performed -= instance.OnCamera_rotate;
             @Camera_rotate.canceled -= instance.OnCamera_rotate;
+            @Camera_zoom.started -= instance.OnCamera_zoom;
+            @Camera_zoom.performed -= instance.OnCamera_zoom;
+            @Camera_zoom.canceled -= instance.OnCamera_zoom;
         }
 
         public void RemoveCallbacks(ICameraControlActions instance)
@@ -322,5 +351,6 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnCamera_move(InputAction.CallbackContext context);
         void OnCamera_rotate_toggle(InputAction.CallbackContext context);
         void OnCamera_rotate(InputAction.CallbackContext context);
+        void OnCamera_zoom(InputAction.CallbackContext context);
     }
 }
