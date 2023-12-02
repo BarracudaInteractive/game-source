@@ -12,6 +12,9 @@ public class SectionManager : MonoBehaviour
     [Header("Section Canvas")]
     public GameObject SectionSetCanvas;
     
+    [Header("Camara")]
+    public GameObject gCamera;
+    
     [Header("Checkpoints")]
     public List<GameObject> CheckpointArray;
     public GameObject[] CollidersArray;
@@ -37,13 +40,12 @@ public class SectionManager : MonoBehaviour
     public TMP_Text tText;
     
     private GameManager _GameManager;
-    
+    private CameraMovComponentFH _CameraMovComponentFH;
     
     private Transform _tCurrentWaypoint;
     private List<Transform> _NodesList = new List<Transform> ();
     private const short BASE_HEIGHT = 12;
     private List<float> _StepsTuple = new List<float> { 8.62f, 10.0f, 27.5f, 52.0f, 23.33f, 50.0f, 5.0f, 50.0f, 65.0f};
-    
     
     private int _iTimeout = 0;
     private int _iRenderTimer = 30;
@@ -287,6 +289,7 @@ public class SectionManager : MonoBehaviour
             _iPositionsContra++;
             _iPositions--;
             _SetText();
+            _CameraMovComponentFH.CameraBetweenCheckpoints(CollidersArray[_iCurrentPosition], true);
         }
         else
         {
@@ -299,6 +302,7 @@ public class SectionManager : MonoBehaviour
             _GameManager.SectionRotationsList[_iCurrentPosition] = CurrentRot[_iPositionsContra];
             SectionSetCanvas.SetActive(false);
             CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().DisplayAsSelected();
+            _CameraMovComponentFH.CameraBetweenCheckpoints(gCamera, false);
         }
         
     }
@@ -354,6 +358,7 @@ public class SectionManager : MonoBehaviour
         _fCurrentHeight = height;
         _iCurrentPosition = CheckpointArray[id].GetComponent<CheckpointHandler>().CollidersArray[0].GetComponent<CollisionSettings>().GetId;
         _iPositions = CheckpointArray[id].GetComponent<CheckpointHandler>().CollidersArray.Length;
+        _CameraMovComponentFH.CameraBetweenCheckpoints(CollidersArray[_iCurrentPosition], true);
         _FindIds(pos, rot);
         _SetText();
     }
@@ -362,6 +367,7 @@ public class SectionManager : MonoBehaviour
     {
         _InitButtons();
         _GameManager = GetComponent<GameManager>();
+        _CameraMovComponentFH = gCamera.GetComponent<CameraMovComponentFH>();
     }
 
     private void Start()

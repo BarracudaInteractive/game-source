@@ -22,6 +22,7 @@ public class CheckpointHandler : MonoBehaviour
     public GameObject gArrow;
     public GameObject gSelected;
     public GameObject gNoSelected;
+    public GameObject gDot;
     
     [Header("Minor Checkpoint pacenotes")]
     public GameObject gMCheckpointPacenotes00;
@@ -66,6 +67,7 @@ public class CheckpointHandler : MonoBehaviour
     
     private SectionManager SectionManager;
     private Button _bArrow;
+    private Button _bDot;
     private float _fHeight = 0.0f;
     
     public float SetHigh { set => _fHeight = value; }
@@ -551,6 +553,9 @@ public class CheckpointHandler : MonoBehaviour
     {
         _bArrow = gArrow.GetComponent<Button>();
         _bArrow.onClick.AddListener(() => _SectionSetActive());
+        
+        _bDot = gDot.GetComponent<Button>();
+        _bDot.onClick.AddListener(() => _SectionSetActive());
     }
 
     private void _InitRotations()

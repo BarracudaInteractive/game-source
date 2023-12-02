@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Serialization;
@@ -39,37 +40,81 @@ public class CameraMovComponentFH : MonoBehaviour
     private Button _bTutorial3Back;
     
     private float _fLerpTime = 2.0f;
-    private float LookOffset = 1;
-    private float CameraAngle = 30;
-    private float RotationSpeed = 6;
+    private float _fLookOffset = 1;
+    private float _fCameraAngle = 30;
+    private float _fRotationSpeed = 6;
     private Camera _CurrentCamera;
-    private Vector3 _CameraPositionTarget = Vector3.zero;
+    private Vector3 _vec3CameraPositionTarget = Vector3.zero;
     
+    //Zoom variables
+    private float _fDefaultZoom = 40;
+    private float _fZoomMax = 20;
+    private float _fZoomMin = 160;
+    private float _fCurrentZoomAmount;
+    private const float INTERNAL_ZOOM_SPEED = 256;
+    
+    //Move variables
     private float _fHeight = 20.0f;
     private Vector3 _vec3MovDirection;
     private Vector3 _vec3MovTarget;
-    private Vector3 _v3RotInit;
-    
+    private Vector3 _vec3RotInit;
     private const float INTERNAL_MOVE_TARGET_SPEED = 64;
     private const float INTERNAL_MOVE_SPEED = 32;
     
     //Rotation variables
     private bool _rightMouseDown = false;
-    private const float InternalRotationSpeed = 8;
-    private Quaternion _rotationTarget;
-    private Vector2 _mouseDelta;
+    private Quaternion _RotationTargetQuaternion;
+    private Vector2 _vec2MouseDelta;
+    private const float INTERNAL_ROTATION_SPEED = 8;
 
+    private GameObject gLookAtTarget;
+    private bool _selectingCheckpoint = false;
     private bool _playingTutorial = true;
     private bool _pos1 = true;
     private bool _pos2 = false;
     private bool _pos3 = false;
     private bool _pos4 = false;
     
+    private LookAtConstraint _lookAtConstraint;
+    
+    public float CurrentZoom
+    {
+        get => _fCurrentZoomAmount;
+        private set { _fCurrentZoomAmount = value; _UpdateCameraTarget(); }
+    }
+
+    public void MoveCameraToOrigin()
+    { 
+        transform.position = gInitCameraPosition.transform.position;
+    }
+    
+    private void _UpdateCameraTarget() 
+    { 
+        _vec3CameraPositionTarget = (Vector3.up * _fLookOffset) + (Quaternion.AngleAxis(_fCameraAngle, Vector3.right) * Vector3.back) * _fCurrentZoomAmount;
+    }
+    
+    public void OnZoom(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+        
+        // Adjust the current zoom value based on the direction of the scroll - this is clamped to our zoom min/max. 
+        CurrentZoom = Mathf.Clamp(_fCurrentZoomAmount - context.ReadValue<Vector2>().y, _fZoomMax, _fZoomMin);
+    }
+    
     public void OnRotateToggle(InputAction.CallbackContext context) { _rightMouseDown = context.ReadValueAsButton(); }
     
-    public void OnRotate(InputAction.CallbackContext context) { _mouseDelta = _rightMouseDown ? context.ReadValue<Vector2>() : Vector2.zero; }
+    public void OnRotate(InputAction.CallbackContext context) { _vec2MouseDelta = _rightMouseDown ? context.ReadValue<Vector2>() : Vector2.zero; }
     
     public void OnMove(InputAction.CallbackContext context) { Vector2 value = context.ReadValue<Vector2>(); _vec3MovDirection = new Vector3(value.x, 0, value.y); }
+    
+    public void CameraBetweenCheckpoints(GameObject o, bool b)
+    {
+        gLookAtTarget = o;
+        _lookAtConstraint.enabled = b;
+        _lookAtConstraint.SetSource(0, new ConstraintSource {sourceTransform = o.transform, weight = 1});
+        _selectingCheckpoint = b;
+    }
     
     private void _CameraTransition()
     {
@@ -159,8 +204,8 @@ public class CameraMovComponentFH : MonoBehaviour
     {
         gGameManager.GetComponent<GameManager>().EndTutorial();
         _CurrentCamera.GetComponent<LookAtConstraint>().enabled = false;
-        _CurrentCamera.transform.position = _CameraPositionTarget;
-        _CurrentCamera.transform.rotation = Quaternion.AngleAxis(CameraAngle, Vector3.right);
+        _CurrentCamera.transform.position = _vec3CameraPositionTarget;
+        _CurrentCamera.transform.rotation = Quaternion.AngleAxis(_fCameraAngle, Vector3.right);
         _playingTutorial = false;
         gTutorialCanvas.SetActive(false);
     }
@@ -191,14 +236,14 @@ public class CameraMovComponentFH : MonoBehaviour
         _InitButtons();
         
         _CurrentCamera = GetComponentInChildren<Camera>();
-        _CurrentCamera.transform.rotation = Quaternion.AngleAxis(CameraAngle, Vector3.right);
+        _CurrentCamera.transform.rotation = Quaternion.AngleAxis(_fCameraAngle, Vector3.right);
 
         transform.position += new Vector3(0, _fHeight, 0);
-        _CameraPositionTarget = (Vector3.up * LookOffset + new Vector3(0,_fHeight,0)) + (Quaternion.AngleAxis(CameraAngle, 
-            Vector3.right) * Vector3.back);
-        _CurrentCamera.transform.position = _CameraPositionTarget;
-
-        _rotationTarget = transform.rotation;
+        _vec3CameraPositionTarget = (Vector3.up * _fLookOffset + new Vector3(0,_fHeight,0)) + (Quaternion.AngleAxis(_fCameraAngle, Vector3.right) * Vector3.back) * _fDefaultZoom;
+        CurrentZoom = _fDefaultZoom;
+        _CurrentCamera.transform.position = _vec3CameraPositionTarget;
+        _RotationTargetQuaternion = transform.rotation;
+        _lookAtConstraint = GetComponentInChildren<LookAtConstraint>();
         
         if (_playingTutorial)
         {
@@ -208,18 +253,25 @@ public class CameraMovComponentFH : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _vec3MovTarget += (transform.forward * _vec3MovDirection.z + transform.right * 
-            _vec3MovDirection.x) * (Time.fixedDeltaTime * INTERNAL_MOVE_TARGET_SPEED);
+        _vec3MovTarget += (transform.forward * _vec3MovDirection.z + transform.right * _vec3MovDirection.x) * (Time.fixedDeltaTime * INTERNAL_MOVE_TARGET_SPEED);
     }
 
     private void LateUpdate()
     {
         if (!_playingTutorial)
         {
-            transform.position = Vector3.Lerp(transform.position, _vec3MovTarget, Time.deltaTime * INTERNAL_MOVE_SPEED);
-            transform.position = new Vector3(transform.position.x, _fHeight, transform.position.z);
-            _rotationTarget *= Quaternion.AngleAxis(_mouseDelta.x * Time.deltaTime * RotationSpeed, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, _rotationTarget, Time.deltaTime * InternalRotationSpeed);
+            if (_selectingCheckpoint)
+            {
+                _vec3MovTarget = gLookAtTarget.transform.position;
+                transform.position = Vector3.Lerp(transform.position, _vec3MovTarget, _fLerpTime * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, _vec3MovTarget, Time.deltaTime * INTERNAL_MOVE_SPEED);
+            }
+            _CurrentCamera.transform.localPosition = Vector3.Lerp(_CurrentCamera.transform.localPosition, _vec3CameraPositionTarget, Time.deltaTime * INTERNAL_ZOOM_SPEED);
+            _RotationTargetQuaternion *= Quaternion.AngleAxis(_vec2MouseDelta.x * Time.deltaTime * _fRotationSpeed, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, _RotationTargetQuaternion, Time.deltaTime * INTERNAL_ROTATION_SPEED);
         }
         else
         {

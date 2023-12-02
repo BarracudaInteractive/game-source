@@ -14,7 +14,7 @@ public class CameraChange : MonoBehaviour
     private Button _buttonChange;
     private bool _isFreeView = true;
     
-    private void _ChangeCamera()
+    public void ChangeCamera()
     {
         if (_isFreeView)
         {
@@ -37,6 +37,6 @@ public class CameraChange : MonoBehaviour
     private void Awake()
     {
         _buttonChange = this.GetComponent<Button>();
-        _buttonChange.onClick.AddListener(() => _ChangeCamera());
+        _buttonChange.onClick.AddListener(() => ChangeCamera());
     }
 }
