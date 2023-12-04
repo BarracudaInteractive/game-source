@@ -270,8 +270,15 @@ public class SectionManager : MonoBehaviour
     public void DisplayAllAsSelected()
     {
         foreach (GameObject checkpoint in CheckpointArray)
+        {
             checkpoint.GetComponent<CheckpointHandler>().DisplayAsSelected();
-        
+            int i = 0;
+            foreach (GameObject o in checkpoint.GetComponent<CheckpointHandler>().CollidersArray)
+            {
+                checkpoint.GetComponent<CheckpointHandler>().ShowPacenoteSelected(_GameManager.SectionPacenoteList[o.GetComponent<CollisionSettings>().GetId], i);
+                i++;
+            }
+        }
     }
     
     private void _Submit()
@@ -291,7 +298,8 @@ public class SectionManager : MonoBehaviour
             _SetText();
             _CameraMovComponentFH.CameraBetweenCheckpoints(CollidersArray[_iCurrentPosition], true);
         }
-        else
+        // Last checkpoint
+        else 
         {
             CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
             _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
@@ -303,6 +311,9 @@ public class SectionManager : MonoBehaviour
             SectionSetCanvas.SetActive(false);
             CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().DisplayAsSelected();
             _CameraMovComponentFH.CameraBetweenCheckpoints(gCamera, false);
+            
+            if(_GameManager.AllCheckpointsSelected())
+                _GameManager.DisplayPlayButton();
         }
         
     }

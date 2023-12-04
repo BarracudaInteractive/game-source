@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Serialization;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CameraMovComponentFH : MonoBehaviour
@@ -39,7 +40,7 @@ public class CameraMovComponentFH : MonoBehaviour
     private Button _bTutorial2Back;
     private Button _bTutorial3Back;
     
-    private float _fLerpTime = 2.0f;
+    private float _fLerpTime = 3.0f;
     private float _fLookOffset = 1;
     private float _fCameraAngle = 30;
     private float _fRotationSpeed = 6;
@@ -105,8 +106,15 @@ public class CameraMovComponentFH : MonoBehaviour
     public void OnRotateToggle(InputAction.CallbackContext context) { _rightMouseDown = context.ReadValueAsButton(); }
     
     public void OnRotate(InputAction.CallbackContext context) { _vec2MouseDelta = _rightMouseDown ? context.ReadValue<Vector2>() : Vector2.zero; }
-    
-    public void OnMove(InputAction.CallbackContext context) { Vector2 value = context.ReadValue<Vector2>(); _vec3MovDirection = new Vector3(value.x, 0, value.y); }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Vector2 value = context.ReadValue<Vector2>();  
+        if (value != Vector2.zero) 
+            _vec3MovDirection = new Vector3(value.x, 0, value.y);
+        else
+            _vec3MovDirection = Vector3.zero;
+    }
     
     public void CameraBetweenCheckpoints(GameObject o, bool b)
     {
@@ -245,10 +253,14 @@ public class CameraMovComponentFH : MonoBehaviour
         _RotationTargetQuaternion = transform.rotation;
         _lookAtConstraint = GetComponentInChildren<LookAtConstraint>();
         
-        if (_playingTutorial)
+        if (SceneManager.GetActiveScene().name == "Day1N")
         {
-            Invoke("_StartTutorial", 2.0f);
+            _playingTutorial = false;
+            _lookAtConstraint.enabled = false;
+            gGameManager.GetComponent<GameManager>().EndTutorial();
         }
+        
+        if (_playingTutorial) { Invoke("_StartTutorial", 2.0f); }
     }
 
     private void FixedUpdate()
@@ -264,6 +276,11 @@ public class CameraMovComponentFH : MonoBehaviour
             {
                 _vec3MovTarget = gLookAtTarget.transform.position;
                 transform.position = Vector3.Lerp(transform.position, _vec3MovTarget, _fLerpTime * Time.deltaTime);
+                if (Vector3Int.RoundToInt(transform.position - _vec3MovTarget) == Vector3.zero)
+                {
+                    _selectingCheckpoint = false;
+                    _lookAtConstraint.enabled = false;
+                }
             }
             else
             {

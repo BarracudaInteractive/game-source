@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionSettings : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class CollisionSettings : MonoBehaviour
     private SoundManager _SoundManager;
     private GameManager _GameManager;
     
-    private const int LAST_CHECKPOINT = 16;
+    private int LAST_CHECKPOINT;
     
     public float SetAcc { set => _fAcceleration = value; }
     
@@ -54,16 +55,16 @@ public class CollisionSettings : MonoBehaviour
             _SoundManager.GoodSelectionSE();
         }
         _tFeedbackText.text = s;
-        if (Time.timeScale == 0.0f)
-            Invoke("_HideFeedback", 1.5f);
-        else
-            Invoke("_HideFeedback", 1.5f/Time.timeScale);
+        Invoke("_HideFeedback", 3.5f);
     }
     
     public int GetId => iId;
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "Day1M") LAST_CHECKPOINT = 16;
+        if (SceneManager.GetActiveScene().name == "Day1N") LAST_CHECKPOINT = 17;
+        
         if (iId != LAST_CHECKPOINT)
         {
             _tFeedbackText = gFeedbackText.GetComponent<TMP_Text>();

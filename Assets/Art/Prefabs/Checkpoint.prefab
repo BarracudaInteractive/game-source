@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5502063396483901632}
   - {fileID: 6472767660559528210}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3494038476492047039
 MonoBehaviour:
@@ -58,6 +58,7 @@ MonoBehaviour:
   gArrow: {fileID: 3619423354338207234}
   gSelected: {fileID: 6102046864449799955}
   gNoSelected: {fileID: 6963670794420100748}
+  gDot: {fileID: 0}
   gMCheckpointPacenotes00: {fileID: 7462533524237078610}
   gMCheckpointPacenotes01: {fileID: 5708287170977527387}
   gMCheckpointPacenotes02: {fileID: 7125436125060745239}
@@ -1027,6 +1028,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2072240131037571983}
     m_Modifications:
+    - target: {fileID: 6577344236865824006, guid: 1940cc9f0d7e84745b7747829c7ac0be, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6649459811105458520, guid: 1940cc9f0d7e84745b7747829c7ac0be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

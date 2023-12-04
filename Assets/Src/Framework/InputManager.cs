@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -71,7 +72,16 @@ public class InputManager : MonoBehaviour
         _fZet = (relative.z / relative.magnitude) * _fSteerForce;
     }
 
-    private void Awake() { _Controller = GetComponent<Controller>(); }
+    private void Awake()
+    {
+        _Controller = GetComponent<Controller>();
+        if (SceneManager.GetActiveScene().name == "Day1N")
+        {
+            _fAcceleration = 0.2f;
+            _iDistanceOffset = 3;
+            _fSteerForce = 1f;
+        }
+    }
 
     private void Start()
     {

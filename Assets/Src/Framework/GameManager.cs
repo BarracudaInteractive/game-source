@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Damage bar")] // 0.2 - 1.0
     public GameObject gDamageBar;
-    
+
     [Header("Recon")] public GameObject gReconCanvas;
     public GameObject gFreezeButton;
     public GameObject gRestart;
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     public GameObject gIngameCanvas4;
     public GameObject gIngameCanvas5;
     public GameObject gCameraChange;
+    public GameObject gNavigationBar;
 
     [Header("Game Over")] public GameObject gCarView;
     public GameObject gFreeView;
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Credits Canvas")] public GameObject gCreditsCanvas;
     public GameObject gCreditsClose;
-    
+
     [Header("End screen")] public GameObject gEndCanvas;
     public GameObject gEndExit;
     public GameObject gEndContinue;
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
     public GameObject gEndRow5Time;
     public GameObject gEndRow5Fuel;
     public GameObject gEndRow5Damage;
-    
+
     [Header("Audio Manager")] public GameObject gAudioManager;
 
     [Header("Checkpoints")] public List<bool> SectionIsSelectedList;
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour
     public List<float> SectionAccelerationList;
     public List<Vector3> SectionPositionsList;
     public List<Vector3> SectionRotationsList;
-    
+
     private Button _bReturn;
     private Button _bExit;
     private TMP_Text _tReconAdvice;
@@ -164,17 +165,20 @@ public class GameManager : MonoBehaviour
     private SoundManager _SoundManager;
 
     private char _cLanguage = 'e';
-
     private string _sFilePath;
+    private int NUM_CHECKPOINTS;
 
     public float GetGasoline => _fGasoline;
-    
+
     public float GetDamage => _fDamage;
-    
+
     public float GetTime => _fTime;
-    
-    public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
-    
+
+    public void ChangeScreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
     private void _SetText()
     {
         string zeroU = "";
@@ -185,7 +189,9 @@ public class GameManager : MonoBehaviour
             $"{zeroD}{Mathf.FloorToInt(_fTime / 60).ToString()}:{zeroU}{Mathf.FloorToInt(_fTime % 60).ToString()}";
     }
 
-    private bool _AllCheckpointsSelected()
+    public void DisplayPlayButton() { gFreezeButton.SetActive(true); }
+    
+    public bool AllCheckpointsSelected()
     {
         for (int i = 2; i < SectionIsSelectedList.Count; i++)
         {
@@ -226,18 +232,22 @@ public class GameManager : MonoBehaviour
 
     private void _ResumeGame()
     {
-        if (_AllCheckpointsSelected())
+        if (AllCheckpointsSelected())
         {
             _SendInstructions();
-            
+
             gCar.GetComponent<Rigidbody>().isKinematic = false;
             _hasStarted = true;
             gFreezeButton.SetActive(false);
-            gCameraChange.SetActive(false); 
+            gCameraChange.SetActive(false);
             gIngame.SetActive(true);
-            
+
             _CameraChange.ChangeCamera();
             _CameraMovComponentFH.MoveCameraToOrigin();
+            gNavigationBar.SetActive(false);
+            
+            _SavePlayerPrefs();
+            _ChangeTimeSpeed(2.0f);
         }
         else
         {
@@ -245,19 +255,24 @@ public class GameManager : MonoBehaviour
             gReconFeedback.SetActive(true);
             _tReconAdvice.text = $"SOME CHECKPOINTS ARE NOT SELECTED\nLOCATE THE RED AURA ABOVE THEM";
             Invoke("_HideFeedback", 1.5f);
-            _SavePlayerPrefs();
         }
     }
 
     private void _ReloadScene()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void OilUpdate() { _GasSlider.value = _fGasoline; }
+    public void OilUpdate()
+    {
+        _GasSlider.value = _fGasoline;
+    }
 
-    public void DmgUpdate() { _DmgSlider.value = _fDamage; }
+    public void DmgUpdate()
+    {
+        _DmgSlider.value = _fDamage;
+    }
 
     private void _WriteTimeTables(float time, float fuel, float damage)
     {
@@ -272,95 +287,92 @@ public class GameManager : MonoBehaviour
 
     private void _ReadTimeTables(float time, float fuel, float damage)
     {
-    /*
-     *  WebGL cannot write nor read files
-     *
-    StreamReader sr = new StreamReader(_sFilePath);
-    string[] line = new string[4];
-    string file = "";
-    for (int i = 1; i <= 5; i++)
-    {
-        file = sr.ReadLine();
-        if (file == null || file != "")
+        /*
+         *  WebGL cannot write nor read files
+         *
+        StreamReader sr = new StreamReader(_sFilePath);
+        string[] line = new string[4];
+        string file = "";
+        for (int i = 1; i <= 5; i++)
         {
-            line = file.Split('|');
-            switch (i)
+            file = sr.ReadLine();
+            if (file == null || file != "")
             {
-                case 1:
-                    _tEndRow1Name.text = line[0];
-                    _tEndRow1Time.text = line[1];
-                    _tEndRow1Fuel.text = line[2];
-                    _tEndRow1Damage.text = line[3];
-                    break;
-                case 2:
-                    _tEndRow2Name.text = line[0];
-                    _tEndRow2Time.text = line[1];
-                    _tEndRow2Fuel.text = line[2];
-                    _tEndRow2Damage.text = line[3];
-                    break;
-                case 3:
-                    _tEndRow3Name.text = line[0];
-                    _tEndRow3Time.text = line[1];
-                    _tEndRow3Fuel.text = line[2];
-                    _tEndRow3Damage.text = line[3];
-                    break;
-                case 4:
-                    _tEndRow4Name.text = line[0];
-                    _tEndRow4Time.text = line[1];
-                    _tEndRow4Fuel.text = line[2];
-                    _tEndRow4Damage.text = line[3];
-                    break;
-                case 5:
-                    _tEndRow5Name.text = line[0];
-                    _tEndRow5Time.text = line[1];
-                    _tEndRow5Fuel.text = line[2];
-                    _tEndRow5Damage.text = line[3];
-                    break;
+                line = file.Split('|');
+                switch (i)
+                {
+                    case 1:
+                        _tEndRow1Name.text = line[0];
+                        _tEndRow1Time.text = line[1];
+                        _tEndRow1Fuel.text = line[2];
+                        _tEndRow1Damage.text = line[3];
+                        break;
+                    case 2:
+                        _tEndRow2Name.text = line[0];
+                        _tEndRow2Time.text = line[1];
+                        _tEndRow2Fuel.text = line[2];
+                        _tEndRow2Damage.text = line[3];
+                        break;
+                    case 3:
+                        _tEndRow3Name.text = line[0];
+                        _tEndRow3Time.text = line[1];
+                        _tEndRow3Fuel.text = line[2];
+                        _tEndRow3Damage.text = line[3];
+                        break;
+                    case 4:
+                        _tEndRow4Name.text = line[0];
+                        _tEndRow4Time.text = line[1];
+                        _tEndRow4Fuel.text = line[2];
+                        _tEndRow4Damage.text = line[3];
+                        break;
+                    case 5:
+                        _tEndRow5Name.text = line[0];
+                        _tEndRow5Time.text = line[1];
+                        _tEndRow5Fuel.text = line[2];
+                        _tEndRow5Damage.text = line[3];
+                        break;
+                }
             }
         }
+
+        sr.Close();
+        */
+
+        _tEndRow1Name.text = PlayerPrefs.GetString("User");
+        _tEndRow1Time.text = Math.Round(time, 2).ToString();
+        _tEndRow1Fuel.text = Math.Round(fuel, 2).ToString();
+        _tEndRow1Damage.text = Math.Round(damage, 2).ToString();
+
+        _tEndRow2Name.text = $"Alejandro";
+        _tEndRow2Time.text = $"69,61";
+        _tEndRow2Fuel.text = $"39,85";
+        _tEndRow2Damage.text = $"67,68";
+
+        _tEndRow3Name.text = $"Maria";
+        _tEndRow3Time.text = $"131,23";
+        _tEndRow3Fuel.text = $"17,50";
+        _tEndRow3Damage.text = $"0";
+
+        _tEndRow4Name.text = $"Pedro";
+        _tEndRow4Time.text = $"123,89";
+        _tEndRow4Fuel.text = $"21,05";
+        _tEndRow4Damage.text = $"0";
+
+        _tEndRow5Name.text = $"Alejandro";
+        _tEndRow5Time.text = $"155,68";
+        _tEndRow5Fuel.text = $"0,70";
+        _tEndRow5Damage.text = $"0";
     }
-
-    sr.Close();
-    */
-    
-    _tEndRow1Name.text = PlayerPrefs.GetString("User");
-    _tEndRow1Time.text = Math.Round(time, 2).ToString();
-    _tEndRow1Fuel.text = Math.Round(fuel, 2).ToString();
-    _tEndRow1Damage.text = Math.Round(damage, 2).ToString();
-
-    _tEndRow2Name.text = $"Alejandro";
-    _tEndRow2Time.text = $"69,61";
-    _tEndRow2Fuel.text = $"39,85";
-    _tEndRow2Damage.text = $"67,68";
-    
-    _tEndRow3Name.text = $"Maria";
-    _tEndRow3Time.text = $"131,23";
-    _tEndRow3Fuel.text = $"17,50";
-    _tEndRow3Damage.text = $"0";
-    
-    _tEndRow4Name.text = $"Pedro";
-    _tEndRow4Time.text = $"123,89";
-    _tEndRow4Fuel.text = $"21,05";
-    _tEndRow4Damage.text = $"0";
-    
-    _tEndRow5Name.text = $"Alejandro";
-    _tEndRow5Time.text = $"155,68";
-    _tEndRow5Fuel.text = $"0,70";
-    _tEndRow5Damage.text = $"0";
-}
 
     private void _GameOver(bool D, bool F, bool O)
     {
-    /*gFreeView.SetActive(false);
-    gFreeView.GetComponent<AudioListener>().enabled = false;
-    gCarView.SetActive(true);
-    gCarView.GetComponent<AudioListener>().enabled = true;*/
-    gIngame.SetActive(false);
-    gFreezeButton.SetActive(false);
-    gGameOver.SetActive(true);
-    if (D) tDefeat.text = "You lost because your car has suffered many breakdowns";
-    else if (F) tDefeat.text = "You lost because you ran out of fuel";
-    //else if (O) tDefeat.text = "You have lost because you have gone completely off track";
+        Time.timeScale = 1.0f;
+        gIngame.SetActive(false);
+        gFreezeButton.SetActive(false);
+        gGameOver.SetActive(true);
+        if (D) tDefeat.text = "You lost because your car has suffered many breakdowns";
+        else if (F) tDefeat.text = "You lost because you ran out of fuel";
+        else if (O) tDefeat.text = "You have lost because you have gone completely off track";
     }
 
     private void _Settings()
@@ -368,23 +380,33 @@ public class GameManager : MonoBehaviour
         gSettingsCanvas.SetActive(true);
     }
 
-    private void _Exit() { gSettingsCanvas.SetActive(false); }
+    private void _Exit()
+    {
+        gSettingsCanvas.SetActive(false);
+    }
 
     private void _Return()
     {
-        PlayerPrefs.SetString("Language", _cLanguage.ToString());
-        PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
-        PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
-        PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
         Time.timeScale = 1.0f;
+        _DeletePlayerPrefsLong();
         SceneManager.LoadScene("Prefs");
     }
 
-    public void ChangeGear() { _tIngameGear.text = $"GEAR: {_Controller.GetGear.ToString()}"; }
+    public void ChangeGear()
+    {
+        _tIngameGear.text = $"GEAR: {_Controller.GetGear.ToString()}";
+    }
 
-    public void ChangeKPH() { _tIngameKPH.text = $"KPH: {((int)_Controller.GetKPH).ToString()}"; }
+    public void ChangeKPH()
+    {
+        _tIngameKPH.text = $"KPH: {((int)_Controller.GetKPH).ToString()}";
+    }
 
-    private void _ChangeTimeSpeed(float f) { _fTimeSpeed = f; Time.timeScale = f; }
+    private void _ChangeTimeSpeed(float f)
+    {
+        _fTimeSpeed = f;
+        Time.timeScale = f;
+    }
 
     private void _LoadPlayerPrefs()
     {
@@ -395,23 +417,16 @@ public class GameManager : MonoBehaviour
             _dSettingsLanguage.value = 1;
     }
 
-    private void _LoadDay1N()
+    private void _LoadNextStage()
     {
-        PlayerPrefs.SetString("Language", _cLanguage.ToString());
-        PlayerPrefs.SetFloat("Music", _sSettingsMusic.value);
-        PlayerPrefs.SetFloat("Effects", _sSettingsEffects.value);
-        PlayerPrefs.SetFloat("Sound", _sSettingsSound.value);
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("Day1M");
+        _DeletePlayerPrefsLong();
+        if (SceneManager.GetActiveScene().name == "Day1M") SceneManager.LoadScene("Day1N");
+        if (SceneManager.GetActiveScene().name == "Day1N") SceneManager.LoadScene("Day2A");
     }
 
     public void EndScreen(float time, float fuel, float damage)
     {
-        /*
-        gFreeView.SetActive(false);
-        gFreeView.GetComponent<AudioListener>().enabled = false;
-        gCarView.SetActive(true);
-        */
         _CameraController.hasFinished = true;
         gCarView.GetComponent<AudioListener>().enabled = true;
         gIngame.SetActive(false);
@@ -480,10 +495,10 @@ public class GameManager : MonoBehaviour
         _bIngameResumePlay.onClick.AddListener(() => _ChangeTimeSpeed(0.0f));
 
         _bIngameNormal = gIngameNormal.GetComponent<Button>();
-        _bIngameNormal.onClick.AddListener(() => _ChangeTimeSpeed(1.0f));
+        _bIngameNormal.onClick.AddListener(() => _ChangeTimeSpeed(2.0f));
 
         _bIngameFast = gIngameFast.GetComponent<Button>();
-        _bIngameFast.onClick.AddListener(() => _ChangeTimeSpeed(2.0f));
+        _bIngameFast.onClick.AddListener(() => _ChangeTimeSpeed(4.0f));
 
         _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
         _dSettingsLanguage.onValueChanged.AddListener(delegate
@@ -496,7 +511,7 @@ public class GameManager : MonoBehaviour
         _bEndExit.onClick.AddListener(() => _Return());
 
         _bEndContinue = gEndContinue.GetComponent<Button>();
-        _bEndContinue.onClick.AddListener(() => _LoadDay1N());
+        _bEndContinue.onClick.AddListener(() => _LoadNextStage());
 
         _tEndRow1Name = gEndRow1Name.GetComponent<TMP_Text>();
         _tEndRow1Time = gEndRow1Time.GetComponent<TMP_Text>();
@@ -524,344 +539,455 @@ public class GameManager : MonoBehaviour
         _CameraMovComponentFH = gFreeView.GetComponent<CameraMovComponentFH>();
     }
 
-private void _InitAudio()
-{
-if (PlayerPrefs.HasKey("User"))
-{
-    _sSettingsMusic.value = PlayerPrefs.GetFloat("Music");
-    _sSettingsEffects.value = PlayerPrefs.GetFloat("Effects");
-    _sSettingsSound.value = PlayerPrefs.GetFloat("Sound");
-}
-else
-{
-    _sSettingsMusic.value = 0.1f;
-    _sSettingsEffects.value = 0.2f;
-    AudioListener.volume = 1.0f;
-}
-}
+    private void _InitAudio()
+    {
+        if (PlayerPrefs.HasKey("User"))
+        {
+            _sSettingsMusic.value = PlayerPrefs.GetFloat("Music");
+            _sSettingsEffects.value = PlayerPrefs.GetFloat("Effects");
+            _sSettingsSound.value = PlayerPrefs.GetFloat("Sound");
+        }
+        else
+        {
+            _sSettingsMusic.value = 0.1f;
+            _sSettingsEffects.value = 0.2f;
+            AudioListener.volume = 1.0f;
+        }
+    }
 
-private void _InitLists()
-{
-SectionIsSelectedList = new List<bool>
-{
-    false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false
-};
-SectionPacenoteList = new List<int>
-{
-    0, 0,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-};
-SectionHeightList = new List<float>
-{
-    0, 0,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-};
-SectionAccelerationList = new List<float>
-{
-    0, 0,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
-};
-SectionPositionsList = new List<Vector3>
-{
-    Vector3.up, Vector3.up,
-    Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero,
-    Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero,
-};
-SectionRotationsList = new List<Vector3>
-{
-    Vector3.zero, Vector3.zero,
-    Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up,
-    Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up,
-};
-}
+    private void _InitLists(int size)
+    {
+        switch (size)
+        {
+            case 16:
+                SectionIsSelectedList = new List<bool>
+                {
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false
+                };
+                SectionPacenoteList = new List<int>
+                {
+                    0, 0,
+                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                };
+                SectionHeightList = new List<float>
+                {
+                    0, 0,
+                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                };
+                SectionAccelerationList = new List<float>
+                {
+                    0, 0,
+                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                };
+                SectionPositionsList = new List<Vector3>
+                {
+                    Vector3.up, Vector3.up,
+                    Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero,
+                    Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero,
+                };
+                SectionRotationsList = new List<Vector3>
+                {
+                    Vector3.zero, Vector3.zero,
+                    Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up,
+                    Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up,
+                };
+                break;
+            case 17:
+                SectionIsSelectedList = new List<bool>
+                {
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false, false
+                };
+                SectionPacenoteList = new List<int>
+                {
+                    0, 0,
+                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                };
+                SectionHeightList = new List<float>
+                {
+                    0, 0,
+                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                };
+                SectionAccelerationList = new List<float>
+                {
+                    0, 0,
+                    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+                };
+                SectionPositionsList = new List<Vector3>
+                {
+                    Vector3.up, Vector3.up,
+                    Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero,
+                    Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero
+                };
+                SectionRotationsList = new List<Vector3>
+                {
+                    Vector3.zero, Vector3.zero,
+                    Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up,
+                    Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up, Vector3.up
+                };
+                break;
+        }
+        
+    }
 
-private void _SavePlayerPrefs()
-{
-PlayerPrefs.SetInt("Pacenote2", SectionPacenoteList[2]);
-PlayerPrefs.SetInt("Pacenote3", SectionPacenoteList[3]);
-PlayerPrefs.SetInt("Pacenote4", SectionPacenoteList[4]);
-PlayerPrefs.SetInt("Pacenote5", SectionPacenoteList[5]);
-PlayerPrefs.SetInt("Pacenote6", SectionPacenoteList[6]);
-PlayerPrefs.SetInt("Pacenote7", SectionPacenoteList[7]);
-PlayerPrefs.SetInt("Pacenote8", SectionPacenoteList[8]);
-PlayerPrefs.SetInt("Pacenote9", SectionPacenoteList[9]);
-PlayerPrefs.SetInt("Pacenote10", SectionPacenoteList[10]);
-PlayerPrefs.SetInt("Pacenote11", SectionPacenoteList[11]);
-PlayerPrefs.SetInt("Pacenote12", SectionPacenoteList[12]);
-PlayerPrefs.SetInt("Pacenote13", SectionPacenoteList[13]);
-PlayerPrefs.SetInt("Pacenote14", SectionPacenoteList[14]);
-PlayerPrefs.SetInt("Pacenote15", SectionPacenoteList[15]);
+    private void _SavePlayerPrefs()
+    {
+        PlayerPrefs.SetInt("Pacenote2", SectionPacenoteList[2]);
+        PlayerPrefs.SetInt("Pacenote3", SectionPacenoteList[3]);
+        PlayerPrefs.SetInt("Pacenote4", SectionPacenoteList[4]);
+        PlayerPrefs.SetInt("Pacenote5", SectionPacenoteList[5]);
+        PlayerPrefs.SetInt("Pacenote6", SectionPacenoteList[6]);
+        PlayerPrefs.SetInt("Pacenote7", SectionPacenoteList[7]);
+        PlayerPrefs.SetInt("Pacenote8", SectionPacenoteList[8]);
+        PlayerPrefs.SetInt("Pacenote9", SectionPacenoteList[9]);
+        PlayerPrefs.SetInt("Pacenote10", SectionPacenoteList[10]);
+        PlayerPrefs.SetInt("Pacenote11", SectionPacenoteList[11]);
+        PlayerPrefs.SetInt("Pacenote12", SectionPacenoteList[12]);
+        PlayerPrefs.SetInt("Pacenote13", SectionPacenoteList[13]);
+        PlayerPrefs.SetInt("Pacenote14", SectionPacenoteList[14]);
+        PlayerPrefs.SetInt("Pacenote15", SectionPacenoteList[15]);
+        if (SceneManager.GetActiveScene().name == "Day1N") PlayerPrefs.SetInt("Pacenote16", SectionPacenoteList[16]);
 
-PlayerPrefs.SetFloat("Height2", SectionHeightList[2]);
-PlayerPrefs.SetFloat("Height3", SectionHeightList[3]);
-PlayerPrefs.SetFloat("Height4", SectionHeightList[4]);
-PlayerPrefs.SetFloat("Height5", SectionHeightList[5]);
-PlayerPrefs.SetFloat("Height6", SectionHeightList[6]);
-PlayerPrefs.SetFloat("Height7", SectionHeightList[7]);
-PlayerPrefs.SetFloat("Height8", SectionHeightList[8]);
-PlayerPrefs.SetFloat("Height9", SectionHeightList[9]);
-PlayerPrefs.SetFloat("Height10", SectionHeightList[10]);
-PlayerPrefs.SetFloat("Height11", SectionHeightList[11]);
-PlayerPrefs.SetFloat("Height12", SectionHeightList[12]);
-PlayerPrefs.SetFloat("Height13", SectionHeightList[13]);
-PlayerPrefs.SetFloat("Height14", SectionHeightList[14]);
-PlayerPrefs.SetFloat("Height15", SectionHeightList[15]);
+        PlayerPrefs.SetFloat("Height2", SectionHeightList[2]);
+        PlayerPrefs.SetFloat("Height3", SectionHeightList[3]);
+        PlayerPrefs.SetFloat("Height4", SectionHeightList[4]);
+        PlayerPrefs.SetFloat("Height5", SectionHeightList[5]);
+        PlayerPrefs.SetFloat("Height6", SectionHeightList[6]);
+        PlayerPrefs.SetFloat("Height7", SectionHeightList[7]);
+        PlayerPrefs.SetFloat("Height8", SectionHeightList[8]);
+        PlayerPrefs.SetFloat("Height9", SectionHeightList[9]);
+        PlayerPrefs.SetFloat("Height10", SectionHeightList[10]);
+        PlayerPrefs.SetFloat("Height11", SectionHeightList[11]);
+        PlayerPrefs.SetFloat("Height12", SectionHeightList[12]);
+        PlayerPrefs.SetFloat("Height13", SectionHeightList[13]);
+        PlayerPrefs.SetFloat("Height14", SectionHeightList[14]);
+        PlayerPrefs.SetFloat("Height15", SectionHeightList[15]);
+        if (SceneManager.GetActiveScene().name == "Day1N") PlayerPrefs.SetFloat("Height16", SectionHeightList[16]);
+        
+        PlayerPrefs.SetFloat("Acceleration2", SectionAccelerationList[2]);
+        PlayerPrefs.SetFloat("Acceleration3", SectionAccelerationList[3]);
+        PlayerPrefs.SetFloat("Acceleration4", SectionAccelerationList[4]);
+        PlayerPrefs.SetFloat("Acceleration5", SectionAccelerationList[5]);
+        PlayerPrefs.SetFloat("Acceleration6", SectionAccelerationList[6]);
+        PlayerPrefs.SetFloat("Acceleration7", SectionAccelerationList[7]);
+        PlayerPrefs.SetFloat("Acceleration8", SectionAccelerationList[8]);
+        PlayerPrefs.SetFloat("Acceleration9", SectionAccelerationList[9]);
+        PlayerPrefs.SetFloat("Acceleration10", SectionAccelerationList[10]);
+        PlayerPrefs.SetFloat("Acceleration11", SectionAccelerationList[11]);
+        PlayerPrefs.SetFloat("Acceleration12", SectionAccelerationList[12]);
+        PlayerPrefs.SetFloat("Acceleration13", SectionAccelerationList[13]);
+        PlayerPrefs.SetFloat("Acceleration14", SectionAccelerationList[14]);
+        PlayerPrefs.SetFloat("Acceleration15", SectionAccelerationList[15]);
+        if (SceneManager.GetActiveScene().name == "Day1N") PlayerPrefs.SetFloat("Acceleration16", SectionAccelerationList[16]);
+        
+        PlayerPrefs.SetFloat("Position2X", SectionPositionsList[2].x);
+        PlayerPrefs.SetFloat("Position2Y", SectionPositionsList[2].y);
+        PlayerPrefs.SetFloat("Position2Z", SectionPositionsList[2].z);
+        PlayerPrefs.SetFloat("Position3X", SectionPositionsList[3].x);
+        PlayerPrefs.SetFloat("Position3Y", SectionPositionsList[3].y);
+        PlayerPrefs.SetFloat("Position3Z", SectionPositionsList[3].z);
+        PlayerPrefs.SetFloat("Position4X", SectionPositionsList[4].x);
+        PlayerPrefs.SetFloat("Position4Y", SectionPositionsList[4].y);
+        PlayerPrefs.SetFloat("Position4Z", SectionPositionsList[4].z);
+        PlayerPrefs.SetFloat("Position5X", SectionPositionsList[5].x);
+        PlayerPrefs.SetFloat("Position5Y", SectionPositionsList[5].y);
+        PlayerPrefs.SetFloat("Position5Z", SectionPositionsList[5].z);
+        PlayerPrefs.SetFloat("Position6X", SectionPositionsList[6].x);
+        PlayerPrefs.SetFloat("Position6Y", SectionPositionsList[6].y);
+        PlayerPrefs.SetFloat("Position6Z", SectionPositionsList[6].z);
+        PlayerPrefs.SetFloat("Position7X", SectionPositionsList[7].x);
+        PlayerPrefs.SetFloat("Position7Y", SectionPositionsList[7].y);
+        PlayerPrefs.SetFloat("Position7Z", SectionPositionsList[7].z);
+        PlayerPrefs.SetFloat("Position8X", SectionPositionsList[8].x);
+        PlayerPrefs.SetFloat("Position8Y", SectionPositionsList[8].y);
+        PlayerPrefs.SetFloat("Position8Z", SectionPositionsList[8].z);
+        PlayerPrefs.SetFloat("Position9X", SectionPositionsList[9].x);
+        PlayerPrefs.SetFloat("Position9Y", SectionPositionsList[9].y);
+        PlayerPrefs.SetFloat("Position9Z", SectionPositionsList[9].z);
+        PlayerPrefs.SetFloat("Position10X", SectionPositionsList[10].x);
+        PlayerPrefs.SetFloat("Position10Y", SectionPositionsList[10].y);
+        PlayerPrefs.SetFloat("Position10Z", SectionPositionsList[10].z);
+        PlayerPrefs.SetFloat("Position11X", SectionPositionsList[11].x);
+        PlayerPrefs.SetFloat("Position11Y", SectionPositionsList[11].y);
+        PlayerPrefs.SetFloat("Position11Z", SectionPositionsList[11].z);
+        PlayerPrefs.SetFloat("Position12X", SectionPositionsList[12].x);
+        PlayerPrefs.SetFloat("Position12Y", SectionPositionsList[12].y);
+        PlayerPrefs.SetFloat("Position12Z", SectionPositionsList[12].z);
+        PlayerPrefs.SetFloat("Position13X", SectionPositionsList[13].x);
+        PlayerPrefs.SetFloat("Position13Y", SectionPositionsList[13].y);
+        PlayerPrefs.SetFloat("Position13Z", SectionPositionsList[13].z);
+        PlayerPrefs.SetFloat("Position14X", SectionPositionsList[14].x);
+        PlayerPrefs.SetFloat("Position14Y", SectionPositionsList[14].y);
+        PlayerPrefs.SetFloat("Position14Z", SectionPositionsList[14].z);
+        PlayerPrefs.SetFloat("Position15X", SectionPositionsList[15].x);
+        PlayerPrefs.SetFloat("Position15Y", SectionPositionsList[15].y);
+        PlayerPrefs.SetFloat("Position15Z", SectionPositionsList[15].z);
+        if (SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetFloat("Position16X", SectionPositionsList[16].x);
+            PlayerPrefs.SetFloat("Position16Y", SectionPositionsList[16].y);
+            PlayerPrefs.SetFloat("Position16Z", SectionPositionsList[16].z);
+        }
 
-PlayerPrefs.SetFloat("Acceleration2", SectionAccelerationList[2]);
-PlayerPrefs.SetFloat("Acceleration3", SectionAccelerationList[3]);
-PlayerPrefs.SetFloat("Acceleration4", SectionAccelerationList[4]);
-PlayerPrefs.SetFloat("Acceleration5", SectionAccelerationList[5]);
-PlayerPrefs.SetFloat("Acceleration6", SectionAccelerationList[6]);
-PlayerPrefs.SetFloat("Acceleration7", SectionAccelerationList[7]);
-PlayerPrefs.SetFloat("Acceleration8", SectionAccelerationList[8]);
-PlayerPrefs.SetFloat("Acceleration9", SectionAccelerationList[9]);
-PlayerPrefs.SetFloat("Acceleration10", SectionAccelerationList[10]);
-PlayerPrefs.SetFloat("Acceleration11", SectionAccelerationList[11]);
-PlayerPrefs.SetFloat("Acceleration12", SectionAccelerationList[12]);
-PlayerPrefs.SetFloat("Acceleration13", SectionAccelerationList[13]);
-PlayerPrefs.SetFloat("Acceleration14", SectionAccelerationList[14]);
-PlayerPrefs.SetFloat("Acceleration15", SectionAccelerationList[15]);
+        PlayerPrefs.SetFloat("Rotation2X", SectionRotationsList[2].x);
+        PlayerPrefs.SetFloat("Rotation2Y", SectionRotationsList[2].y);
+        PlayerPrefs.SetFloat("Rotation2Z", SectionRotationsList[2].z);
+        PlayerPrefs.SetFloat("Rotation3X", SectionRotationsList[3].x);
+        PlayerPrefs.SetFloat("Rotation3Y", SectionRotationsList[3].y);
+        PlayerPrefs.SetFloat("Rotation3Z", SectionRotationsList[3].z);
+        PlayerPrefs.SetFloat("Rotation4X", SectionRotationsList[4].x);
+        PlayerPrefs.SetFloat("Rotation4Y", SectionRotationsList[4].y);
+        PlayerPrefs.SetFloat("Rotation4Z", SectionRotationsList[4].z);
+        PlayerPrefs.SetFloat("Rotation5X", SectionRotationsList[5].x);
+        PlayerPrefs.SetFloat("Rotation5Y", SectionRotationsList[5].y);
+        PlayerPrefs.SetFloat("Rotation5Z", SectionRotationsList[5].z);
+        PlayerPrefs.SetFloat("Rotation6X", SectionRotationsList[6].x);
+        PlayerPrefs.SetFloat("Rotation6Y", SectionRotationsList[6].y);
+        PlayerPrefs.SetFloat("Rotation6Z", SectionRotationsList[6].z);
+        PlayerPrefs.SetFloat("Rotation7X", SectionRotationsList[7].x);
+        PlayerPrefs.SetFloat("Rotation7Y", SectionRotationsList[7].y);
+        PlayerPrefs.SetFloat("Rotation7Z", SectionRotationsList[7].z);
+        PlayerPrefs.SetFloat("Rotation8X", SectionRotationsList[8].x);
+        PlayerPrefs.SetFloat("Rotation8Y", SectionRotationsList[8].y);
+        PlayerPrefs.SetFloat("Rotation8Z", SectionRotationsList[8].z);
+        PlayerPrefs.SetFloat("Rotation9X", SectionRotationsList[9].x);
+        PlayerPrefs.SetFloat("Rotation9Y", SectionRotationsList[9].y);
+        PlayerPrefs.SetFloat("Rotation9Z", SectionRotationsList[9].z);
+        PlayerPrefs.SetFloat("Rotation10X", SectionRotationsList[10].x);
+        PlayerPrefs.SetFloat("Rotation10Y", SectionRotationsList[10].y);
+        PlayerPrefs.SetFloat("Rotation10Z", SectionRotationsList[10].z);
+        PlayerPrefs.SetFloat("Rotation11X", SectionRotationsList[11].x);
+        PlayerPrefs.SetFloat("Rotation11Y", SectionRotationsList[11].y);
+        PlayerPrefs.SetFloat("Rotation11Z", SectionRotationsList[11].z);
+        PlayerPrefs.SetFloat("Rotation12X", SectionRotationsList[12].x);
+        PlayerPrefs.SetFloat("Rotation12Y", SectionRotationsList[12].y);
+        PlayerPrefs.SetFloat("Rotation12Z", SectionRotationsList[12].z);
+        PlayerPrefs.SetFloat("Rotation13X", SectionRotationsList[13].x);
+        PlayerPrefs.SetFloat("Rotation13Y", SectionRotationsList[13].y);
+        PlayerPrefs.SetFloat("Rotation13Z", SectionRotationsList[13].z);
+        PlayerPrefs.SetFloat("Rotation14X", SectionRotationsList[14].x);
+        PlayerPrefs.SetFloat("Rotation14Y", SectionRotationsList[14].y);
+        PlayerPrefs.SetFloat("Rotation14Z", SectionRotationsList[14].z);
+        PlayerPrefs.SetFloat("Rotation15X", SectionRotationsList[15].x);
+        PlayerPrefs.SetFloat("Rotation15Y", SectionRotationsList[15].y);
+        PlayerPrefs.SetFloat("Rotation15Z", SectionRotationsList[15].z);
+        if (SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetFloat("Rotation16X", SectionRotationsList[16].x);
+            PlayerPrefs.SetFloat("Rotation16Y", SectionRotationsList[16].y);
+            PlayerPrefs.SetFloat("Rotation16Z", SectionRotationsList[16].z);
+        }
+    }
 
-PlayerPrefs.SetFloat("Position2X", SectionPositionsList[2].x);
-PlayerPrefs.SetFloat("Position2Y", SectionPositionsList[2].y);
-PlayerPrefs.SetFloat("Position2Z", SectionPositionsList[2].z);
-PlayerPrefs.SetFloat("Position3X", SectionPositionsList[3].x);
-PlayerPrefs.SetFloat("Position3Y", SectionPositionsList[3].y);
-PlayerPrefs.SetFloat("Position3Z", SectionPositionsList[3].z);
-PlayerPrefs.SetFloat("Position4X", SectionPositionsList[4].x);
-PlayerPrefs.SetFloat("Position4Y", SectionPositionsList[4].y);
-PlayerPrefs.SetFloat("Position4Z", SectionPositionsList[4].z);
-PlayerPrefs.SetFloat("Position5X", SectionPositionsList[5].x);
-PlayerPrefs.SetFloat("Position5Y", SectionPositionsList[5].y);
-PlayerPrefs.SetFloat("Position5Z", SectionPositionsList[5].z);
-PlayerPrefs.SetFloat("Position6X", SectionPositionsList[6].x);
-PlayerPrefs.SetFloat("Position6Y", SectionPositionsList[6].y);
-PlayerPrefs.SetFloat("Position6Z", SectionPositionsList[6].z);
-PlayerPrefs.SetFloat("Position7X", SectionPositionsList[7].x);
-PlayerPrefs.SetFloat("Position7Y", SectionPositionsList[7].y);
-PlayerPrefs.SetFloat("Position7Z", SectionPositionsList[7].z);
-PlayerPrefs.SetFloat("Position8X", SectionPositionsList[8].x);
-PlayerPrefs.SetFloat("Position8Y", SectionPositionsList[8].y);
-PlayerPrefs.SetFloat("Position8Z", SectionPositionsList[8].z);
-PlayerPrefs.SetFloat("Position9X", SectionPositionsList[9].x);
-PlayerPrefs.SetFloat("Position9Y", SectionPositionsList[9].y);
-PlayerPrefs.SetFloat("Position9Z", SectionPositionsList[9].z);
-PlayerPrefs.SetFloat("Position10X", SectionPositionsList[10].x);
-PlayerPrefs.SetFloat("Position10Y", SectionPositionsList[10].y);
-PlayerPrefs.SetFloat("Position10Z", SectionPositionsList[10].z);
-PlayerPrefs.SetFloat("Position11X", SectionPositionsList[11].x);
-PlayerPrefs.SetFloat("Position11Y", SectionPositionsList[11].y);
-PlayerPrefs.SetFloat("Position11Z", SectionPositionsList[11].z);
-PlayerPrefs.SetFloat("Position12X", SectionPositionsList[12].x);
-PlayerPrefs.SetFloat("Position12Y", SectionPositionsList[12].y);
-PlayerPrefs.SetFloat("Position12Z", SectionPositionsList[12].z);
-PlayerPrefs.SetFloat("Position13X", SectionPositionsList[13].x);
-PlayerPrefs.SetFloat("Position13Y", SectionPositionsList[13].y);
-PlayerPrefs.SetFloat("Position13Z", SectionPositionsList[13].z);
-PlayerPrefs.SetFloat("Position14X", SectionPositionsList[14].x);
-PlayerPrefs.SetFloat("Position14Y", SectionPositionsList[14].y);
-PlayerPrefs.SetFloat("Position14Z", SectionPositionsList[14].z);
-PlayerPrefs.SetFloat("Position15X", SectionPositionsList[15].x);
-PlayerPrefs.SetFloat("Position15Y", SectionPositionsList[15].y);
-PlayerPrefs.SetFloat("Position15Z", SectionPositionsList[15].z);
+    private void _LoadPlayerPrefsLong()
+    {
+        for (int i = 2; i < SectionIsSelectedList.Count; i++)
+            SectionIsSelectedList[i] = true;
+        
+        gReconLoadLong.SetActive(false);
 
-PlayerPrefs.SetFloat("Rotation2X", SectionRotationsList[2].x);
-PlayerPrefs.SetFloat("Rotation2Y", SectionRotationsList[2].y);
-PlayerPrefs.SetFloat("Rotation2Z", SectionRotationsList[2].z);
-PlayerPrefs.SetFloat("Rotation3X", SectionRotationsList[3].x);
-PlayerPrefs.SetFloat("Rotation3Y", SectionRotationsList[3].y);
-PlayerPrefs.SetFloat("Rotation3Z", SectionRotationsList[3].z);
-PlayerPrefs.SetFloat("Rotation4X", SectionRotationsList[4].x);
-PlayerPrefs.SetFloat("Rotation4Y", SectionRotationsList[4].y);
-PlayerPrefs.SetFloat("Rotation4Z", SectionRotationsList[4].z);
-PlayerPrefs.SetFloat("Rotation5X", SectionRotationsList[5].x);
-PlayerPrefs.SetFloat("Rotation5Y", SectionRotationsList[5].y);
-PlayerPrefs.SetFloat("Rotation5Z", SectionRotationsList[5].z);
-PlayerPrefs.SetFloat("Rotation6X", SectionRotationsList[6].x);
-PlayerPrefs.SetFloat("Rotation6Y", SectionRotationsList[6].y);
-PlayerPrefs.SetFloat("Rotation6Z", SectionRotationsList[6].z);
-PlayerPrefs.SetFloat("Rotation7X", SectionRotationsList[7].x);
-PlayerPrefs.SetFloat("Rotation7Y", SectionRotationsList[7].y);
-PlayerPrefs.SetFloat("Rotation7Z", SectionRotationsList[7].z);
-PlayerPrefs.SetFloat("Rotation8X", SectionRotationsList[8].x);
-PlayerPrefs.SetFloat("Rotation8Y", SectionRotationsList[8].y);
-PlayerPrefs.SetFloat("Rotation8Z", SectionRotationsList[8].z);
-PlayerPrefs.SetFloat("Rotation9X", SectionRotationsList[9].x);
-PlayerPrefs.SetFloat("Rotation9Y", SectionRotationsList[9].y);
-PlayerPrefs.SetFloat("Rotation9Z", SectionRotationsList[9].z);
-PlayerPrefs.SetFloat("Rotation10X", SectionRotationsList[10].x);
-PlayerPrefs.SetFloat("Rotation10Y", SectionRotationsList[10].y);
-PlayerPrefs.SetFloat("Rotation10Z", SectionRotationsList[10].z);
-PlayerPrefs.SetFloat("Rotation11X", SectionRotationsList[11].x);
-PlayerPrefs.SetFloat("Rotation11Y", SectionRotationsList[11].y);
-PlayerPrefs.SetFloat("Rotation11Z", SectionRotationsList[11].z);
-PlayerPrefs.SetFloat("Rotation12X", SectionRotationsList[12].x);
-PlayerPrefs.SetFloat("Rotation12Y", SectionRotationsList[12].y);
-PlayerPrefs.SetFloat("Rotation12Z", SectionRotationsList[12].z);
-PlayerPrefs.SetFloat("Rotation13X", SectionRotationsList[13].x);
-PlayerPrefs.SetFloat("Rotation13Y", SectionRotationsList[13].y);
-PlayerPrefs.SetFloat("Rotation13Z", SectionRotationsList[13].z);
-PlayerPrefs.SetFloat("Rotation14X", SectionRotationsList[14].x);
-PlayerPrefs.SetFloat("Rotation14Y", SectionRotationsList[14].y);
-PlayerPrefs.SetFloat("Rotation14Z", SectionRotationsList[14].z);
-PlayerPrefs.SetFloat("Rotation15X", SectionRotationsList[15].x);
-PlayerPrefs.SetFloat("Rotation15Y", SectionRotationsList[15].y);
-PlayerPrefs.SetFloat("Rotation15Z", SectionRotationsList[15].z);
-}
+        SectionPacenoteList[2] = PlayerPrefs.GetInt("Pacenote2");
+        SectionPacenoteList[3] = PlayerPrefs.GetInt("Pacenote3");
+        SectionPacenoteList[4] = PlayerPrefs.GetInt("Pacenote4");
+        SectionPacenoteList[5] = PlayerPrefs.GetInt("Pacenote5");
+        SectionPacenoteList[6] = PlayerPrefs.GetInt("Pacenote6");
+        SectionPacenoteList[7] = PlayerPrefs.GetInt("Pacenote7");
+        SectionPacenoteList[8] = PlayerPrefs.GetInt("Pacenote8");
+        SectionPacenoteList[9] = PlayerPrefs.GetInt("Pacenote9");
+        SectionPacenoteList[10] = PlayerPrefs.GetInt("Pacenote10");
+        SectionPacenoteList[11] = PlayerPrefs.GetInt("Pacenote11");
+        SectionPacenoteList[12] = PlayerPrefs.GetInt("Pacenote12");
+        SectionPacenoteList[13] = PlayerPrefs.GetInt("Pacenote13");
+        SectionPacenoteList[14] = PlayerPrefs.GetInt("Pacenote14");
+        SectionPacenoteList[15] = PlayerPrefs.GetInt("Pacenote15");
+        if (SceneManager.GetActiveScene().name == "Day1N") SectionPacenoteList[16] = PlayerPrefs.GetInt("Pacenote16");
 
-private void _LoadPlayerPrefsLong()
-{
-for (int i = 2; i < SectionIsSelectedList.Count; i++)
-    SectionIsSelectedList[i] = true;
+        SectionHeightList[2] = PlayerPrefs.GetFloat("Height2");
+        SectionHeightList[3] = PlayerPrefs.GetFloat("Height3");
+        SectionHeightList[4] = PlayerPrefs.GetFloat("Height4");
+        SectionHeightList[5] = PlayerPrefs.GetFloat("Height5");
+        SectionHeightList[6] = PlayerPrefs.GetFloat("Height6");
+        SectionHeightList[7] = PlayerPrefs.GetFloat("Height7");
+        SectionHeightList[8] = PlayerPrefs.GetFloat("Height8");
+        SectionHeightList[9] = PlayerPrefs.GetFloat("Height9");
+        SectionHeightList[10] = PlayerPrefs.GetFloat("Height10");
+        SectionHeightList[11] = PlayerPrefs.GetFloat("Height11");
+        SectionHeightList[12] = PlayerPrefs.GetFloat("Height12");
+        SectionHeightList[13] = PlayerPrefs.GetFloat("Height13");
+        SectionHeightList[14] = PlayerPrefs.GetFloat("Height14");
+        SectionHeightList[15] = PlayerPrefs.GetFloat("Height15");
+        if (SceneManager.GetActiveScene().name == "Day1N") SectionHeightList[16] = PlayerPrefs.GetFloat("Height16");
 
-_SectionManager.DisplayAllAsSelected();
+        SectionAccelerationList[2] = PlayerPrefs.GetFloat("Acceleration2");
+        SectionAccelerationList[3] = PlayerPrefs.GetFloat("Acceleration3");
+        SectionAccelerationList[4] = PlayerPrefs.GetFloat("Acceleration4");
+        SectionAccelerationList[5] = PlayerPrefs.GetFloat("Acceleration5");
+        SectionAccelerationList[6] = PlayerPrefs.GetFloat("Acceleration6");
+        SectionAccelerationList[7] = PlayerPrefs.GetFloat("Acceleration7");
+        SectionAccelerationList[8] = PlayerPrefs.GetFloat("Acceleration8");
+        SectionAccelerationList[9] = PlayerPrefs.GetFloat("Acceleration9");
+        SectionAccelerationList[10] = PlayerPrefs.GetFloat("Acceleration10");
+        SectionAccelerationList[11] = PlayerPrefs.GetFloat("Acceleration11");
+        SectionAccelerationList[12] = PlayerPrefs.GetFloat("Acceleration12");
+        SectionAccelerationList[13] = PlayerPrefs.GetFloat("Acceleration13");
+        SectionAccelerationList[14] = PlayerPrefs.GetFloat("Acceleration14");
+        SectionAccelerationList[15] = PlayerPrefs.GetFloat("Acceleration15");
+        if (SceneManager.GetActiveScene().name == "Day1N") SectionAccelerationList[16] = PlayerPrefs.GetFloat("Acceleration16");
 
-gReconLoadLong.SetActive(false);
+        SectionPositionsList[2] = new Vector3(PlayerPrefs.GetFloat("Position2X"), PlayerPrefs.GetFloat("Position2Y"),
+            PlayerPrefs.GetFloat("Position2Z"));
+        SectionPositionsList[3] = new Vector3(PlayerPrefs.GetFloat("Position3X"), PlayerPrefs.GetFloat("Position3Y"),
+            PlayerPrefs.GetFloat("Position3Z"));
+        SectionPositionsList[4] = new Vector3(PlayerPrefs.GetFloat("Position4X"), PlayerPrefs.GetFloat("Position4Y"),
+            PlayerPrefs.GetFloat("Position4Z"));
+        SectionPositionsList[5] = new Vector3(PlayerPrefs.GetFloat("Position5X"), PlayerPrefs.GetFloat("Position5Y"),
+            PlayerPrefs.GetFloat("Position5Z"));
+        SectionPositionsList[6] = new Vector3(PlayerPrefs.GetFloat("Position6X"), PlayerPrefs.GetFloat("Position6Y"),
+            PlayerPrefs.GetFloat("Position6Z"));
+        SectionPositionsList[7] = new Vector3(PlayerPrefs.GetFloat("Position7X"), PlayerPrefs.GetFloat("Position7Y"),
+            PlayerPrefs.GetFloat("Position7Z"));
+        SectionPositionsList[8] = new Vector3(PlayerPrefs.GetFloat("Position8X"), PlayerPrefs.GetFloat("Position8Y"),
+            PlayerPrefs.GetFloat("Position8Z"));
+        SectionPositionsList[9] = new Vector3(PlayerPrefs.GetFloat("Position9X"), PlayerPrefs.GetFloat("Position9Y"),
+            PlayerPrefs.GetFloat("Position9Z"));
+        SectionPositionsList[10] = new Vector3(PlayerPrefs.GetFloat("Position10X"), PlayerPrefs.GetFloat("Position10Y"),
+            PlayerPrefs.GetFloat("Position10Z"));
+        SectionPositionsList[11] = new Vector3(PlayerPrefs.GetFloat("Position11X"), PlayerPrefs.GetFloat("Position11Y"),
+            PlayerPrefs.GetFloat("Position11Z"));
+        SectionPositionsList[12] = new Vector3(PlayerPrefs.GetFloat("Position12X"), PlayerPrefs.GetFloat("Position12Y"),
+            PlayerPrefs.GetFloat("Position12Z"));
+        SectionPositionsList[13] = new Vector3(PlayerPrefs.GetFloat("Position13X"), PlayerPrefs.GetFloat("Position13Y"),
+            PlayerPrefs.GetFloat("Position13Z"));
+        SectionPositionsList[14] = new Vector3(PlayerPrefs.GetFloat("Position14X"), PlayerPrefs.GetFloat("Position14Y"),
+            PlayerPrefs.GetFloat("Position14Z"));
+        SectionPositionsList[15] = new Vector3(PlayerPrefs.GetFloat("Position15X"), PlayerPrefs.GetFloat("Position15Y"),
+            PlayerPrefs.GetFloat("Position15Z"));
+        if (SceneManager.GetActiveScene().name == "Day1N") 
+            SectionPositionsList[16] = new Vector3(PlayerPrefs.GetFloat("Position16X"), PlayerPrefs.GetFloat("Position16Y"),
+            PlayerPrefs.GetFloat("Position16Z"));
 
-SectionPacenoteList[2] = PlayerPrefs.GetInt("Pacenote2");
-SectionPacenoteList[3] = PlayerPrefs.GetInt("Pacenote3");
-SectionPacenoteList[4] = PlayerPrefs.GetInt("Pacenote4");
-SectionPacenoteList[5] = PlayerPrefs.GetInt("Pacenote5");
-SectionPacenoteList[6] = PlayerPrefs.GetInt("Pacenote6");
-SectionPacenoteList[7] = PlayerPrefs.GetInt("Pacenote7");
-SectionPacenoteList[8] = PlayerPrefs.GetInt("Pacenote8");
-SectionPacenoteList[9] = PlayerPrefs.GetInt("Pacenote9");
-SectionPacenoteList[10] = PlayerPrefs.GetInt("Pacenote10");
-SectionPacenoteList[11] = PlayerPrefs.GetInt("Pacenote11");
-SectionPacenoteList[12] = PlayerPrefs.GetInt("Pacenote12");
-SectionPacenoteList[13] = PlayerPrefs.GetInt("Pacenote13");
-SectionPacenoteList[14] = PlayerPrefs.GetInt("Pacenote14");
-SectionPacenoteList[15] = PlayerPrefs.GetInt("Pacenote15");
+        SectionRotationsList[2] = new Vector3(PlayerPrefs.GetFloat("Rotation2X"), PlayerPrefs.GetFloat("Rotation2Y"),
+            PlayerPrefs.GetFloat("Rotation2Z"));
+        SectionRotationsList[3] = new Vector3(PlayerPrefs.GetFloat("Rotation3X"), PlayerPrefs.GetFloat("Rotation3Y"),
+            PlayerPrefs.GetFloat("Rotation3Z"));
+        SectionRotationsList[4] = new Vector3(PlayerPrefs.GetFloat("Rotation4X"), PlayerPrefs.GetFloat("Rotation4Y"),
+            PlayerPrefs.GetFloat("Rotation4Z"));
+        SectionRotationsList[5] = new Vector3(PlayerPrefs.GetFloat("Rotation5X"), PlayerPrefs.GetFloat("Rotation5Y"),
+            PlayerPrefs.GetFloat("Rotation5Z"));
+        SectionRotationsList[6] = new Vector3(PlayerPrefs.GetFloat("Rotation6X"), PlayerPrefs.GetFloat("Rotation6Y"),
+            PlayerPrefs.GetFloat("Rotation6Z"));
+        SectionRotationsList[7] = new Vector3(PlayerPrefs.GetFloat("Rotation7X"), PlayerPrefs.GetFloat("Rotation7Y"),
+            PlayerPrefs.GetFloat("Rotation7Z"));
+        SectionRotationsList[8] = new Vector3(PlayerPrefs.GetFloat("Rotation8X"), PlayerPrefs.GetFloat("Rotation8Y"),
+            PlayerPrefs.GetFloat("Rotation8Z"));
+        SectionRotationsList[9] = new Vector3(PlayerPrefs.GetFloat("Rotation9X"), PlayerPrefs.GetFloat("Rotation9Y"),
+            PlayerPrefs.GetFloat("Rotation9Z"));
+        SectionRotationsList[10] = new Vector3(PlayerPrefs.GetFloat("Rotation10X"), PlayerPrefs.GetFloat("Rotation10Y"),
+            PlayerPrefs.GetFloat("Rotation10Z"));
+        SectionRotationsList[11] = new Vector3(PlayerPrefs.GetFloat("Rotation11X"), PlayerPrefs.GetFloat("Rotation11Y"),
+            PlayerPrefs.GetFloat("Rotation11Z"));
+        SectionRotationsList[12] = new Vector3(PlayerPrefs.GetFloat("Rotation12X"), PlayerPrefs.GetFloat("Rotation12Y"),
+            PlayerPrefs.GetFloat("Rotation12Z"));
+        SectionRotationsList[13] = new Vector3(PlayerPrefs.GetFloat("Rotation13X"), PlayerPrefs.GetFloat("Rotation13Y"),
+            PlayerPrefs.GetFloat("Rotation13Z"));
+        SectionRotationsList[14] = new Vector3(PlayerPrefs.GetFloat("Rotation14X"), PlayerPrefs.GetFloat("Rotation14Y"),
+            PlayerPrefs.GetFloat("Rotation14Z"));
+        SectionRotationsList[15] = new Vector3(PlayerPrefs.GetFloat("Rotation15X"), PlayerPrefs.GetFloat("Rotation15Y"),
+            PlayerPrefs.GetFloat("Rotation15Z"));
+        if (SceneManager.GetActiveScene().name == "Day1N") 
+            SectionRotationsList[16] = new Vector3(PlayerPrefs.GetFloat("Rotation16X"), PlayerPrefs.GetFloat("Rotation16Y"),
+            PlayerPrefs.GetFloat("Rotation16Z"));
+        
+        for (int id = 2; id < SectionIsSelectedList.Count; id++)
+            _SectionManager.MoveNodes(SectionPacenoteList[id], id, SectionPositionsList[id], SectionRotationsList[id], SectionHeightList[id]);
+        
+        _SectionManager.DisplayAllAsSelected();
+        
+        gFreezeButton.SetActive(true);
+    }
 
-SectionHeightList[2] = PlayerPrefs.GetFloat("Height2");
-SectionHeightList[3] = PlayerPrefs.GetFloat("Height3");
-SectionHeightList[4] = PlayerPrefs.GetFloat("Height4");
-SectionHeightList[5] = PlayerPrefs.GetFloat("Height5");
-SectionHeightList[6] = PlayerPrefs.GetFloat("Height6");
-SectionHeightList[7] = PlayerPrefs.GetFloat("Height7");
-SectionHeightList[8] = PlayerPrefs.GetFloat("Height8");
-SectionHeightList[9] = PlayerPrefs.GetFloat("Height9");
-SectionHeightList[10] = PlayerPrefs.GetFloat("Height10");
-SectionHeightList[11] = PlayerPrefs.GetFloat("Height11");
-SectionHeightList[12] = PlayerPrefs.GetFloat("Height12");
-SectionHeightList[13] = PlayerPrefs.GetFloat("Height13");
-SectionHeightList[14] = PlayerPrefs.GetFloat("Height14");
-SectionHeightList[15] = PlayerPrefs.GetFloat("Height15");
+    private void _DeletePlayerPrefsLong()
+    {
+        gReconLoadLong.SetActive(false);
 
-SectionAccelerationList[2] = PlayerPrefs.GetFloat("Acceleration2");
-SectionAccelerationList[3] = PlayerPrefs.GetFloat("Acceleration3");
-SectionAccelerationList[4] = PlayerPrefs.GetFloat("Acceleration4");
-SectionAccelerationList[5] = PlayerPrefs.GetFloat("Acceleration5");
-SectionAccelerationList[6] = PlayerPrefs.GetFloat("Acceleration6");
-SectionAccelerationList[7] = PlayerPrefs.GetFloat("Acceleration7");
-SectionAccelerationList[8] = PlayerPrefs.GetFloat("Acceleration8");
-SectionAccelerationList[9] = PlayerPrefs.GetFloat("Acceleration9");
-SectionAccelerationList[10] = PlayerPrefs.GetFloat("Acceleration10");
-SectionAccelerationList[11] = PlayerPrefs.GetFloat("Acceleration11");
-SectionAccelerationList[12] = PlayerPrefs.GetFloat("Acceleration12");
-SectionAccelerationList[13] = PlayerPrefs.GetFloat("Acceleration13");
-SectionAccelerationList[14] = PlayerPrefs.GetFloat("Acceleration14");
-SectionAccelerationList[15] = PlayerPrefs.GetFloat("Acceleration15");
+        string user = PlayerPrefs.GetString("User");
+        string password = PlayerPrefs.GetString("Password");
+        string language = PlayerPrefs.GetString("Language");
+        float music = PlayerPrefs.GetFloat("Music");
+        float effects = PlayerPrefs.GetFloat("Effects");
+        float sound = PlayerPrefs.GetFloat("Sound");
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetString("User", user);
+        PlayerPrefs.SetString("Password", password);
+        PlayerPrefs.SetString("Language", language);
+        PlayerPrefs.SetFloat("Music", music);
+        PlayerPrefs.SetFloat("Effects", effects);
+        PlayerPrefs.SetFloat("Sound", sound);
+    }
 
-SectionPositionsList[2] = new Vector3(PlayerPrefs.GetFloat("Position2X"), PlayerPrefs.GetFloat("Position2Y"), PlayerPrefs.GetFloat("Position2Z"));
-SectionPositionsList[3] = new Vector3(PlayerPrefs.GetFloat("Position3X"), PlayerPrefs.GetFloat("Position3Y"), PlayerPrefs.GetFloat("Position3Z"));
-SectionPositionsList[4] = new Vector3(PlayerPrefs.GetFloat("Position4X"), PlayerPrefs.GetFloat("Position4Y"), PlayerPrefs.GetFloat("Position4Z"));
-SectionPositionsList[5] = new Vector3(PlayerPrefs.GetFloat("Position5X"), PlayerPrefs.GetFloat("Position5Y"), PlayerPrefs.GetFloat("Position5Z"));
-SectionPositionsList[6] = new Vector3(PlayerPrefs.GetFloat("Position6X"), PlayerPrefs.GetFloat("Position6Y"), PlayerPrefs.GetFloat("Position6Z"));
-SectionPositionsList[7] = new Vector3(PlayerPrefs.GetFloat("Position7X"), PlayerPrefs.GetFloat("Position7Y"), PlayerPrefs.GetFloat("Position7Z"));
-SectionPositionsList[8] = new Vector3(PlayerPrefs.GetFloat("Position8X"), PlayerPrefs.GetFloat("Position8Y"), PlayerPrefs.GetFloat("Position8Z"));
-SectionPositionsList[9] = new Vector3(PlayerPrefs.GetFloat("Position9X"), PlayerPrefs.GetFloat("Position9Y"), PlayerPrefs.GetFloat("Position9Z"));
-SectionPositionsList[10] = new Vector3(PlayerPrefs.GetFloat("Position10X"), PlayerPrefs.GetFloat("Position10Y"), PlayerPrefs.GetFloat("Position10Z"));
-SectionPositionsList[11] = new Vector3(PlayerPrefs.GetFloat("Position11X"), PlayerPrefs.GetFloat("Position11Y"), PlayerPrefs.GetFloat("Position11Z"));
-SectionPositionsList[12] = new Vector3(PlayerPrefs.GetFloat("Position12X"), PlayerPrefs.GetFloat("Position12Y"), PlayerPrefs.GetFloat("Position12Z"));
-SectionPositionsList[13] = new Vector3(PlayerPrefs.GetFloat("Position13X"), PlayerPrefs.GetFloat("Position13Y"), PlayerPrefs.GetFloat("Position13Z"));
-SectionPositionsList[14] = new Vector3(PlayerPrefs.GetFloat("Position14X"), PlayerPrefs.GetFloat("Position14Y"), PlayerPrefs.GetFloat("Position14Z"));
-SectionPositionsList[15] = new Vector3(PlayerPrefs.GetFloat("Position15X"), PlayerPrefs.GetFloat("Position15Y"), PlayerPrefs.GetFloat("Position15Z"));
+    public void EndTutorial()
+    {
+        gReconCanvas.SetActive(true);
+    }
 
-SectionRotationsList[2] = new Vector3(PlayerPrefs.GetFloat("Rotation2X"), PlayerPrefs.GetFloat("Rotation2Y"), PlayerPrefs.GetFloat("Rotation2Z"));
-SectionRotationsList[3] = new Vector3(PlayerPrefs.GetFloat("Rotation3X"), PlayerPrefs.GetFloat("Rotation3Y"), PlayerPrefs.GetFloat("Rotation3Z"));
-SectionRotationsList[4] = new Vector3(PlayerPrefs.GetFloat("Rotation4X"), PlayerPrefs.GetFloat("Rotation4Y"), PlayerPrefs.GetFloat("Rotation4Z"));
-SectionRotationsList[5] = new Vector3(PlayerPrefs.GetFloat("Rotation5X"), PlayerPrefs.GetFloat("Rotation5Y"), PlayerPrefs.GetFloat("Rotation5Z"));
-SectionRotationsList[6] = new Vector3(PlayerPrefs.GetFloat("Rotation6X"), PlayerPrefs.GetFloat("Rotation6Y"), PlayerPrefs.GetFloat("Rotation6Z"));
-SectionRotationsList[7] = new Vector3(PlayerPrefs.GetFloat("Rotation7X"), PlayerPrefs.GetFloat("Rotation7Y"), PlayerPrefs.GetFloat("Rotation7Z"));
-SectionRotationsList[8] = new Vector3(PlayerPrefs.GetFloat("Rotation8X"), PlayerPrefs.GetFloat("Rotation8Y"), PlayerPrefs.GetFloat("Rotation8Z"));
-SectionRotationsList[9] = new Vector3(PlayerPrefs.GetFloat("Rotation9X"), PlayerPrefs.GetFloat("Rotation9Y"), PlayerPrefs.GetFloat("Rotation9Z"));
-SectionRotationsList[10] = new Vector3(PlayerPrefs.GetFloat("Rotation10X"), PlayerPrefs.GetFloat("Rotation10Y"), PlayerPrefs.GetFloat("Rotation10Z"));
-SectionRotationsList[11] = new Vector3(PlayerPrefs.GetFloat("Rotation11X"), PlayerPrefs.GetFloat("Rotation11Y"), PlayerPrefs.GetFloat("Rotation11Z"));
-SectionRotationsList[12] = new Vector3(PlayerPrefs.GetFloat("Rotation12X"), PlayerPrefs.GetFloat("Rotation12Y"), PlayerPrefs.GetFloat("Rotation12Z"));
-SectionRotationsList[13] = new Vector3(PlayerPrefs.GetFloat("Rotation13X"), PlayerPrefs.GetFloat("Rotation13Y"), PlayerPrefs.GetFloat("Rotation13Z"));
-SectionRotationsList[14] = new Vector3(PlayerPrefs.GetFloat("Rotation14X"), PlayerPrefs.GetFloat("Rotation14Y"), PlayerPrefs.GetFloat("Rotation14Z"));
-SectionRotationsList[15] = new Vector3(PlayerPrefs.GetFloat("Rotation15X"), PlayerPrefs.GetFloat("Rotation15Y"), PlayerPrefs.GetFloat("Rotation15Z"));
-}
+    private void Awake()
+    {
+        if (SceneManager.GetActiveScene().name == "Day1M") NUM_CHECKPOINTS = 16;
+        if (SceneManager.GetActiveScene().name == "Day1N") NUM_CHECKPOINTS = 17;
+        
+        Application.targetFrameRate = 60;
+        _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileTimeTables.txt";
+        _InitLists(NUM_CHECKPOINTS);
+        _InitButtons();
+        _LoadPlayerPrefs();
 
-private void _DeletePlayerPrefsLong()
-{
-gReconLoadLong.SetActive(false);
+        _PauseGame();
+        _SectionManager = GetComponent<SectionManager>();
+        _SoundManager = gAudioManager.GetComponent<SoundManager>();
+        ChangeGear();
+        ChangeKPH();
+        if (PlayerPrefs.HasKey("Position9Z") && PlayerPrefs.GetFloat("Position9Z") != 0.0f)
+            gReconLoadLong.SetActive(true);
+    }
 
-string user = PlayerPrefs.GetString("User");
-string language = PlayerPrefs.GetString("Language");
-PlayerPrefs.DeleteAll();
-PlayerPrefs.SetString("User", user);
-PlayerPrefs.SetString("Language", language);
-}
+    private void Start()
+    {
+        _InitAudio();
+        StartCoroutine(GetOil());
+    }
 
-public void EndTutorial() { gReconCanvas.SetActive(true); }
+    private void FixedUpdate()
+    {
+        _fDamage = _Controller.GetDmg;
+        DmgUpdate();
+        bool isDamaged = _fDamage >= 100.0f;
+        bool noFuel = _fGasoline < 0.0f;
+        // Add || _isOut when roads are finished
+        if (isDamaged || noFuel || _isOut)
+        {
+            _GameOver(isDamaged, noFuel, _isOut);
+            _Controller.StopCar();
+        }
+    }
 
-private void Awake()
-{
-Application.targetFrameRate = 60;
-_sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileTimeTables.txt";
-_InitLists();
-_InitButtons();
-_LoadPlayerPrefs();
+    private void Update()
+    {
+        if (_hasStarted)
+        {
+            _fTime += (Time.deltaTime);
+            _SetText();
+        }
+    }
 
-_PauseGame();
-_SectionManager = GetComponent<SectionManager>();
-_SoundManager = gAudioManager.GetComponent<SoundManager>();
-ChangeGear();
-ChangeKPH();
-if (PlayerPrefs.HasKey("Position9Z") && PlayerPrefs.GetFloat("Position9Z") != 0.0f)
-    gReconLoadLong.SetActive(true);
-}
-
-private void Start()
-{
-_InitAudio();
-StartCoroutine(GetOil());
-}
-
-private void FixedUpdate()
-{
-_fDamage = _Controller.GetDmg;
-DmgUpdate();
-bool isDamaged = _fDamage >= 100.0f;
-bool noFuel = _fGasoline < 0.0f;
-// Add || _isOut when roads are finished
-if (isDamaged || noFuel)
-{
-    _GameOver(isDamaged, noFuel, false);
-    _Controller.StopCar();
-}
-}
-
-private void Update()
-{
-if (_hasStarted)
-{
-    _fTime += (Time.deltaTime);
-    _SetText();
-}
-}
-
-private IEnumerator GetOil()
-{
-while (true)
-{
-    yield return new WaitForSeconds(1.0f);
-    _fGasoline = _Controller.GetGas;
-    _isOut = _Controller.IsOutOfTrack;
-    OilUpdate();
-}
-}
+    private IEnumerator GetOil()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            _fGasoline = _Controller.GetGas;
+            _isOut = _Controller.IsOutOfTrack;
+            OilUpdate();
+        }
+    }
 }
