@@ -230,11 +230,29 @@ public class PrefsManager : MonoBehaviour
         SceneManager.LoadScene("Menu"); 
     }
 
+    private void _DeletePlayerPrefsLong()
+    {
+        string user = PlayerPrefs.GetString("User");
+        string password = PlayerPrefs.GetString("Password");
+        string language = PlayerPrefs.GetString("Language");
+        float music = PlayerPrefs.GetFloat("Music");
+        float effects = PlayerPrefs.GetFloat("Effects");
+        float sound = PlayerPrefs.GetFloat("Sound");
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetString("User", user);
+        PlayerPrefs.SetString("Password", password);
+        PlayerPrefs.SetString("Language", language);
+        PlayerPrefs.SetFloat("Music", music);
+        PlayerPrefs.SetFloat("Effects", effects);
+        PlayerPrefs.SetFloat("Sound", sound);
+    }
+    
     private void _LoadStage()
     {
+        _DeletePlayerPrefsLong();
         if (_iStage == 0) SceneManager.LoadScene("Day1M");
-        else if (_iStage == 1) SceneManager.LoadScene("Day1M");
-        else if (_iStage == 2) SceneManager.LoadScene("Day1M");
+        else if (_iStage == 1) SceneManager.LoadScene("Day1N");
+        else if (_iStage == 2) SceneManager.LoadScene("Day2A");
     }
 
     public void _BackLog(GameObject canvas)
@@ -397,6 +415,13 @@ public class PrefsManager : MonoBehaviour
         childObject.transform.parent = gToRotate.transform;
         _StopCar();
         _LoadPlayerPrefs();
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == _iStage)
+                _StagesList[_iStage].SetActive(true);
+            else
+                _StagesList[i].SetActive(false);
+        }
     }
     
     private void Start()

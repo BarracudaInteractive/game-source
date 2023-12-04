@@ -71,6 +71,8 @@ public class CheckpointHandler : MonoBehaviour
     private float _fHeight = 0.0f;
     
     public float SetHigh { set => _fHeight = value; }
+    
+    public float GetId() { return iId; }
 
     private void _SectionSetActive()
     {
