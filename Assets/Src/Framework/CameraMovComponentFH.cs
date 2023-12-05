@@ -88,6 +88,8 @@ public class CameraMovComponentFH : MonoBehaviour
     { 
         transform.position = gInitCameraPosition.transform.position;
     }
+
+    public bool IsSelectingCheckpoint() { return _selectingCheckpoint; }
     
     private void _UpdateCameraTarget() 
     { 
@@ -253,7 +255,7 @@ public class CameraMovComponentFH : MonoBehaviour
         _RotationTargetQuaternion = transform.rotation;
         _lookAtConstraint = GetComponentInChildren<LookAtConstraint>();
         
-        if (SceneManager.GetActiveScene().name == "Day1N")
+        if (SceneManager.GetActiveScene().name == "Day1N" || SceneManager.GetActiveScene().name == "Day2A")
         {
             _playingTutorial = false;
             _lookAtConstraint.enabled = false;

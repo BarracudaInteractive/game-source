@@ -283,37 +283,42 @@ public class SectionManager : MonoBehaviour
     
     private void _Submit()
     {
-        if (_iPositions > 1)
+        if (!_CameraMovComponentFH.IsSelectingCheckpoint())
         {
-            CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
-            _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
-            _GameManager.SectionPacenoteList[_iCurrentPosition] = _iCurrentPacenote;
-            _GameManager.SectionHeightList[_iCurrentPosition] = BASE_HEIGHT + _fCurrentHeight;
-            _GameManager.SectionAccelerationList[_iCurrentPosition] = _fTemperValue;
-            _GameManager.SectionPositionsList[_iCurrentPosition] = CurrentPos[_iPositionsContra];
-            _GameManager.SectionRotationsList[_iCurrentPosition] = CurrentRot[_iPositionsContra];
-            _iCurrentPosition++;
-            _iPositionsContra++;
-            _iPositions--;
-            _SetText();
-            _CameraMovComponentFH.CameraBetweenCheckpoints(CollidersArray[_iCurrentPosition], true);
-        }
-        // Last checkpoint
-        else 
-        {
-            CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
-            _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
-            _GameManager.SectionPacenoteList[_iCurrentPosition] = _iCurrentPacenote;
-            _GameManager.SectionHeightList[_iCurrentPosition] = BASE_HEIGHT + _fCurrentHeight;
-            _GameManager.SectionAccelerationList[_iCurrentPosition] = _fTemperValue;
-            _GameManager.SectionPositionsList[_iCurrentPosition] = CurrentPos[_iPositionsContra];
-            _GameManager.SectionRotationsList[_iCurrentPosition] = CurrentRot[_iPositionsContra];
-            SectionSetCanvas.SetActive(false);
-            CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().DisplayAsSelected();
-            _CameraMovComponentFH.CameraBetweenCheckpoints(gCamera, false);
-            
-            if(_GameManager.AllCheckpointsSelected())
-                _GameManager.DisplayPlayButton();
+            if (_iPositions > 1)
+            {
+                CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>()
+                    .ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
+                _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
+                _GameManager.SectionPacenoteList[_iCurrentPosition] = _iCurrentPacenote;
+                _GameManager.SectionHeightList[_iCurrentPosition] = BASE_HEIGHT + _fCurrentHeight;
+                _GameManager.SectionAccelerationList[_iCurrentPosition] = _fTemperValue;
+                _GameManager.SectionPositionsList[_iCurrentPosition] = CurrentPos[_iPositionsContra];
+                _GameManager.SectionRotationsList[_iCurrentPosition] = CurrentRot[_iPositionsContra];
+                _iCurrentPosition++;
+                _iPositionsContra++;
+                _iPositions--;
+                _SetText();
+                _CameraMovComponentFH.CameraBetweenCheckpoints(CollidersArray[_iCurrentPosition], true);
+            }
+            // Last checkpoint
+            else
+            {
+                CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>()
+                    .ShowPacenoteSelected(_iCurrentPacenote, _iPositionsContra);
+                _GameManager.SectionIsSelectedList[_iCurrentPosition] = true;
+                _GameManager.SectionPacenoteList[_iCurrentPosition] = _iCurrentPacenote;
+                _GameManager.SectionHeightList[_iCurrentPosition] = BASE_HEIGHT + _fCurrentHeight;
+                _GameManager.SectionAccelerationList[_iCurrentPosition] = _fTemperValue;
+                _GameManager.SectionPositionsList[_iCurrentPosition] = CurrentPos[_iPositionsContra];
+                _GameManager.SectionRotationsList[_iCurrentPosition] = CurrentRot[_iPositionsContra];
+                SectionSetCanvas.SetActive(false);
+                CheckpointArray[_iCurrentCheckpoint].GetComponent<CheckpointHandler>().DisplayAsSelected();
+                _CameraMovComponentFH.CameraBetweenCheckpoints(gCamera, false);
+
+                if (_GameManager.AllCheckpointsSelected())
+                    _GameManager.DisplayPlayButton();
+            }
         }
         
     }

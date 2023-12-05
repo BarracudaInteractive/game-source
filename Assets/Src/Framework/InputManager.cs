@@ -75,7 +75,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         _Controller = GetComponent<Controller>();
-        if (SceneManager.GetActiveScene().name == "Day1N")
+        if (SceneManager.GetActiveScene().name == "Day1N" || SceneManager.GetActiveScene().name == "Day2A")
         {
             _fAcceleration = 0.2f;
             _iDistanceOffset = 3;

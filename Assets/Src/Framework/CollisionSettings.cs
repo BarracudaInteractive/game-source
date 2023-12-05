@@ -64,6 +64,7 @@ public class CollisionSettings : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Day1M") LAST_CHECKPOINT = 16;
         if (SceneManager.GetActiveScene().name == "Day1N") LAST_CHECKPOINT = 17;
+        if (SceneManager.GetActiveScene().name == "Day2A") LAST_CHECKPOINT = 14;
         
         if (iId != LAST_CHECKPOINT)
         {
