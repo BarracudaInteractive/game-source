@@ -423,6 +423,7 @@ public class GameManager : MonoBehaviour
         _DeletePlayerPrefsLong();
         if (SceneManager.GetActiveScene().name == "Day1M") SceneManager.LoadScene("Day1N");
         if (SceneManager.GetActiveScene().name == "Day1N") SceneManager.LoadScene("Day2A");
+        if (SceneManager.GetActiveScene().name == "Day2A") SceneManager.LoadScene("Prefs");
     }
 
     public void EndScreen(float time, float fuel, float damage)
@@ -645,8 +646,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Pacenote11", SectionPacenoteList[11]);
         PlayerPrefs.SetInt("Pacenote12", SectionPacenoteList[12]);
         PlayerPrefs.SetInt("Pacenote13", SectionPacenoteList[13]);
-        PlayerPrefs.SetInt("Pacenote14", SectionPacenoteList[14]);
-        PlayerPrefs.SetInt("Pacenote15", SectionPacenoteList[15]);
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetInt("Pacenote14", SectionPacenoteList[14]);
+            PlayerPrefs.SetInt("Pacenote15", SectionPacenoteList[15]);
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") PlayerPrefs.SetInt("Pacenote16", SectionPacenoteList[16]);
 
         PlayerPrefs.SetFloat("Height2", SectionHeightList[2]);
@@ -661,8 +665,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("Height11", SectionHeightList[11]);
         PlayerPrefs.SetFloat("Height12", SectionHeightList[12]);
         PlayerPrefs.SetFloat("Height13", SectionHeightList[13]);
-        PlayerPrefs.SetFloat("Height14", SectionHeightList[14]);
-        PlayerPrefs.SetFloat("Height15", SectionHeightList[15]);
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetFloat("Height14", SectionHeightList[14]);
+            PlayerPrefs.SetFloat("Height15", SectionHeightList[15]);
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") PlayerPrefs.SetFloat("Height16", SectionHeightList[16]);
         
         PlayerPrefs.SetFloat("Acceleration2", SectionAccelerationList[2]);
@@ -677,8 +684,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("Acceleration11", SectionAccelerationList[11]);
         PlayerPrefs.SetFloat("Acceleration12", SectionAccelerationList[12]);
         PlayerPrefs.SetFloat("Acceleration13", SectionAccelerationList[13]);
-        PlayerPrefs.SetFloat("Acceleration14", SectionAccelerationList[14]);
-        PlayerPrefs.SetFloat("Acceleration15", SectionAccelerationList[15]);
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetFloat("Acceleration14", SectionAccelerationList[14]);
+            PlayerPrefs.SetFloat("Acceleration15", SectionAccelerationList[15]);
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") PlayerPrefs.SetFloat("Acceleration16", SectionAccelerationList[16]);
         
         PlayerPrefs.SetFloat("Position2X", SectionPositionsList[2].x);
@@ -717,12 +727,15 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("Position13X", SectionPositionsList[13].x);
         PlayerPrefs.SetFloat("Position13Y", SectionPositionsList[13].y);
         PlayerPrefs.SetFloat("Position13Z", SectionPositionsList[13].z);
-        PlayerPrefs.SetFloat("Position14X", SectionPositionsList[14].x);
-        PlayerPrefs.SetFloat("Position14Y", SectionPositionsList[14].y);
-        PlayerPrefs.SetFloat("Position14Z", SectionPositionsList[14].z);
-        PlayerPrefs.SetFloat("Position15X", SectionPositionsList[15].x);
-        PlayerPrefs.SetFloat("Position15Y", SectionPositionsList[15].y);
-        PlayerPrefs.SetFloat("Position15Z", SectionPositionsList[15].z);
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetFloat("Position14X", SectionPositionsList[14].x);
+            PlayerPrefs.SetFloat("Position14Y", SectionPositionsList[14].y);
+            PlayerPrefs.SetFloat("Position14Z", SectionPositionsList[14].z);
+            PlayerPrefs.SetFloat("Position15X", SectionPositionsList[15].x);
+            PlayerPrefs.SetFloat("Position15Y", SectionPositionsList[15].y);
+            PlayerPrefs.SetFloat("Position15Z", SectionPositionsList[15].z);
+        }
         if (SceneManager.GetActiveScene().name == "Day1N")
         {
             PlayerPrefs.SetFloat("Position16X", SectionPositionsList[16].x);
@@ -766,12 +779,15 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("Rotation13X", SectionRotationsList[13].x);
         PlayerPrefs.SetFloat("Rotation13Y", SectionRotationsList[13].y);
         PlayerPrefs.SetFloat("Rotation13Z", SectionRotationsList[13].z);
-        PlayerPrefs.SetFloat("Rotation14X", SectionRotationsList[14].x);
-        PlayerPrefs.SetFloat("Rotation14Y", SectionRotationsList[14].y);
-        PlayerPrefs.SetFloat("Rotation14Z", SectionRotationsList[14].z);
-        PlayerPrefs.SetFloat("Rotation15X", SectionRotationsList[15].x);
-        PlayerPrefs.SetFloat("Rotation15Y", SectionRotationsList[15].y);
-        PlayerPrefs.SetFloat("Rotation15Z", SectionRotationsList[15].z);
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            PlayerPrefs.SetFloat("Rotation14X", SectionRotationsList[14].x);
+            PlayerPrefs.SetFloat("Rotation14Y", SectionRotationsList[14].y);
+            PlayerPrefs.SetFloat("Rotation14Z", SectionRotationsList[14].z);
+            PlayerPrefs.SetFloat("Rotation15X", SectionRotationsList[15].x);
+            PlayerPrefs.SetFloat("Rotation15Y", SectionRotationsList[15].y);
+            PlayerPrefs.SetFloat("Rotation15Z", SectionRotationsList[15].z);
+        }
         if (SceneManager.GetActiveScene().name == "Day1N")
         {
             PlayerPrefs.SetFloat("Rotation16X", SectionRotationsList[16].x);
@@ -799,8 +815,11 @@ public class GameManager : MonoBehaviour
         SectionPacenoteList[11] = PlayerPrefs.GetInt("Pacenote11");
         SectionPacenoteList[12] = PlayerPrefs.GetInt("Pacenote12");
         SectionPacenoteList[13] = PlayerPrefs.GetInt("Pacenote13");
-        SectionPacenoteList[14] = PlayerPrefs.GetInt("Pacenote14");
-        SectionPacenoteList[15] = PlayerPrefs.GetInt("Pacenote15");
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            SectionPacenoteList[14] = PlayerPrefs.GetInt("Pacenote14");
+            SectionPacenoteList[15] = PlayerPrefs.GetInt("Pacenote15");
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") SectionPacenoteList[16] = PlayerPrefs.GetInt("Pacenote16");
 
         SectionHeightList[2] = PlayerPrefs.GetFloat("Height2");
@@ -815,8 +834,11 @@ public class GameManager : MonoBehaviour
         SectionHeightList[11] = PlayerPrefs.GetFloat("Height11");
         SectionHeightList[12] = PlayerPrefs.GetFloat("Height12");
         SectionHeightList[13] = PlayerPrefs.GetFloat("Height13");
-        SectionHeightList[14] = PlayerPrefs.GetFloat("Height14");
-        SectionHeightList[15] = PlayerPrefs.GetFloat("Height15");
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            SectionHeightList[14] = PlayerPrefs.GetFloat("Height14");
+            SectionHeightList[15] = PlayerPrefs.GetFloat("Height15");
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") SectionHeightList[16] = PlayerPrefs.GetFloat("Height16");
 
         SectionAccelerationList[2] = PlayerPrefs.GetFloat("Acceleration2");
@@ -831,8 +853,11 @@ public class GameManager : MonoBehaviour
         SectionAccelerationList[11] = PlayerPrefs.GetFloat("Acceleration11");
         SectionAccelerationList[12] = PlayerPrefs.GetFloat("Acceleration12");
         SectionAccelerationList[13] = PlayerPrefs.GetFloat("Acceleration13");
-        SectionAccelerationList[14] = PlayerPrefs.GetFloat("Acceleration14");
-        SectionAccelerationList[15] = PlayerPrefs.GetFloat("Acceleration15");
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            SectionAccelerationList[14] = PlayerPrefs.GetFloat("Acceleration14");
+            SectionAccelerationList[15] = PlayerPrefs.GetFloat("Acceleration15");
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") SectionAccelerationList[16] = PlayerPrefs.GetFloat("Acceleration16");
 
         SectionPositionsList[2] = new Vector3(PlayerPrefs.GetFloat("Position2X"), PlayerPrefs.GetFloat("Position2Y"),
@@ -859,10 +884,15 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.GetFloat("Position12Z"));
         SectionPositionsList[13] = new Vector3(PlayerPrefs.GetFloat("Position13X"), PlayerPrefs.GetFloat("Position13Y"),
             PlayerPrefs.GetFloat("Position13Z"));
-        SectionPositionsList[14] = new Vector3(PlayerPrefs.GetFloat("Position14X"), PlayerPrefs.GetFloat("Position14Y"),
-            PlayerPrefs.GetFloat("Position14Z"));
-        SectionPositionsList[15] = new Vector3(PlayerPrefs.GetFloat("Position15X"), PlayerPrefs.GetFloat("Position15Y"),
-            PlayerPrefs.GetFloat("Position15Z"));
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            SectionPositionsList[14] = new Vector3(PlayerPrefs.GetFloat("Position14X"),
+                PlayerPrefs.GetFloat("Position14Y"),
+                PlayerPrefs.GetFloat("Position14Z"));
+            SectionPositionsList[15] = new Vector3(PlayerPrefs.GetFloat("Position15X"),
+                PlayerPrefs.GetFloat("Position15Y"),
+                PlayerPrefs.GetFloat("Position15Z"));
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") 
             SectionPositionsList[16] = new Vector3(PlayerPrefs.GetFloat("Position16X"), PlayerPrefs.GetFloat("Position16Y"),
             PlayerPrefs.GetFloat("Position16Z"));
@@ -891,10 +921,15 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.GetFloat("Rotation12Z"));
         SectionRotationsList[13] = new Vector3(PlayerPrefs.GetFloat("Rotation13X"), PlayerPrefs.GetFloat("Rotation13Y"),
             PlayerPrefs.GetFloat("Rotation13Z"));
-        SectionRotationsList[14] = new Vector3(PlayerPrefs.GetFloat("Rotation14X"), PlayerPrefs.GetFloat("Rotation14Y"),
-            PlayerPrefs.GetFloat("Rotation14Z"));
-        SectionRotationsList[15] = new Vector3(PlayerPrefs.GetFloat("Rotation15X"), PlayerPrefs.GetFloat("Rotation15Y"),
-            PlayerPrefs.GetFloat("Rotation15Z"));
+        if (SceneManager.GetActiveScene().name == "Day1M" || SceneManager.GetActiveScene().name == "Day1N")
+        {
+            SectionRotationsList[14] = new Vector3(PlayerPrefs.GetFloat("Rotation14X"),
+                PlayerPrefs.GetFloat("Rotation14Y"),
+                PlayerPrefs.GetFloat("Rotation14Z"));
+            SectionRotationsList[15] = new Vector3(PlayerPrefs.GetFloat("Rotation15X"),
+                PlayerPrefs.GetFloat("Rotation15Y"),
+                PlayerPrefs.GetFloat("Rotation15Z"));
+        }
         if (SceneManager.GetActiveScene().name == "Day1N") 
             SectionRotationsList[16] = new Vector3(PlayerPrefs.GetFloat("Rotation16X"), PlayerPrefs.GetFloat("Rotation16Y"),
             PlayerPrefs.GetFloat("Rotation16Z"));
@@ -935,6 +970,7 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Day1M") NUM_CHECKPOINTS = 16;
         if (SceneManager.GetActiveScene().name == "Day1N") NUM_CHECKPOINTS = 17;
+        if (SceneManager.GetActiveScene().name == "Day2A") NUM_CHECKPOINTS = 14;
         
         Application.targetFrameRate = 60;
         _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FileTimeTables.txt";

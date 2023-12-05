@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 1200
+  m_LinearFogEnd: 600
   m_AmbientSkyColor: {r: 0.9716981, g: 0.9322332, b: 0.29945406, a: 1}
   m_AmbientEquatorColor: {r: 0.8207547, g: 0.60205966, b: 0.36133853, a: 1}
   m_AmbientGroundColor: {r: 0.8207547, g: 0.26886076, b: 0.14453536, a: 1}
@@ -32,13 +32,13 @@ RenderSettings:
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1701123706}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.07346918, g: 0.05661905, b: 0.12473615, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -70,7 +70,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
-    m_ReflectionCompression: 2
+    m_ReflectionCompression: 0
     m_MixedBakeMode: 2
     m_BakeBackend: 1
     m_PVRSampling: 1
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 86f4125b61e3fb0408d40f55c6fc5e63, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 0a8898f5d618c0c408e3b3a10aeacef4, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: b869212c9f89b80409c025ce28803726, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -14653,11 +14653,12 @@ MonoBehaviour:
   gEndRow5Fuel: {fileID: 299304140}
   gEndRow5Damage: {fileID: 299304139}
   gAudioManager: {fileID: 388471327}
-  SectionIsSelectedList: 00000000000000000000000000000000
-  SectionPacenoteList: 0000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  SectionIsSelectedList: 0000000000000000000000000000000000
+  SectionPacenoteList: 0000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   SectionHeightList:
   - 0
   - 0
+  - -1
   - -1
   - -1
   - -1
@@ -14689,6 +14690,7 @@ MonoBehaviour:
   - -1
   - -1
   - -1
+  - -1
   SectionPositionsList:
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
@@ -14706,9 +14708,11 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   SectionRotationsList:
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 1, z: 0}
+  - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
