@@ -62,7 +62,7 @@ public class Controller : MonoBehaviour
     private const int BASE_FUEL_CONSUMPTION = 30;
     private const float MIN_DAMAGE = 5.0f;
     private const float BASE_FALL_DAMAGE = 3.0f;
-    private const float MAX_TIME_OFF_PISTE = 2.0f;
+    private const float MAX_TIME_OFF_PISTE = 5.0f;
 
     public bool IsAcc => _isAcc;
 

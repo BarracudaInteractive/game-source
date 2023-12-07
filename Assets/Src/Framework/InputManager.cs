@@ -75,11 +75,17 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         _Controller = GetComponent<Controller>();
-        if (SceneManager.GetActiveScene().name == "Day1N" || SceneManager.GetActiveScene().name == "Day2A")
+        if (SceneManager.GetActiveScene().name == "Day1N")
         {
-            _fAcceleration = 0.2f;
-            _iDistanceOffset = 3;
+            _fAcceleration = 0.1f;
+            _iDistanceOffset = 2;
             _fSteerForce = 1f;
+        }
+        if (SceneManager.GetActiveScene().name == "Day2A")
+        {
+            _fAcceleration = 0.3f;
+            _iDistanceOffset = 3;
+            _fSteerForce = 0.8f;
         }
     }
 
