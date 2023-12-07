@@ -400,7 +400,6 @@ public class MenuManager : MonoBehaviour
             else _cLanguage = 's';
         });
         _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
-
         _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
     }
 
@@ -442,7 +441,7 @@ public class MenuManager : MonoBehaviour
         _InitCanvasList();
         if (PlayerPrefs.HasKey("User") && PlayerPrefs.HasKey("Language"))
             _LoadPlayerPrefs();
-        Invoke("_StudioNext", 1.0f);
+        Invoke("_StudioNext", 3.0f);
     }
 
     private void Start()

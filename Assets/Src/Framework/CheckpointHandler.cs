@@ -91,7 +91,7 @@ public class CheckpointHandler : MonoBehaviour
     {
         gCheckpointCanvas.SetActive(false);
         foreach (GameObject g in PositionsArray)
-            g.transform.GetChild(2).gameObject.SetActive(false);
+            g.transform.Find("Sign").gameObject.SetActive(false);
     }
     
     public void ShowPacenoteSelected(int p, int id)

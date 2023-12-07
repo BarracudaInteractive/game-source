@@ -99,7 +99,7 @@ public class SectionManager : MonoBehaviour
             case 0:
                 for (var i = 0; i < 5; i++)
                 {
-                    mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                    mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                     _NodesList[id + i].position = mov;
                     _NodesList[id + i].Rotate(0.0f, _v3Rot.y, _v3Pos.z + 0.0f, Space.Self);
                     _NodesList[id + i].Translate(0.0f, 0.0f, (20.0f * i), Space.Self);
@@ -108,7 +108,7 @@ public class SectionManager : MonoBehaviour
             case 1:
                 for (var i = 0; i < 5; i++)
                 {
-                    mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                    mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                     _NodesList[id + i].position = mov;
                     //Rotate 8.62f degrees around the Y axis left side
                     _NodesList[id + i].Rotate(0.0f, -_StepsTuple[0] + _v3Rot.y, 0.0f, Space.Self); //pos.z + 0.0f
@@ -118,7 +118,7 @@ public class SectionManager : MonoBehaviour
             case 2:
                 for (var i = 0; i < 5; i++)
                 {
-                    mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                    mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                     _NodesList[id + i].position = mov;
                     //Rotate 8.62f degrees around the Y axis left side
                     _NodesList[id + i].Rotate(0.0f, _StepsTuple[0] + _v3Rot.y, 0.0f, Space.Self); //pos.z + 0.0f
@@ -126,7 +126,7 @@ public class SectionManager : MonoBehaviour
                 }
                 break;
             case 3:
-                mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                 _NodesList[id].position = mov;
                 _NodesList[id].Rotate(0.0f, 0.0f + _v3Rot.y, 0.0f, Space.Self);
                 _NodesList[id].Translate(_StepsTuple[1], 0.0f, 0.0f, Space.Self);
@@ -149,7 +149,7 @@ public class SectionManager : MonoBehaviour
                 
                 break;
             case 4:
-                mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                 _NodesList[id].position = mov;
                 _NodesList[id].Rotate(0.0f, 0.0f + _v3Rot.y, 0.0f, Space.Self);
                 _NodesList[id].Translate(-_StepsTuple[1], 0.0f, 0.0f, Space.Self);
@@ -171,7 +171,7 @@ public class SectionManager : MonoBehaviour
                 _NodesList[id + 4].Translate(_StepsTuple[3], 0.0f, 109.17f, Space.Self);
                 break;
             case 5:
-                mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                 _NodesList[id].position = mov;
                 _NodesList[id].Rotate(0.0f, 0.0f + _v3Rot.y, 0.0f, Space.Self);
                 _NodesList[id].Translate(_StepsTuple[1], 0.0f, 0.0f, Space.Self);
@@ -193,7 +193,7 @@ public class SectionManager : MonoBehaviour
                 _NodesList[id + 4].Translate(-_StepsTuple[5], 0.0f, 80.0f, Space.Self);
                 break;
             case 6:
-                mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                 _NodesList[id].position = mov;
                 _NodesList[id].Rotate(0.0f, 0.0f + _v3Rot.y, 0.0f, Space.Self);
                 _NodesList[id].Translate(-_StepsTuple[1], 0.0f, 0.0f, Space.Self);
@@ -215,7 +215,7 @@ public class SectionManager : MonoBehaviour
                 _NodesList[id + 4].Translate(_StepsTuple[5], 0.0f, 80.0f, Space.Self);
                 break;
             case 7:
-                mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                 _NodesList[id].position = mov;
                 _NodesList[id].Rotate(0.0f, 0.0f + _v3Rot.y, 0.0f, Space.Self);
                 _NodesList[id].Translate(_StepsTuple[1], 0.0f, 15.0f, Space.Self);
@@ -237,7 +237,7 @@ public class SectionManager : MonoBehaviour
                 _NodesList[id + 4].Translate(-70+7.5f, 0.0f, 33.0f, Space.Self);
                 break;
             case 8:
-                mov = new Vector3(_v3Pos.x, _iHigh + _fCurrentHeight, _v3Pos.z);
+                mov = new Vector3(_v3Pos.x, _iHigh, _v3Pos.z);
                 _NodesList[id].position = mov;
                 _NodesList[id].Rotate(0.0f, 0.0f + _v3Rot.y, 0.0f, Space.Self);
                 _NodesList[id].Translate(-_StepsTuple[1], 0.0f, 15.0f, Space.Self);
