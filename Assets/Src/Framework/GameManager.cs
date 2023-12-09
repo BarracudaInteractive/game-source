@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Android controllers")] public GameObject gAndroidJoystick;
+    public GameObject gAndroidDPad;
+    
     [Header("Car")] public GameObject gCar;
 
     [Header("Gasoline bar")] // 0.2 - 1.0
@@ -30,6 +34,8 @@ public class GameManager : MonoBehaviour
     public GameObject gReconLoadY;
     public GameObject gReconLoadN;
 
+    [Header("Checkpoint Selection Canvas")] public GameObject gCheckpointSelectionCanvas;
+    
     [Header("Ingame")] public GameObject gIngame;
     public TMP_Text tText;
     public GameObject gIngameGear;
@@ -60,6 +66,8 @@ public class GameManager : MonoBehaviour
     public GameObject gSettingsLanguage;
     public GameObject gExit;
     public GameObject gSettingsCredits;
+    public GameObject gSettingsControls;
+    public GameObject gSettingsExitControls;
 
     [Header("Credits Canvas")] public GameObject gCreditsCanvas;
     public GameObject gCreditsClose;
@@ -110,6 +118,8 @@ public class GameManager : MonoBehaviour
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
     private Button _bSettingsCredits;
+    private Button _bSettingsControls;
+    private Button _bSettingsExitControls;
 
     private Button _bCreditsClose;
 
@@ -167,6 +177,17 @@ public class GameManager : MonoBehaviour
     private char _cLanguage = 'e';
     private string _sFilePath;
     private int NUM_CHECKPOINTS;
+    
+    [DllImport("__Internal")]
+    private static extern bool IsMobile();
+    
+    public bool IsMobileWebGL()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            return IsMobile();
+#endif
+        return false;
+    }
 
     public float GetGasoline => _fGasoline;
 
@@ -245,6 +266,7 @@ public class GameManager : MonoBehaviour
             _CameraChange.ChangeCamera();
             _CameraMovComponentFH.MoveCameraToOrigin();
             gNavigationBar.SetActive(false);
+            gCheckpointSelectionCanvas.SetActive(false);
             
             _SavePlayerPrefs();
             _ChangeTimeSpeed(2.0f);
@@ -474,6 +496,12 @@ public class GameManager : MonoBehaviour
 
         _bCreditsClose = gCreditsClose.GetComponent<Button>();
         _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
+        
+        _bSettingsControls = gSettingsControls.GetComponent<Button>();
+        _bSettingsControls.onClick.AddListener(() => gSettingsExitControls.SetActive(true));
+        
+        _bSettingsExitControls = gSettingsExitControls.GetComponent<Button>();
+        _bSettingsExitControls.onClick.AddListener(() => gSettingsExitControls.SetActive(false));
 
         _bReturn = gReturn.GetComponent<Button>();
         _bReturn.onClick.AddListener(() => _Return());
@@ -481,10 +509,19 @@ public class GameManager : MonoBehaviour
         _aSource = gAudioManager.GetComponent<AudioSource>();
 
         _sSettingsMusic = gSettingsMusic.GetComponent<Slider>();
-        _sSettingsMusic.onValueChanged.AddListener(delegate { _aSource.volume = _sSettingsMusic.value; });
+        _sSettingsMusic.onValueChanged.AddListener(delegate
+        {
+            _aSource.volume = _sSettingsMusic.value;
+            _sSettingsEffects.value = _sSettingsMusic.value;
+        });
 
         _sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
-        _sSettingsEffects.onValueChanged.AddListener(delegate { _SoundManager.SetVolume(_sSettingsEffects.value); });
+        _sSettingsEffects.onValueChanged.AddListener(delegate
+        {
+            _SoundManager.SetVolume(_sSettingsEffects.value); 
+            _sSettingsMusic.value = _sSettingsEffects.value;
+            
+        });
 
         _sSettingsSound = gSettingsSound.GetComponent<Slider>();
         _sSettingsSound.onValueChanged.AddListener(delegate { AudioListener.volume = _sSettingsSound.value; });
@@ -961,10 +998,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("Sound", sound);
     }
 
-    public void EndTutorial()
-    {
-        gReconCanvas.SetActive(true);
-    }
+    public void EndTutorial() { gReconCanvas.SetActive(true); }
 
     private void Awake()
     {
@@ -991,6 +1025,9 @@ public class GameManager : MonoBehaviour
     {
         _InitAudio();
         StartCoroutine(GetOil());
+        if (!IsMobile()) return;
+        gAndroidJoystick.SetActive(true);
+        gAndroidDPad.SetActive(true);
     }
 
     private void FixedUpdate()

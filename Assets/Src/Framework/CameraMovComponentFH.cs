@@ -108,6 +108,8 @@ public class CameraMovComponentFH : MonoBehaviour
     public void OnRotateToggle(InputAction.CallbackContext context) { _rightMouseDown = context.ReadValueAsButton(); }
     
     public void OnRotate(InputAction.CallbackContext context) { _vec2MouseDelta = _rightMouseDown ? context.ReadValue<Vector2>() : Vector2.zero; }
+    
+    public void OnRotateDPad(InputAction.CallbackContext context) { _vec2MouseDelta = context.ReadValue<Vector2>() * INTERNAL_ROTATION_SPEED; }
 
     public void OnMove(InputAction.CallbackContext context)
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,6 +66,8 @@ public class PrefsManager : MonoBehaviour
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
     public GameObject gSettingsCredits;
+    public GameObject gSettingsControls;
+    public GameObject gSettingsExitControls;
 
     [Header("Credits Canvas")] public GameObject gCreditsCanvas;
     public GameObject gCreditsClose;
@@ -107,6 +110,8 @@ public class PrefsManager : MonoBehaviour
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
     private Button _bSettingsCredits;
+    private Button _bSettingsControls;
+    private Button _bSettingsExitControls;
 
     private Button _bCreditsClose;
     
@@ -127,6 +132,17 @@ public class PrefsManager : MonoBehaviour
     private int _iLastCanvas = 0;
     private char _cLanguage = 'e';
     private int _iStage = 0;
+    
+    [DllImport("__Internal")]
+    private static extern bool IsMobile();
+    
+    public bool IsMobileWebGL()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            return IsMobile();
+#endif
+        return false;
+    }
 
     public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
     
@@ -330,6 +346,8 @@ public class PrefsManager : MonoBehaviour
         _sSettingsEffects = gSettingsEffects.GetComponent<Slider>();
         _sSettingsSound = gSettingsSound.GetComponent<Slider>();
         _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
+        _bSettingsControls = gSettingsControls.GetComponent<Button>();
+        _bSettingsExitControls = gSettingsExitControls.GetComponent<Button>();
         
         //Actions
         _bDefaultBack.onClick.AddListener(() => _BackLog(gDeafaultCanvas));
@@ -373,6 +391,8 @@ public class PrefsManager : MonoBehaviour
                 if (_dSettingsLanguage.value == 0) _cLanguage = 'e'; else _cLanguage = 's'; 
             });
         _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
+        _bSettingsControls.onClick.AddListener(() => gSettingsExitControls.SetActive(true));
+        _bSettingsExitControls.onClick.AddListener(() => gSettingsExitControls.SetActive(false));
 
         _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
     }
