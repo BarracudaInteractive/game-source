@@ -62,6 +62,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Camera_rotate_dpad"",
+                    ""type"": ""Value"",
+                    ""id"": ""723f54e5-a83c-46b0-8aaa-a29485409489"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -199,12 +208,45 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""852ee3e9-8b6a-441e-afb8-ddac33e13adc"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""bbdb7f82-1a50-4b80-b05c-6ae6bca6e70c"",
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Camera_zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""903ec39e-1605-4462-bfe9-b212d3406137"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70189130-7aa3-4689-8b03-8ed094dfd2d3"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_rotate_dpad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -219,6 +261,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_CameraControl_Camera_rotate_toggle = m_CameraControl.FindAction("Camera_rotate_toggle", throwIfNotFound: true);
         m_CameraControl_Camera_rotate = m_CameraControl.FindAction("Camera_rotate", throwIfNotFound: true);
         m_CameraControl_Camera_zoom = m_CameraControl.FindAction("Camera_zoom", throwIfNotFound: true);
+        m_CameraControl_Camera_rotate_dpad = m_CameraControl.FindAction("Camera_rotate_dpad", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +327,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraControl_Camera_rotate_toggle;
     private readonly InputAction m_CameraControl_Camera_rotate;
     private readonly InputAction m_CameraControl_Camera_zoom;
+    private readonly InputAction m_CameraControl_Camera_rotate_dpad;
     public struct CameraControlActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -292,6 +336,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @Camera_rotate_toggle => m_Wrapper.m_CameraControl_Camera_rotate_toggle;
         public InputAction @Camera_rotate => m_Wrapper.m_CameraControl_Camera_rotate;
         public InputAction @Camera_zoom => m_Wrapper.m_CameraControl_Camera_zoom;
+        public InputAction @Camera_rotate_dpad => m_Wrapper.m_CameraControl_Camera_rotate_dpad;
         public InputActionMap Get() { return m_Wrapper.m_CameraControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +358,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Camera_zoom.started += instance.OnCamera_zoom;
             @Camera_zoom.performed += instance.OnCamera_zoom;
             @Camera_zoom.canceled += instance.OnCamera_zoom;
+            @Camera_rotate_dpad.started += instance.OnCamera_rotate_dpad;
+            @Camera_rotate_dpad.performed += instance.OnCamera_rotate_dpad;
+            @Camera_rotate_dpad.canceled += instance.OnCamera_rotate_dpad;
         }
 
         private void UnregisterCallbacks(ICameraControlActions instance)
@@ -329,6 +377,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @Camera_zoom.started -= instance.OnCamera_zoom;
             @Camera_zoom.performed -= instance.OnCamera_zoom;
             @Camera_zoom.canceled -= instance.OnCamera_zoom;
+            @Camera_rotate_dpad.started -= instance.OnCamera_rotate_dpad;
+            @Camera_rotate_dpad.performed -= instance.OnCamera_rotate_dpad;
+            @Camera_rotate_dpad.canceled -= instance.OnCamera_rotate_dpad;
         }
 
         public void RemoveCallbacks(ICameraControlActions instance)
@@ -352,5 +403,6 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnCamera_rotate_toggle(InputAction.CallbackContext context);
         void OnCamera_rotate(InputAction.CallbackContext context);
         void OnCamera_zoom(InputAction.CallbackContext context);
+        void OnCamera_rotate_dpad(InputAction.CallbackContext context);
     }
 }

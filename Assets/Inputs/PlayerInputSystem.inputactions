@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Camera_rotate_dpad",
+                    "type": "Value",
+                    "id": "723f54e5-a83c-46b0-8aaa-a29485409489",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -177,12 +186,45 @@
                 },
                 {
                     "name": "",
+                    "id": "852ee3e9-8b6a-441e-afb8-ddac33e13adc",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "bbdb7f82-1a50-4b80-b05c-6ae6bca6e70c",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "NormalizeVector2",
                     "groups": "",
                     "action": "Camera_zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "903ec39e-1605-4462-bfe9-b212d3406137",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70189130-7aa3-4689-8b03-8ed094dfd2d3",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_rotate_dpad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

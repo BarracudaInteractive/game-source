@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -74,11 +75,14 @@ public class MenuManager : MonoBehaviour
     public GameObject gSettingsSound;
     public GameObject gSettingsLanguage;
     public GameObject gSettingsCredits;
+    public GameObject gSettingsControls;
+    public GameObject gSettingsExitControls;
 
     [Header("Credits Canvas")] public GameObject gCreditsCanvas;
     public GameObject gCreditsClose;
 
     public GameObject gAudioManager;
+    private TouchScreenKeyboard keyboard;
 
     //Objects
     private Button _bLanguageExit;
@@ -129,6 +133,8 @@ public class MenuManager : MonoBehaviour
     private Slider _sSettingsSound;
     private TMP_Dropdown _dSettingsLanguage;
     private Button _bSettingsCredits;
+    private Button _bSettingsControls;
+    private Button _bSettingsExitControls;
 
     private Button _bCreditsClose;
 
@@ -142,9 +148,32 @@ public class MenuManager : MonoBehaviour
     private int _iLastCanvas = 0;
     private char _cLanguage = 'e';
     private char _cLogOrSign = 'l';
+    
+    [DllImport("__Internal")]
+    private static extern bool IsMobile();
+    
+    public bool IsMobileWebGL()
+    {
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            return IsMobile();
+        #endif
+        return false;
+    }
 
     public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
 
+    public void OpenKeyboard()
+    {
+        if (!IsMobileWebGL()) return;
+        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false);
+    }
+    
+    public void OpenKeyboardSecure()
+    {
+        if (!IsMobileWebGL()) return;
+        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true);
+    }
+    
     private void _ExitGame()
     {
 #if UNITY_EDITOR
@@ -348,6 +377,8 @@ public class MenuManager : MonoBehaviour
         _sSettingsSound = gSettingsSound.GetComponent<Slider>();
         _dSettingsLanguage = gSettingsLanguage.GetComponent<TMP_Dropdown>();
         _bSettingsCredits = gSettingsCredits.GetComponent<Button>();
+        _bSettingsControls = gSettingsControls.GetComponent<Button>();
+        _bSettingsExitControls = gSettingsExitControls.GetComponent<Button>();
 
         _bCreditsClose = gCreditsClose.GetComponent<Button>();
 
@@ -401,6 +432,8 @@ public class MenuManager : MonoBehaviour
         });
         _bSettingsCredits.onClick.AddListener(() => gCreditsCanvas.SetActive(true));
         _bCreditsClose.onClick.AddListener(() => gCreditsCanvas.SetActive(false));
+        _bSettingsControls.onClick.AddListener(() => gSettingsExitControls.SetActive(true));
+        _bSettingsExitControls.onClick.AddListener(() => gSettingsExitControls.SetActive(false));
     }
 
     private void _InitCanvasList()
@@ -435,7 +468,6 @@ public class MenuManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Application.targetFrameRate = 60;
-        Screen.fullScreen = true;
         _sFilePath = $"{Application.dataPath}\\Src\\Framework\\FilePrefs.txt";
         _InitButtons();
         _InitCanvasList();
