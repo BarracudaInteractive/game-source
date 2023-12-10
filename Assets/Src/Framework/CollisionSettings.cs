@@ -19,7 +19,7 @@ public class CollisionSettings : MonoBehaviour
     public float _fGoodAcceleration = 0.0f;
     public int _fGoodPacenote = 0;
     
-    float _fAcceleration = 0.0f;
+    [SerializeField] private float _fAcceleration = 0.0f;
     private int _iPacenote = 0;
     private TMP_Text _tFeedbackText;
     private bool _isWorse = false;
