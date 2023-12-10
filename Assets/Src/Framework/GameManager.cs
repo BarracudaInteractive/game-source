@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
     private char _cLanguage = 'e';
     private string _sFilePath;
     private int NUM_CHECKPOINTS;
+    private bool _hasEnded = false;
     
     [DllImport("__Internal")]
     private static extern bool IsMobile();
@@ -452,6 +453,7 @@ public class GameManager : MonoBehaviour
 
     public void EndScreen(float time, float fuel, float damage)
     {
+        _hasEnded = true;
         _CameraController.hasFinished = true;
         gCarView.GetComponent<AudioListener>().enabled = true;
         gIngame.SetActive(false);
@@ -1045,7 +1047,7 @@ public class GameManager : MonoBehaviour
         bool isDamaged = _fDamage >= 100.0f;
         bool noFuel = _fGasoline < 0.0f;
         // Add || _isOut when roads are finished
-        if (isDamaged || noFuel || _isOut)
+        if ((isDamaged || noFuel || _isOut) && !_hasEnded)
         {
             _GameOver(isDamaged, noFuel, _isOut);
             _Controller.StopCar();

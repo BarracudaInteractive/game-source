@@ -83,7 +83,7 @@ public class InputManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Day2A")
         {
-            _fAcceleration = 0.3f;
+            _fAcceleration = 0.25f;
             _iDistanceOffset = 3;
             _fSteerForce = 0.8f;
         }
