@@ -164,14 +164,28 @@ public class MenuManager : MonoBehaviour
 
     public void OpenKeyboard()
     {
-        if (!IsMobileWebGL()) return;
-        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false);
+        try
+        {
+            if (!IsMobileWebGL()) return;
+            if (_cLogOrSign == 'l')
+                keyboard = TouchScreenKeyboard.Open(_iLogInUser.text, TouchScreenKeyboardType.Default, false, false, false);
+            else
+                keyboard = TouchScreenKeyboard.Open(_iSignInUser.text, TouchScreenKeyboardType.Default, false, false, false);
+        }
+        catch {}
     }
     
     public void OpenKeyboardSecure()
     {
-        if (!IsMobileWebGL()) return;
-        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true);
+        try 
+        {
+            if (!IsMobileWebGL()) return;
+            if (_cLogOrSign == 'l')
+                keyboard = TouchScreenKeyboard.Open(_iLogInUser.text, TouchScreenKeyboardType.Default, false, false, true);
+            else
+                keyboard = TouchScreenKeyboard.Open(_iSignInUser.text, TouchScreenKeyboardType.Default, false, false, true);
+        }
+        catch {}
     }
     
     private void _ExitGame()

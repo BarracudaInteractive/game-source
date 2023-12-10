@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5874686407421254136}
   - component: {fileID: 6581663452018184758}
   - component: {fileID: 3378209785439502362}
-  - component: {fileID: 2632453651616888274}
   - component: {fileID: 944830260237051706}
   m_Layer: 0
   m_Name: FenceB_O
@@ -33,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6581663452018184758
 MeshFilter:
@@ -85,27 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &2632453651616888274
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954728973492035995}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 6c41d268699e27248a4354335b2a76ee, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &944830260237051706
 BoxCollider:
   m_ObjectHideFlags: 0
