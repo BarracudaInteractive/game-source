@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4021103092786314066}
   - component: {fileID: 5279754514575828463}
   - component: {fileID: 495845868455724266}
-  - component: {fileID: 4005757731048223178}
   m_Layer: 0
   m_Name: FirTreeA
   m_TagString: deco
@@ -85,24 +84,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &4005757731048223178
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756956835226348332}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 7f9b57a02a16e55429c68854f45a8801, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

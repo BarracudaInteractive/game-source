@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("Android controllers")] public GameObject gAndroidJoystick;
     public GameObject gAndroidDPad;
+    public GameObject gAndroidTutorialA;
+    public GameObject gAndroidTutorialB;
     
     [Header("Car")] public GameObject gCar;
 
@@ -1025,9 +1027,15 @@ public class GameManager : MonoBehaviour
     {
         _InitAudio();
         StartCoroutine(GetOil());
-        if (!IsMobile()) return;
-        gAndroidJoystick.SetActive(true);
-        gAndroidDPad.SetActive(true);
+        try
+        {
+            if (!IsMobile()) return;
+            gAndroidJoystick.SetActive(true);
+            gAndroidDPad.SetActive(true);
+            gAndroidTutorialA.SetActive(false);
+            gAndroidTutorialB.SetActive(true);
+        }
+        catch {}
     }
 
     private void FixedUpdate()
