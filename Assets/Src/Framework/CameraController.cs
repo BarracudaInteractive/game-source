@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour
     
     public void OnRotateToggle(InputAction.CallbackContext context) { _rightMouseDown = context.ReadValueAsButton(); }
     
+    public void OnRotateDPad(InputAction.CallbackContext context) { _vec2MouseDelta = context.ReadValue<Vector2>() * INTERNAL_ROTATION_SPEED; }
+    
     private void Awake () 
     {
         _gCar = GameObject.FindGameObjectWithTag("AI");
