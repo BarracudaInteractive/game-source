@@ -975,8 +975,8 @@ public class GameManager : MonoBehaviour
             SectionRotationsList[16] = new Vector3(PlayerPrefs.GetFloat("Rotation16X"), PlayerPrefs.GetFloat("Rotation16Y"),
             PlayerPrefs.GetFloat("Rotation16Z"));
         
-        for (int id = 2; id < SectionIsSelectedList.Count; id++)
-            _SectionManager.MoveNodes(SectionPacenoteList[id], id, SectionPositionsList[id], SectionRotationsList[id], SectionHeightList[id]);
+        //for (int id = 2; id < SectionIsSelectedList.Count; id++)
+        //    _SectionManager.MoveNodes(SectionPacenoteList[id], id, SectionPositionsList[id], SectionRotationsList[id], SectionHeightList[id]);
         
         _SectionManager.DisplayAllAsSelected();
         
