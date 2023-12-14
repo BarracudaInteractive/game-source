@@ -172,7 +172,11 @@ public class Controller : MonoBehaviour
         foreach (WheelCollider wheel in _Wheels)
         {
             wheel.GetGroundHit(out hit);
-            if (hit.collider.gameObject.CompareTag("off-piste")) outOfTrack++;
+            try
+            {
+                if (hit.collider.gameObject.CompareTag("off-piste")) outOfTrack++;
+            }
+            catch {}
         }
 
         return (outOfTrack == 4);
