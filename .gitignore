@@ -52,4 +52,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+# Database Credentials
+*.json
+*.json.meta
+
 # End of https://www.gitignore.io/api/unity

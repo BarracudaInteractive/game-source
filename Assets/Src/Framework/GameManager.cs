@@ -107,6 +107,9 @@ public class GameManager : MonoBehaviour
     public List<Vector3> SectionPositionsList;
     public List<Vector3> SectionRotationsList;
 
+    [Header("Database Manager")]
+    public GameObject gDatabaseManager;
+    
     private Button _bReturn;
     private Button _bExit;
     private TMP_Text _tReconAdvice;
@@ -175,6 +178,7 @@ public class GameManager : MonoBehaviour
 
     private SectionManager _SectionManager;
     private SoundManager _SoundManager;
+    private DatabaseManager _DatabaseManager;
 
     private char _cLanguage = 'e';
     private string _sFilePath;
@@ -461,6 +465,7 @@ public class GameManager : MonoBehaviour
         gEndCanvas.SetActive(true);
         _WriteTimeTables(time, fuel, damage);
         _ReadTimeTables(time, fuel, damage);
+        StartCoroutine(_DatabaseManager.SendMetricPostRequest("metric", PlayerPrefs.GetString("User"), SceneManager.GetActiveScene().name, time.ToString(), fuel.ToString(), damage.ToString()));
         _SoundManager.EndSE();
     }
 
@@ -1023,6 +1028,8 @@ public class GameManager : MonoBehaviour
         ChangeKPH();
         if (PlayerPrefs.HasKey("Position9Z") && PlayerPrefs.GetFloat("Position9Z") != 0.0f)
             gReconLoadLong.SetActive(true);
+        
+        _DatabaseManager = GetComponent<DatabaseManager>();
     }
 
     private void Start()

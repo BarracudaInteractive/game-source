@@ -83,6 +83,7 @@ public class MenuManager : MonoBehaviour
 
     public GameObject gAudioManager;
     private TouchScreenKeyboard keyboard;
+    public GameObject gDatabaseManager;
 
     //Objects
     private Button _bLanguageExit;
@@ -140,6 +141,7 @@ public class MenuManager : MonoBehaviour
 
     private AudioSource _aSourceMusic;
     private SoundManager _SoundManager;
+    private DatabaseManager dbManager;
 
     private string _sFilePath;
 
@@ -148,6 +150,7 @@ public class MenuManager : MonoBehaviour
     private int _iLastCanvas = 0;
     private char _cLanguage = 'e';
     private char _cLogOrSign = 'l';
+    private bool readyResponse = false;
     
     [DllImport("__Internal")]
     private static extern bool IsMobile();
@@ -160,6 +163,12 @@ public class MenuManager : MonoBehaviour
         return false;
     }
 
+    public bool Ready
+    {
+        get => readyResponse;
+        set => readyResponse = value;
+    }
+    
     public void ChangeScreen() { Screen.fullScreen = !Screen.fullScreen; }
 
     public void OpenKeyboard()
@@ -319,19 +328,48 @@ public class MenuManager : MonoBehaviour
             }
         }
          */
-        if ((_iLogInUser.text == "" || _iLogInPasswd.text == "") && _cLogOrSign == 'l')
+        if (_cLogOrSign == 'l')
         {
-            _SoundManager.BadSelectionSE();
-            gLogInError.SetActive(true);
-            gSignInError.SetActive(false);
-            return;
+            if (_iLogInUser.text == "" || _iLogInPasswd.text == "")
+            {
+                _SoundManager.BadSelectionSE();
+                gLogInError.SetActive(true);
+                gSignInError.SetActive(false);
+                return;
+            }
+            
+            if (!Ready) {
+                StartCoroutine(dbManager.SendUserGetRequest("user", _iLogInUser.text));
+                Invoke("_LoadPrefs", 0.33f);
+                return;
+            }
+
+            if (dbManager.Name == _iLogInUser.text && dbManager.Passwd == _iLogInPasswd.text) Debug.Log("User found. Loading Prefs...");
+            else
+            {
+                _SoundManager.BadSelectionSE();
+                gLogInError.SetActive(true);
+                gSignInError.SetActive(false);
+                return;
+            }
+            
+            Ready = false;
         }
-        else if ((_iSignInUser.text == "" || _iSignInPasswd.text == "") && _cLogOrSign == 's')
+        else if (_cLogOrSign == 's')
         {
-            _SoundManager.BadSelectionSE();
-            gSignInError.SetActive(true);
-            gLogInError.SetActive(false);
-            return;
+            if (_iSignInPasswd.text == "" || _iSignInUser.text == "")
+            {
+                _SoundManager.BadSelectionSE();
+                gSignInError.SetActive(true);
+                gLogInError.SetActive(false);
+                return;
+            }
+
+            string sex = "Unknown";
+            if (_dSignInSex.value == 0) sex = "Male";
+            if (_dSignInSex.value == 1) sex = "Female";
+            if (_dSignInSex.value == 2) sex = "NS";
+            StartCoroutine(dbManager.SendUserPostRequest("user", _iSignInUser.text, _iSignInPasswd.text, _sSignInAge.value.ToString(), sex));
         }
 
         _InitPlayerPrefs();
@@ -488,6 +526,7 @@ public class MenuManager : MonoBehaviour
         if (PlayerPrefs.HasKey("User") && PlayerPrefs.HasKey("Language"))
             _LoadPlayerPrefs();
         Invoke("_StudioNext", 3.0f);
+        dbManager = gDatabaseManager.GetComponent<DatabaseManager>();
     }
 
     private void Start()
